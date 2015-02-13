@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Skybox : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Skybox o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Skybox();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Skybox();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_material(IntPtr l) {
@@ -31,7 +27,7 @@ public class Lua_UnityEngine_Skybox : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Skybox");
-		addMember(l,"material",get_material,set_material);
+		addMember(l,"material",get_material,set_material,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Skybox),typeof(UnityEngine.Behaviour));
 	}
 }

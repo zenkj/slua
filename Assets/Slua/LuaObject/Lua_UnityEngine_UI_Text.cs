@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Text : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -52,18 +53,6 @@ public class Lua_UnityEngine_UI_Text : LuaObject {
 		try{
 			UnityEngine.UI.Text self=(UnityEngine.UI.Text)checkSelf(l);
 			self.CalculateLayoutInputVertical();
-			return 0;
-		}
-		catch(Exception e) {
-			LuaDLL.luaL_error(l, e.ToString());
-			return 0;
-		}
-	}
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static public int OnRebuildRequested(IntPtr l) {
-		try{
-			UnityEngine.UI.Text self=(UnityEngine.UI.Text)checkSelf(l);
-			self.OnRebuildRequested();
 			return 0;
 		}
 		catch(Exception e) {
@@ -196,7 +185,7 @@ public class Lua_UnityEngine_UI_Text : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_alignment(IntPtr l) {
 		UnityEngine.UI.Text o = (UnityEngine.UI.Text)checkSelf(l);
-		pushValue(l,o.alignment);
+		pushEnum(l,(int)o.alignment);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -224,7 +213,7 @@ public class Lua_UnityEngine_UI_Text : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_horizontalOverflow(IntPtr l) {
 		UnityEngine.UI.Text o = (UnityEngine.UI.Text)checkSelf(l);
-		pushValue(l,o.horizontalOverflow);
+		pushEnum(l,(int)o.horizontalOverflow);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -238,7 +227,7 @@ public class Lua_UnityEngine_UI_Text : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_verticalOverflow(IntPtr l) {
 		UnityEngine.UI.Text o = (UnityEngine.UI.Text)checkSelf(l);
-		pushValue(l,o.verticalOverflow);
+		pushEnum(l,(int)o.verticalOverflow);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -266,7 +255,7 @@ public class Lua_UnityEngine_UI_Text : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_fontStyle(IntPtr l) {
 		UnityEngine.UI.Text o = (UnityEngine.UI.Text)checkSelf(l);
-		pushValue(l,o.fontStyle);
+		pushEnum(l,(int)o.fontStyle);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -331,32 +320,31 @@ public class Lua_UnityEngine_UI_Text : LuaObject {
 		addMember(l,GetGenerationSettings);
 		addMember(l,CalculateLayoutInputHorizontal);
 		addMember(l,CalculateLayoutInputVertical);
-		addMember(l,OnRebuildRequested);
 		addMember(l,GetTextAnchorPivot_s);
-		addMember(l,"cachedTextGenerator",get_cachedTextGenerator,null);
-		addMember(l,"cachedTextGeneratorForLayout",get_cachedTextGeneratorForLayout,null);
-		addMember(l,"defaultMaterial",get_defaultMaterial,null);
-		addMember(l,"mainTexture",get_mainTexture,null);
-		addMember(l,"font",get_font,set_font);
-		addMember(l,"text",get_text,set_text);
-		addMember(l,"supportRichText",get_supportRichText,set_supportRichText);
-		addMember(l,"resizeTextForBestFit",get_resizeTextForBestFit,set_resizeTextForBestFit);
-		addMember(l,"resizeTextMinSize",get_resizeTextMinSize,set_resizeTextMinSize);
-		addMember(l,"resizeTextMaxSize",get_resizeTextMaxSize,set_resizeTextMaxSize);
-		addMember(l,"alignment",get_alignment,set_alignment);
-		addMember(l,"fontSize",get_fontSize,set_fontSize);
-		addMember(l,"horizontalOverflow",get_horizontalOverflow,set_horizontalOverflow);
-		addMember(l,"verticalOverflow",get_verticalOverflow,set_verticalOverflow);
-		addMember(l,"lineSpacing",get_lineSpacing,set_lineSpacing);
-		addMember(l,"fontStyle",get_fontStyle,set_fontStyle);
-		addMember(l,"pixelsPerUnit",get_pixelsPerUnit,null);
-		addMember(l,"minWidth",get_minWidth,null);
-		addMember(l,"preferredWidth",get_preferredWidth,null);
-		addMember(l,"flexibleWidth",get_flexibleWidth,null);
-		addMember(l,"minHeight",get_minHeight,null);
-		addMember(l,"preferredHeight",get_preferredHeight,null);
-		addMember(l,"flexibleHeight",get_flexibleHeight,null);
-		addMember(l,"layoutPriority",get_layoutPriority,null);
+		addMember(l,"cachedTextGenerator",get_cachedTextGenerator,null,true);
+		addMember(l,"cachedTextGeneratorForLayout",get_cachedTextGeneratorForLayout,null,true);
+		addMember(l,"defaultMaterial",get_defaultMaterial,null,true);
+		addMember(l,"mainTexture",get_mainTexture,null,true);
+		addMember(l,"font",get_font,set_font,true);
+		addMember(l,"text",get_text,set_text,true);
+		addMember(l,"supportRichText",get_supportRichText,set_supportRichText,true);
+		addMember(l,"resizeTextForBestFit",get_resizeTextForBestFit,set_resizeTextForBestFit,true);
+		addMember(l,"resizeTextMinSize",get_resizeTextMinSize,set_resizeTextMinSize,true);
+		addMember(l,"resizeTextMaxSize",get_resizeTextMaxSize,set_resizeTextMaxSize,true);
+		addMember(l,"alignment",get_alignment,set_alignment,true);
+		addMember(l,"fontSize",get_fontSize,set_fontSize,true);
+		addMember(l,"horizontalOverflow",get_horizontalOverflow,set_horizontalOverflow,true);
+		addMember(l,"verticalOverflow",get_verticalOverflow,set_verticalOverflow,true);
+		addMember(l,"lineSpacing",get_lineSpacing,set_lineSpacing,true);
+		addMember(l,"fontStyle",get_fontStyle,set_fontStyle,true);
+		addMember(l,"pixelsPerUnit",get_pixelsPerUnit,null,true);
+		addMember(l,"minWidth",get_minWidth,null,true);
+		addMember(l,"preferredWidth",get_preferredWidth,null,true);
+		addMember(l,"flexibleWidth",get_flexibleWidth,null,true);
+		addMember(l,"minHeight",get_minHeight,null,true);
+		addMember(l,"preferredHeight",get_preferredHeight,null,true);
+		addMember(l,"flexibleHeight",get_flexibleHeight,null,true);
+		addMember(l,"layoutPriority",get_layoutPriority,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Text),typeof(UnityEngine.UI.MaskableGraphic));
 	}
 }

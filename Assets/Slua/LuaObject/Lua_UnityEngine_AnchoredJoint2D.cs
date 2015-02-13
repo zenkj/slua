@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AnchoredJoint2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AnchoredJoint2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AnchoredJoint2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AnchoredJoint2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_anchor(IntPtr l) {
@@ -45,8 +41,8 @@ public class Lua_UnityEngine_AnchoredJoint2D : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.AnchoredJoint2D");
-		addMember(l,"anchor",get_anchor,set_anchor);
-		addMember(l,"connectedAnchor",get_connectedAnchor,set_connectedAnchor);
+		addMember(l,"anchor",get_anchor,set_anchor,true);
+		addMember(l,"connectedAnchor",get_connectedAnchor,set_connectedAnchor,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AnchoredJoint2D),typeof(UnityEngine.Joint2D));
 	}
 }

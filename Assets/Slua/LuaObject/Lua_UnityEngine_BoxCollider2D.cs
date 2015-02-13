@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_BoxCollider2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.BoxCollider2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.BoxCollider2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.BoxCollider2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_center(IntPtr l) {
@@ -45,8 +41,8 @@ public class Lua_UnityEngine_BoxCollider2D : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.BoxCollider2D");
-		addMember(l,"center",get_center,set_center);
-		addMember(l,"size",get_size,set_size);
+		addMember(l,"center",get_center,set_center,true);
+		addMember(l,"size",get_size,set_size,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.BoxCollider2D),typeof(UnityEngine.Collider2D));
 	}
 }

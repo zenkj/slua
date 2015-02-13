@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Texture : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Texture o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Texture();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Texture();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetNativeTexturePtr(IntPtr l) {
@@ -70,7 +66,7 @@ public class Lua_UnityEngine_Texture : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_anisotropicFiltering(IntPtr l) {
-		pushValue(l,UnityEngine.Texture.anisotropicFiltering);
+		pushEnum(l,(int)UnityEngine.Texture.anisotropicFiltering);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -111,7 +107,7 @@ public class Lua_UnityEngine_Texture : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_filterMode(IntPtr l) {
 		UnityEngine.Texture o = (UnityEngine.Texture)checkSelf(l);
-		pushValue(l,o.filterMode);
+		pushEnum(l,(int)o.filterMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -139,7 +135,7 @@ public class Lua_UnityEngine_Texture : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_wrapMode(IntPtr l) {
 		UnityEngine.Texture o = (UnityEngine.Texture)checkSelf(l);
-		pushValue(l,o.wrapMode);
+		pushEnum(l,(int)o.wrapMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -175,15 +171,15 @@ public class Lua_UnityEngine_Texture : LuaObject {
 		addMember(l,GetNativeTexturePtr);
 		addMember(l,GetNativeTextureID);
 		addMember(l,SetGlobalAnisotropicFilteringLimits_s);
-		addMember(l,"masterTextureLimit",get_masterTextureLimit,set_masterTextureLimit);
-		addMember(l,"anisotropicFiltering",get_anisotropicFiltering,set_anisotropicFiltering);
-		addMember(l,"width",get_width,set_width);
-		addMember(l,"height",get_height,set_height);
-		addMember(l,"filterMode",get_filterMode,set_filterMode);
-		addMember(l,"anisoLevel",get_anisoLevel,set_anisoLevel);
-		addMember(l,"wrapMode",get_wrapMode,set_wrapMode);
-		addMember(l,"mipMapBias",get_mipMapBias,set_mipMapBias);
-		addMember(l,"texelSize",get_texelSize,null);
+		addMember(l,"masterTextureLimit",get_masterTextureLimit,set_masterTextureLimit,false);
+		addMember(l,"anisotropicFiltering",get_anisotropicFiltering,set_anisotropicFiltering,false);
+		addMember(l,"width",get_width,set_width,true);
+		addMember(l,"height",get_height,set_height,true);
+		addMember(l,"filterMode",get_filterMode,set_filterMode,true);
+		addMember(l,"anisoLevel",get_anisoLevel,set_anisoLevel,true);
+		addMember(l,"wrapMode",get_wrapMode,set_wrapMode,true);
+		addMember(l,"mipMapBias",get_mipMapBias,set_mipMapBias,true);
+		addMember(l,"texelSize",get_texelSize,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Texture),typeof(UnityEngine.Object));
 	}
 }

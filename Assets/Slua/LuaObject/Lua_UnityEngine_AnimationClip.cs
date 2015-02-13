@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AnimationClip : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AnimationClip o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AnimationClip();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AnimationClip();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetCurve(IntPtr l) {
@@ -96,7 +92,7 @@ public class Lua_UnityEngine_AnimationClip : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_wrapMode(IntPtr l) {
 		UnityEngine.AnimationClip o = (UnityEngine.AnimationClip)checkSelf(l);
-		pushValue(l,o.wrapMode);
+		pushEnum(l,(int)o.wrapMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -127,10 +123,10 @@ public class Lua_UnityEngine_AnimationClip : LuaObject {
 		addMember(l,EnsureQuaternionContinuity);
 		addMember(l,ClearCurves);
 		addMember(l,AddEvent);
-		addMember(l,"length",get_length,null);
-		addMember(l,"frameRate",get_frameRate,set_frameRate);
-		addMember(l,"wrapMode",get_wrapMode,set_wrapMode);
-		addMember(l,"localBounds",get_localBounds,set_localBounds);
+		addMember(l,"length",get_length,null,true);
+		addMember(l,"frameRate",get_frameRate,set_frameRate,true);
+		addMember(l,"wrapMode",get_wrapMode,set_wrapMode,true);
+		addMember(l,"localBounds",get_localBounds,set_localBounds,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AnimationClip),typeof(UnityEngine.Motion));
 	}
 }

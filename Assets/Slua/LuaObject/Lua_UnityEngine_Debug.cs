@@ -6,19 +6,16 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Debug : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Debug o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Debug();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Debug();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawLine_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(UnityEngine.Color),typeof(System.Single),typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==5){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -32,7 +29,7 @@ public class Lua_UnityEngine_Debug : LuaObject {
 				UnityEngine.Debug.DrawLine(a1,a2,a3,a4,a5);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(UnityEngine.Color),typeof(System.Single))){
+			else if(argc==4){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -44,7 +41,7 @@ public class Lua_UnityEngine_Debug : LuaObject {
 				UnityEngine.Debug.DrawLine(a1,a2,a3,a4);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(UnityEngine.Color))){
+			else if(argc==3){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -54,7 +51,7 @@ public class Lua_UnityEngine_Debug : LuaObject {
 				UnityEngine.Debug.DrawLine(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3))){
+			else if(argc==2){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -73,7 +70,8 @@ public class Lua_UnityEngine_Debug : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawRay_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(UnityEngine.Color),typeof(System.Single))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -85,7 +83,7 @@ public class Lua_UnityEngine_Debug : LuaObject {
 				UnityEngine.Debug.DrawRay(a1,a2,a3,a4);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(UnityEngine.Color))){
+			else if(argc==3){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -95,7 +93,7 @@ public class Lua_UnityEngine_Debug : LuaObject {
 				UnityEngine.Debug.DrawRay(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3))){
+			else if(argc==2){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -103,7 +101,7 @@ public class Lua_UnityEngine_Debug : LuaObject {
 				UnityEngine.Debug.DrawRay(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(UnityEngine.Color),typeof(System.Single),typeof(System.Boolean))){
+			else if(argc==5){
 				UnityEngine.Vector3 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -150,13 +148,14 @@ public class Lua_UnityEngine_Debug : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Log_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Object))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.Object a1;
 				checkType(l,1,out a1);
 				UnityEngine.Debug.Log(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.Object),typeof(UnityEngine.Object))){
+			else if(argc==2){
 				System.Object a1;
 				checkType(l,1,out a1);
 				UnityEngine.Object a2;
@@ -175,13 +174,14 @@ public class Lua_UnityEngine_Debug : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LogError_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Object))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.Object a1;
 				checkType(l,1,out a1);
 				UnityEngine.Debug.LogError(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.Object),typeof(UnityEngine.Object))){
+			else if(argc==2){
 				System.Object a1;
 				checkType(l,1,out a1);
 				UnityEngine.Object a2;
@@ -211,13 +211,14 @@ public class Lua_UnityEngine_Debug : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LogException_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Exception))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.Exception a1;
 				checkType(l,1,out a1);
 				UnityEngine.Debug.LogException(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.Exception),typeof(UnityEngine.Object))){
+			else if(argc==2){
 				System.Exception a1;
 				checkType(l,1,out a1);
 				UnityEngine.Object a2;
@@ -236,13 +237,14 @@ public class Lua_UnityEngine_Debug : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LogWarning_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Object))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.Object a1;
 				checkType(l,1,out a1);
 				UnityEngine.Debug.LogWarning(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.Object),typeof(UnityEngine.Object))){
+			else if(argc==2){
 				System.Object a1;
 				checkType(l,1,out a1);
 				UnityEngine.Object a2;
@@ -286,8 +288,8 @@ public class Lua_UnityEngine_Debug : LuaObject {
 		addMember(l,ClearDeveloperConsole_s);
 		addMember(l,LogException_s);
 		addMember(l,LogWarning_s);
-		addMember(l,"developerConsoleVisible",get_developerConsoleVisible,set_developerConsoleVisible);
-		addMember(l,"isDebugBuild",get_isDebugBuild,null);
+		addMember(l,"developerConsoleVisible",get_developerConsoleVisible,set_developerConsoleVisible,false);
+		addMember(l,"isDebugBuild",get_isDebugBuild,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Debug));
 	}
 }

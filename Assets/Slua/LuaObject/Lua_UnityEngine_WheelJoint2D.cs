@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_WheelJoint2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.WheelJoint2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.WheelJoint2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.WheelJoint2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetMotorTorque(IntPtr l) {
@@ -87,11 +83,11 @@ public class Lua_UnityEngine_WheelJoint2D : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.WheelJoint2D");
 		addMember(l,GetMotorTorque);
-		addMember(l,"suspension",get_suspension,set_suspension);
-		addMember(l,"useMotor",get_useMotor,set_useMotor);
-		addMember(l,"motor",get_motor,set_motor);
-		addMember(l,"jointTranslation",get_jointTranslation,null);
-		addMember(l,"jointSpeed",get_jointSpeed,null);
+		addMember(l,"suspension",get_suspension,set_suspension,true);
+		addMember(l,"useMotor",get_useMotor,set_useMotor,true);
+		addMember(l,"motor",get_motor,set_motor,true);
+		addMember(l,"jointTranslation",get_jointTranslation,null,true);
+		addMember(l,"jointSpeed",get_jointSpeed,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.WheelJoint2D),typeof(UnityEngine.AnchoredJoint2D));
 	}
 }

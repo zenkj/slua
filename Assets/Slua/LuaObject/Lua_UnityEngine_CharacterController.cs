@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_CharacterController : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.CharacterController o;
-		if(matchType(l,1)){
-			o=new UnityEngine.CharacterController();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.CharacterController();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SimpleMove(IntPtr l) {
@@ -37,7 +33,7 @@ public class Lua_UnityEngine_CharacterController : LuaObject {
 			UnityEngine.Vector3 a1;
 			checkType(l,2,out a1);
 			UnityEngine.CollisionFlags ret=self.Move(a1);
-			pushValue(l,ret);
+			pushEnum(l,(int)ret);
 			return 1;
 		}
 		catch(Exception e) {
@@ -60,7 +56,7 @@ public class Lua_UnityEngine_CharacterController : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_collisionFlags(IntPtr l) {
 		UnityEngine.CharacterController o = (UnityEngine.CharacterController)checkSelf(l);
-		pushValue(l,o.collisionFlags);
+		pushEnum(l,(int)o.collisionFlags);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -151,15 +147,15 @@ public class Lua_UnityEngine_CharacterController : LuaObject {
 		getTypeTable(l,"UnityEngine.CharacterController");
 		addMember(l,SimpleMove);
 		addMember(l,Move);
-		addMember(l,"isGrounded",get_isGrounded,null);
-		addMember(l,"velocity",get_velocity,null);
-		addMember(l,"collisionFlags",get_collisionFlags,null);
-		addMember(l,"radius",get_radius,set_radius);
-		addMember(l,"height",get_height,set_height);
-		addMember(l,"center",get_center,set_center);
-		addMember(l,"slopeLimit",get_slopeLimit,set_slopeLimit);
-		addMember(l,"stepOffset",get_stepOffset,set_stepOffset);
-		addMember(l,"detectCollisions",get_detectCollisions,set_detectCollisions);
+		addMember(l,"isGrounded",get_isGrounded,null,true);
+		addMember(l,"velocity",get_velocity,null,true);
+		addMember(l,"collisionFlags",get_collisionFlags,null,true);
+		addMember(l,"radius",get_radius,set_radius,true);
+		addMember(l,"height",get_height,set_height,true);
+		addMember(l,"center",get_center,set_center,true);
+		addMember(l,"slopeLimit",get_slopeLimit,set_slopeLimit,true);
+		addMember(l,"stepOffset",get_stepOffset,set_stepOffset,true);
+		addMember(l,"detectCollisions",get_detectCollisions,set_detectCollisions,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.CharacterController),typeof(UnityEngine.Collider));
 	}
 }

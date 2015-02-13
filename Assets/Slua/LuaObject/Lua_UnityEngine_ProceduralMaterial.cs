@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ProceduralMaterial : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ProceduralMaterial o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ProceduralMaterial();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ProceduralMaterial();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetProceduralPropertyDescriptions(IntPtr l) {
@@ -338,7 +334,7 @@ public class Lua_UnityEngine_ProceduralMaterial : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_cacheSize(IntPtr l) {
 		UnityEngine.ProceduralMaterial o = (UnityEngine.ProceduralMaterial)checkSelf(l);
-		pushValue(l,o.cacheSize);
+		pushEnum(l,(int)o.cacheSize);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -392,7 +388,7 @@ public class Lua_UnityEngine_ProceduralMaterial : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_loadingBehavior(IntPtr l) {
 		UnityEngine.ProceduralMaterial o = (UnityEngine.ProceduralMaterial)checkSelf(l);
-		pushValue(l,o.loadingBehavior);
+		pushEnum(l,(int)o.loadingBehavior);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -402,7 +398,7 @@ public class Lua_UnityEngine_ProceduralMaterial : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_substanceProcessorUsage(IntPtr l) {
-		pushValue(l,UnityEngine.ProceduralMaterial.substanceProcessorUsage);
+		pushEnum(l,(int)UnityEngine.ProceduralMaterial.substanceProcessorUsage);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -464,16 +460,16 @@ public class Lua_UnityEngine_ProceduralMaterial : LuaObject {
 		addMember(l,GetGeneratedTextures);
 		addMember(l,GetGeneratedTexture);
 		addMember(l,StopRebuilds_s);
-		addMember(l,"cacheSize",get_cacheSize,set_cacheSize);
-		addMember(l,"animationUpdateRate",get_animationUpdateRate,set_animationUpdateRate);
-		addMember(l,"isProcessing",get_isProcessing,null);
-		addMember(l,"isCachedDataAvailable",get_isCachedDataAvailable,null);
-		addMember(l,"isLoadTimeGenerated",get_isLoadTimeGenerated,set_isLoadTimeGenerated);
-		addMember(l,"loadingBehavior",get_loadingBehavior,null);
-		addMember(l,"isSupported",get_isSupported,null);
-		addMember(l,"substanceProcessorUsage",get_substanceProcessorUsage,set_substanceProcessorUsage);
-		addMember(l,"preset",get_preset,set_preset);
-		addMember(l,"isReadable",get_isReadable,set_isReadable);
+		addMember(l,"cacheSize",get_cacheSize,set_cacheSize,true);
+		addMember(l,"animationUpdateRate",get_animationUpdateRate,set_animationUpdateRate,true);
+		addMember(l,"isProcessing",get_isProcessing,null,true);
+		addMember(l,"isCachedDataAvailable",get_isCachedDataAvailable,null,true);
+		addMember(l,"isLoadTimeGenerated",get_isLoadTimeGenerated,set_isLoadTimeGenerated,true);
+		addMember(l,"loadingBehavior",get_loadingBehavior,null,true);
+		addMember(l,"isSupported",get_isSupported,null,false);
+		addMember(l,"substanceProcessorUsage",get_substanceProcessorUsage,set_substanceProcessorUsage,false);
+		addMember(l,"preset",get_preset,set_preset,true);
+		addMember(l,"isReadable",get_isReadable,set_isReadable,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ProceduralMaterial),typeof(UnityEngine.Material));
 	}
 }

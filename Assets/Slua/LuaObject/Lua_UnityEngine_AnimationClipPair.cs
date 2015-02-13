@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AnimationClipPair : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AnimationClipPair o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AnimationClipPair();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AnimationClipPair();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_originalClip(IntPtr l) {
@@ -45,8 +41,8 @@ public class Lua_UnityEngine_AnimationClipPair : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.AnimationClipPair");
-		addMember(l,"originalClip",get_originalClip,set_originalClip);
-		addMember(l,"overrideClip",get_overrideClip,set_overrideClip);
+		addMember(l,"originalClip",get_originalClip,set_originalClip,true);
+		addMember(l,"overrideClip",get_overrideClip,set_overrideClip,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AnimationClipPair));
 	}
 }

@@ -6,19 +6,16 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Graphics o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Graphics();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Graphics();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawMesh_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera),typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(int),typeof(UnityEngine.Camera),typeof(int))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -36,7 +33,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6,a7);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(int),typeof(UnityEngine.Camera))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -52,7 +49,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(System.Int32))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(int))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -66,7 +63,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera),typeof(System.Int32),typeof(UnityEngine.MaterialPropertyBlock))){
+			else if(argc==8){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -86,7 +83,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6,a7,a8);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera),typeof(System.Int32))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(int),typeof(UnityEngine.Camera),typeof(int))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -102,7 +99,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(int),typeof(UnityEngine.Camera))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -116,7 +113,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(System.Int32))){
+			else if(argc==4){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -128,7 +125,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera),typeof(System.Int32),typeof(UnityEngine.MaterialPropertyBlock))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(int),typeof(UnityEngine.Camera),typeof(int),typeof(UnityEngine.MaterialPropertyBlock))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -146,7 +143,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6,a7);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera),typeof(System.Int32),typeof(UnityEngine.MaterialPropertyBlock),typeof(System.Boolean),typeof(System.Boolean))){
+			else if(argc==10){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -170,7 +167,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(UnityEngine.Material),typeof(System.Int32),typeof(UnityEngine.Camera),typeof(System.Int32),typeof(UnityEngine.MaterialPropertyBlock),typeof(System.Boolean),typeof(System.Boolean))){
+			else if(argc==9){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -192,46 +189,6 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4,a5,a6,a7,a8,a9);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion))){
-				UnityEngine.Mesh a1;
-				checkType(l,1,out a1);
-				UnityEngine.Vector3 a2;
-				checkType(l,2,out a2);
-				UnityEngine.Quaternion a3;
-				checkType(l,3,out a3);
-				UnityEngine.Graphics.DrawMesh(a1,a2,a3);
-				return 0;
-			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(System.Int32))){
-				UnityEngine.Mesh a1;
-				checkType(l,1,out a1);
-				UnityEngine.Vector3 a2;
-				checkType(l,2,out a2);
-				UnityEngine.Quaternion a3;
-				checkType(l,3,out a3);
-				System.Int32 a4;
-				checkType(l,4,out a4);
-				UnityEngine.Graphics.DrawMesh(a1,a2,a3,a4);
-				return 0;
-			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4))){
-				UnityEngine.Mesh a1;
-				checkType(l,1,out a1);
-				UnityEngine.Matrix4x4 a2;
-				checkType(l,2,out a2);
-				UnityEngine.Graphics.DrawMesh(a1,a2);
-				return 0;
-			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(System.Int32))){
-				UnityEngine.Mesh a1;
-				checkType(l,1,out a1);
-				UnityEngine.Matrix4x4 a2;
-				checkType(l,2,out a2);
-				System.Int32 a3;
-				checkType(l,3,out a3);
-				UnityEngine.Graphics.DrawMesh(a1,a2,a3);
-				return 0;
-			}
 			LuaDLL.luaL_error(l,"No matched override function to call");
 			return 0;
 		}
@@ -243,7 +200,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawMeshNow_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -253,7 +211,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMeshNow(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Vector3),typeof(UnityEngine.Quaternion),typeof(System.Int32))){
+			else if(argc==4){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -265,7 +223,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMeshNow(a1,a2,a3,a4);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4))){
+			else if(argc==2){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -273,7 +231,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawMeshNow(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(System.Int32))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Mesh),typeof(UnityEngine.Matrix4x4),typeof(int))){
 				UnityEngine.Mesh a1;
 				checkType(l,1,out a1);
 				UnityEngine.Matrix4x4 a2;
@@ -294,7 +252,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawProcedural_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.MeshTopology),typeof(System.Int32),typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.MeshTopology a1;
 				checkEnum(l,1,out a1);
 				System.Int32 a2;
@@ -304,7 +263,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawProcedural(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.MeshTopology),typeof(System.Int32))){
+			else if(argc==2){
 				UnityEngine.MeshTopology a1;
 				checkEnum(l,1,out a1);
 				System.Int32 a2;
@@ -323,7 +282,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawProceduralIndirect_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.MeshTopology),typeof(UnityEngine.ComputeBuffer),typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.MeshTopology a1;
 				checkEnum(l,1,out a1);
 				UnityEngine.ComputeBuffer a2;
@@ -333,7 +293,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawProceduralIndirect(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.MeshTopology),typeof(UnityEngine.ComputeBuffer))){
+			else if(argc==2){
 				UnityEngine.MeshTopology a1;
 				checkEnum(l,1,out a1);
 				UnityEngine.ComputeBuffer a2;
@@ -352,7 +312,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DrawTexture_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -360,7 +321,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Material))){
+			else if(argc==3){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -370,7 +331,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32))){
+			else if(argc==6){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -386,7 +347,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2,a3,a4,a5,a6);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(UnityEngine.Material))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(int),typeof(int),typeof(int),typeof(int),typeof(UnityEngine.Material))){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -404,7 +365,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2,a3,a4,a5,a6,a7);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(int),typeof(int),typeof(int),typeof(int))){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -422,7 +383,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2,a3,a4,a5,a6,a7);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(UnityEngine.Material))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(int),typeof(int),typeof(int),typeof(int),typeof(UnityEngine.Material))){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -442,7 +403,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2,a3,a4,a5,a6,a7,a8);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(UnityEngine.Color))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(int),typeof(int),typeof(int),typeof(int),typeof(UnityEngine.Color))){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -462,7 +423,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.DrawTexture(a1,a2,a3,a4,a5,a6,a7,a8);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Rect),typeof(UnityEngine.Texture),typeof(UnityEngine.Rect),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(UnityEngine.Color),typeof(UnityEngine.Material))){
+			else if(argc==9){
 				UnityEngine.Rect a1;
 				checkType(l,1,out a1);
 				UnityEngine.Texture a2;
@@ -495,7 +456,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Blit_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Texture),typeof(UnityEngine.RenderTexture))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(UnityEngine.Texture),typeof(UnityEngine.RenderTexture))){
 				UnityEngine.Texture a1;
 				checkType(l,1,out a1);
 				UnityEngine.RenderTexture a2;
@@ -503,7 +465,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.Blit(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture),typeof(UnityEngine.RenderTexture),typeof(UnityEngine.Material))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Texture),typeof(UnityEngine.RenderTexture),typeof(UnityEngine.Material))){
 				UnityEngine.Texture a1;
 				checkType(l,1,out a1);
 				UnityEngine.RenderTexture a2;
@@ -513,7 +475,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.Blit(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture),typeof(UnityEngine.RenderTexture),typeof(UnityEngine.Material),typeof(System.Int32))){
+			else if(argc==4){
 				UnityEngine.Texture a1;
 				checkType(l,1,out a1);
 				UnityEngine.RenderTexture a2;
@@ -525,7 +487,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.Blit(a1,a2,a3,a4);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture),typeof(UnityEngine.Material))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Texture),typeof(UnityEngine.Material))){
 				UnityEngine.Texture a1;
 				checkType(l,1,out a1);
 				UnityEngine.Material a2;
@@ -533,7 +495,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.Blit(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture),typeof(UnityEngine.Material),typeof(System.Int32))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Texture),typeof(UnityEngine.Material),typeof(int))){
 				UnityEngine.Texture a1;
 				checkType(l,1,out a1);
 				UnityEngine.Material a2;
@@ -561,7 +523,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 			UnityEngine.Material a3;
 			checkType(l,3,out a3);
 			UnityEngine.Vector2[] a4;
-			checkType(l,4,out a4);
+			checkParams(l,4,out a4);
 			UnityEngine.Graphics.BlitMultiTap(a1,a2,a3,a4);
 			return 0;
 		}
@@ -573,13 +535,14 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetRenderTarget_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.RenderTexture))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.RenderTexture a1;
 				checkType(l,1,out a1);
 				UnityEngine.Graphics.SetRenderTarget(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.RenderTexture),typeof(System.Int32))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.RenderTexture),typeof(int))){
 				UnityEngine.RenderTexture a1;
 				checkType(l,1,out a1);
 				System.Int32 a2;
@@ -587,7 +550,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.SetRenderTarget(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.RenderTexture),typeof(System.Int32),typeof(UnityEngine.CubemapFace))){
+			else if(argc==3){
 				UnityEngine.RenderTexture a1;
 				checkType(l,1,out a1);
 				System.Int32 a2;
@@ -597,7 +560,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.SetRenderTarget(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.RenderBuffer),typeof(UnityEngine.RenderBuffer))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.RenderBuffer),typeof(UnityEngine.RenderBuffer))){
 				UnityEngine.RenderBuffer a1;
 				checkType(l,1,out a1);
 				UnityEngine.RenderBuffer a2;
@@ -605,7 +568,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.SetRenderTarget(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.RenderBuffer),typeof(UnityEngine.RenderBuffer))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.RenderBuffer[]),typeof(UnityEngine.RenderBuffer))){
 				UnityEngine.RenderBuffer[] a1;
 				checkType(l,1,out a1);
 				UnityEngine.RenderBuffer a2;
@@ -624,7 +587,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetRandomWriteTarget_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32),typeof(UnityEngine.RenderTexture))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int),typeof(UnityEngine.RenderTexture))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.RenderTexture a2;
@@ -632,7 +596,7 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 				UnityEngine.Graphics.SetRandomWriteTarget(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.Int32),typeof(UnityEngine.ComputeBuffer))){
+			else if(matchType(l,argc,1,typeof(int),typeof(UnityEngine.ComputeBuffer))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.ComputeBuffer a2;
@@ -681,8 +645,8 @@ public class Lua_UnityEngine_Graphics : LuaObject {
 		addMember(l,SetRenderTarget_s);
 		addMember(l,SetRandomWriteTarget_s);
 		addMember(l,ClearRandomWriteTargets_s);
-		addMember(l,"activeColorBuffer",get_activeColorBuffer,null);
-		addMember(l,"activeDepthBuffer",get_activeDepthBuffer,null);
+		addMember(l,"activeColorBuffer",get_activeColorBuffer,null,false);
+		addMember(l,"activeDepthBuffer",get_activeDepthBuffer,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Graphics));
 	}
 }

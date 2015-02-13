@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AudioDistortionFilter : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AudioDistortionFilter o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AudioDistortionFilter();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AudioDistortionFilter();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_distortionLevel(IntPtr l) {
@@ -31,7 +27,7 @@ public class Lua_UnityEngine_AudioDistortionFilter : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.AudioDistortionFilter");
-		addMember(l,"distortionLevel",get_distortionLevel,set_distortionLevel);
+		addMember(l,"distortionLevel",get_distortionLevel,set_distortionLevel,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AudioDistortionFilter),typeof(UnityEngine.Behaviour));
 	}
 }

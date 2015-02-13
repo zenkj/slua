@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LayerMask : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -40,7 +41,7 @@ public class Lua_UnityEngine_LayerMask : LuaObject {
 	static public int GetMask_s(IntPtr l) {
 		try{
 			System.String[] a1;
-			checkType(l,1,out a1);
+			checkParams(l,1,out a1);
 			System.Int32 ret=UnityEngine.LayerMask.GetMask(a1);
 			pushValue(l,ret);
 			return 1;
@@ -70,7 +71,7 @@ public class Lua_UnityEngine_LayerMask : LuaObject {
 		addMember(l,LayerToName_s);
 		addMember(l,NameToLayer_s);
 		addMember(l,GetMask_s);
-		addMember(l,"value",get_value,set_value);
+		addMember(l,"value",get_value,set_value,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LayerMask));
 	}
 }

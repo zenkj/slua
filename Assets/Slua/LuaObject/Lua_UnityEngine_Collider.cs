@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Collider : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Collider o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Collider();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Collider();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int ClosestPointOnBounds(IntPtr l) {
@@ -121,12 +117,12 @@ public class Lua_UnityEngine_Collider : LuaObject {
 		getTypeTable(l,"UnityEngine.Collider");
 		addMember(l,ClosestPointOnBounds);
 		addMember(l,Raycast);
-		addMember(l,"enabled",get_enabled,set_enabled);
-		addMember(l,"attachedRigidbody",get_attachedRigidbody,null);
-		addMember(l,"isTrigger",get_isTrigger,set_isTrigger);
-		addMember(l,"material",get_material,set_material);
-		addMember(l,"sharedMaterial",get_sharedMaterial,set_sharedMaterial);
-		addMember(l,"bounds",get_bounds,null);
+		addMember(l,"enabled",get_enabled,set_enabled,true);
+		addMember(l,"attachedRigidbody",get_attachedRigidbody,null,true);
+		addMember(l,"isTrigger",get_isTrigger,set_isTrigger,true);
+		addMember(l,"material",get_material,set_material,true);
+		addMember(l,"sharedMaterial",get_sharedMaterial,set_sharedMaterial,true);
+		addMember(l,"bounds",get_bounds,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Collider),typeof(UnityEngine.Component));
 	}
 }

@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SphereCollider : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SphereCollider o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SphereCollider();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SphereCollider();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_center(IntPtr l) {
@@ -45,8 +41,8 @@ public class Lua_UnityEngine_SphereCollider : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.SphereCollider");
-		addMember(l,"center",get_center,set_center);
-		addMember(l,"radius",get_radius,set_radius);
+		addMember(l,"center",get_center,set_center,true);
+		addMember(l,"radius",get_radius,set_radius,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SphereCollider),typeof(UnityEngine.Collider));
 	}
 }

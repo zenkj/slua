@@ -6,20 +6,21 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AnimationCurve : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.AnimationCurve o;
-		if(matchType(l,1,typeof(UnityEngine.Keyframe))){
+		if(argc==2){
 			UnityEngine.Keyframe[] a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			o=new UnityEngine.AnimationCurve(a1);
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1)){
+		else if(argc==1){
 			o=new UnityEngine.AnimationCurve();
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -40,7 +41,8 @@ public class Lua_UnityEngine_AnimationCurve : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddKey(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Single),typeof(System.Single))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.AnimationCurve self=(UnityEngine.AnimationCurve)checkSelf(l);
 				System.Single a1;
 				checkType(l,2,out a1);
@@ -50,7 +52,7 @@ public class Lua_UnityEngine_AnimationCurve : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.Keyframe))){
+			else if(argc==2){
 				UnityEngine.AnimationCurve self=(UnityEngine.AnimationCurve)checkSelf(l);
 				UnityEngine.Keyframe a1;
 				checkType(l,2,out a1);
@@ -176,7 +178,7 @@ public class Lua_UnityEngine_AnimationCurve : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_preWrapMode(IntPtr l) {
 		UnityEngine.AnimationCurve o = (UnityEngine.AnimationCurve)checkSelf(l);
-		pushValue(l,o.preWrapMode);
+		pushEnum(l,(int)o.preWrapMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -190,7 +192,7 @@ public class Lua_UnityEngine_AnimationCurve : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_postWrapMode(IntPtr l) {
 		UnityEngine.AnimationCurve o = (UnityEngine.AnimationCurve)checkSelf(l);
-		pushValue(l,o.postWrapMode);
+		pushEnum(l,(int)o.postWrapMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -210,10 +212,10 @@ public class Lua_UnityEngine_AnimationCurve : LuaObject {
 		addMember(l,SmoothTangents);
 		addMember(l,Linear_s);
 		addMember(l,EaseInOut_s);
-		addMember(l,"keys",get_keys,set_keys);
-		addMember(l,"length",get_length,null);
-		addMember(l,"preWrapMode",get_preWrapMode,set_preWrapMode);
-		addMember(l,"postWrapMode",get_postWrapMode,set_postWrapMode);
+		addMember(l,"keys",get_keys,set_keys,true);
+		addMember(l,"length",get_length,null,true);
+		addMember(l,"preWrapMode",get_preWrapMode,set_preWrapMode,true);
+		addMember(l,"postWrapMode",get_postWrapMode,set_postWrapMode,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AnimationCurve));
 	}
 }

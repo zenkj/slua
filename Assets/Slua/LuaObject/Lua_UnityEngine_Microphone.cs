@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Microphone : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Microphone o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Microphone();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Microphone();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Start_s(IntPtr l) {
@@ -105,7 +101,7 @@ public class Lua_UnityEngine_Microphone : LuaObject {
 		addMember(l,IsRecording_s);
 		addMember(l,GetPosition_s);
 		addMember(l,GetDeviceCaps_s);
-		addMember(l,"devices",get_devices,null);
+		addMember(l,"devices",get_devices,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Microphone));
 	}
 }

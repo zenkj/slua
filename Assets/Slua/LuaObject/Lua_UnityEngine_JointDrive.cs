@@ -6,12 +6,13 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_JointDrive : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_mode(IntPtr l) {
 		UnityEngine.JointDrive o = (UnityEngine.JointDrive)checkSelf(l);
-		pushValue(l,o.mode);
+		pushEnum(l,(int)o.mode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -70,10 +71,10 @@ public class Lua_UnityEngine_JointDrive : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.JointDrive");
-		addMember(l,"mode",get_mode,set_mode);
-		addMember(l,"positionSpring",get_positionSpring,set_positionSpring);
-		addMember(l,"positionDamper",get_positionDamper,set_positionDamper);
-		addMember(l,"maximumForce",get_maximumForce,set_maximumForce);
+		addMember(l,"mode",get_mode,set_mode,true);
+		addMember(l,"positionSpring",get_positionSpring,set_positionSpring,true);
+		addMember(l,"positionDamper",get_positionDamper,set_positionDamper,true);
+		addMember(l,"maximumForce",get_maximumForce,set_maximumForce,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.JointDrive));
 	}
 }

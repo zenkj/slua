@@ -6,19 +6,16 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Sprite : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Sprite o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Sprite();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Sprite();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Create_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Texture2D),typeof(UnityEngine.Rect),typeof(UnityEngine.Vector2),typeof(System.Single),typeof(System.UInt32),typeof(UnityEngine.SpriteMeshType),typeof(UnityEngine.Vector4))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==7){
 				UnityEngine.Texture2D a1;
 				checkType(l,1,out a1);
 				UnityEngine.Rect a2;
@@ -37,7 +34,7 @@ public class Lua_UnityEngine_Sprite : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture2D),typeof(UnityEngine.Rect),typeof(UnityEngine.Vector2),typeof(System.Single),typeof(System.UInt32),typeof(UnityEngine.SpriteMeshType))){
+			else if(argc==6){
 				UnityEngine.Texture2D a1;
 				checkType(l,1,out a1);
 				UnityEngine.Rect a2;
@@ -54,7 +51,7 @@ public class Lua_UnityEngine_Sprite : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture2D),typeof(UnityEngine.Rect),typeof(UnityEngine.Vector2),typeof(System.Single),typeof(System.UInt32))){
+			else if(argc==5){
 				UnityEngine.Texture2D a1;
 				checkType(l,1,out a1);
 				UnityEngine.Rect a2;
@@ -69,7 +66,7 @@ public class Lua_UnityEngine_Sprite : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture2D),typeof(UnityEngine.Rect),typeof(UnityEngine.Vector2),typeof(System.Single))){
+			else if(argc==4){
 				UnityEngine.Texture2D a1;
 				checkType(l,1,out a1);
 				UnityEngine.Rect a2;
@@ -82,7 +79,7 @@ public class Lua_UnityEngine_Sprite : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Texture2D),typeof(UnityEngine.Rect),typeof(UnityEngine.Vector2))){
+			else if(argc==3){
 				UnityEngine.Texture2D a1;
 				checkType(l,1,out a1);
 				UnityEngine.Rect a2;
@@ -146,13 +143,13 @@ public class Lua_UnityEngine_Sprite : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_packingMode(IntPtr l) {
 		UnityEngine.Sprite o = (UnityEngine.Sprite)checkSelf(l);
-		pushValue(l,o.packingMode);
+		pushEnum(l,(int)o.packingMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_packingRotation(IntPtr l) {
 		UnityEngine.Sprite o = (UnityEngine.Sprite)checkSelf(l);
-		pushValue(l,o.packingRotation);
+		pushEnum(l,(int)o.packingRotation);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -164,16 +161,16 @@ public class Lua_UnityEngine_Sprite : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Sprite");
 		addMember(l,Create_s);
-		addMember(l,"bounds",get_bounds,null);
-		addMember(l,"rect",get_rect,null);
-		addMember(l,"pixelsPerUnit",get_pixelsPerUnit,null);
-		addMember(l,"texture",get_texture,null);
-		addMember(l,"textureRect",get_textureRect,null);
-		addMember(l,"textureRectOffset",get_textureRectOffset,null);
-		addMember(l,"packed",get_packed,null);
-		addMember(l,"packingMode",get_packingMode,null);
-		addMember(l,"packingRotation",get_packingRotation,null);
-		addMember(l,"border",get_border,null);
+		addMember(l,"bounds",get_bounds,null,true);
+		addMember(l,"rect",get_rect,null,true);
+		addMember(l,"pixelsPerUnit",get_pixelsPerUnit,null,true);
+		addMember(l,"texture",get_texture,null,true);
+		addMember(l,"textureRect",get_textureRect,null,true);
+		addMember(l,"textureRectOffset",get_textureRectOffset,null,true);
+		addMember(l,"packed",get_packed,null,true);
+		addMember(l,"packingMode",get_packingMode,null,true);
+		addMember(l,"packingRotation",get_packingRotation,null,true);
+		addMember(l,"border",get_border,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Sprite),typeof(UnityEngine.Object));
 	}
 }

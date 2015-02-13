@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ParticleSystem o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ParticleSystem();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ParticleSystem();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetParticles(IntPtr l) {
@@ -66,7 +62,8 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Simulate(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Single),typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Single a1;
 				checkType(l,2,out a1);
@@ -75,14 +72,14 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 				self.Simulate(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Single))){
+			else if(argc==2){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Single a1;
 				checkType(l,2,out a1);
 				self.Simulate(a1);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Single),typeof(System.Boolean),typeof(System.Boolean))){
+			else if(argc==4){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Single a1;
 				checkType(l,2,out a1);
@@ -104,12 +101,13 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Play(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				self.Play();
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Boolean))){
+			else if(argc==2){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -127,12 +125,13 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Stop(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				self.Stop();
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Boolean))){
+			else if(argc==2){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -150,12 +149,13 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Pause(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				self.Pause();
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Boolean))){
+			else if(argc==2){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -173,12 +173,13 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Clear(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				self.Clear();
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Boolean))){
+			else if(argc==2){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -196,13 +197,14 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int IsAlive(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Boolean ret=self.IsAlive();
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.Boolean))){
+			else if(argc==2){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -221,14 +223,15 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Emit(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,2,typeof(int))){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				System.Int32 a1;
 				checkType(l,2,out a1);
 				self.Emit(a1);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3),typeof(System.Single),typeof(System.Single),typeof(UnityEngine.Color32))){
+			else if(argc==6){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				UnityEngine.Vector3 a1;
 				checkType(l,2,out a1);
@@ -243,7 +246,7 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 				self.Emit(a1,a2,a3,a4,a5);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.ParticleSystem.Particle))){
+			else if(matchType(l,argc,2,typeof(UnityEngine.ParticleSystem.Particle))){
 				UnityEngine.ParticleSystem self=(UnityEngine.ParticleSystem)checkSelf(l);
 				UnityEngine.ParticleSystem.Particle a1;
 				checkType(l,2,out a1);
@@ -493,7 +496,7 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_simulationSpace(IntPtr l) {
 		UnityEngine.ParticleSystem o = (UnityEngine.ParticleSystem)checkSelf(l);
-		pushValue(l,o.simulationSpace);
+		pushEnum(l,(int)o.simulationSpace);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -513,7 +516,7 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int set_randomSeed(IntPtr l) {
 		UnityEngine.ParticleSystem o = (UnityEngine.ParticleSystem)checkSelf(l);
-		UInt32 v;
+		System.UInt32 v;
 		checkType(l,2,out v);
 		o.randomSeed=v;
 		return 0;
@@ -530,28 +533,28 @@ public class Lua_UnityEngine_ParticleSystem : LuaObject {
 		addMember(l,Clear);
 		addMember(l,IsAlive);
 		addMember(l,Emit);
-		addMember(l,"startDelay",get_startDelay,set_startDelay);
-		addMember(l,"isPlaying",get_isPlaying,null);
-		addMember(l,"isStopped",get_isStopped,null);
-		addMember(l,"isPaused",get_isPaused,null);
-		addMember(l,"loop",get_loop,set_loop);
-		addMember(l,"playOnAwake",get_playOnAwake,set_playOnAwake);
-		addMember(l,"time",get_time,set_time);
-		addMember(l,"duration",get_duration,null);
-		addMember(l,"playbackSpeed",get_playbackSpeed,set_playbackSpeed);
-		addMember(l,"particleCount",get_particleCount,null);
-		addMember(l,"safeCollisionEventSize",get_safeCollisionEventSize,null);
-		addMember(l,"enableEmission",get_enableEmission,set_enableEmission);
-		addMember(l,"emissionRate",get_emissionRate,set_emissionRate);
-		addMember(l,"startSpeed",get_startSpeed,set_startSpeed);
-		addMember(l,"startSize",get_startSize,set_startSize);
-		addMember(l,"startColor",get_startColor,set_startColor);
-		addMember(l,"startRotation",get_startRotation,set_startRotation);
-		addMember(l,"startLifetime",get_startLifetime,set_startLifetime);
-		addMember(l,"gravityModifier",get_gravityModifier,set_gravityModifier);
-		addMember(l,"maxParticles",get_maxParticles,set_maxParticles);
-		addMember(l,"simulationSpace",get_simulationSpace,set_simulationSpace);
-		addMember(l,"randomSeed",get_randomSeed,set_randomSeed);
+		addMember(l,"startDelay",get_startDelay,set_startDelay,true);
+		addMember(l,"isPlaying",get_isPlaying,null,true);
+		addMember(l,"isStopped",get_isStopped,null,true);
+		addMember(l,"isPaused",get_isPaused,null,true);
+		addMember(l,"loop",get_loop,set_loop,true);
+		addMember(l,"playOnAwake",get_playOnAwake,set_playOnAwake,true);
+		addMember(l,"time",get_time,set_time,true);
+		addMember(l,"duration",get_duration,null,true);
+		addMember(l,"playbackSpeed",get_playbackSpeed,set_playbackSpeed,true);
+		addMember(l,"particleCount",get_particleCount,null,true);
+		addMember(l,"safeCollisionEventSize",get_safeCollisionEventSize,null,true);
+		addMember(l,"enableEmission",get_enableEmission,set_enableEmission,true);
+		addMember(l,"emissionRate",get_emissionRate,set_emissionRate,true);
+		addMember(l,"startSpeed",get_startSpeed,set_startSpeed,true);
+		addMember(l,"startSize",get_startSize,set_startSize,true);
+		addMember(l,"startColor",get_startColor,set_startColor,true);
+		addMember(l,"startRotation",get_startRotation,set_startRotation,true);
+		addMember(l,"startLifetime",get_startLifetime,set_startLifetime,true);
+		addMember(l,"gravityModifier",get_gravityModifier,set_gravityModifier,true);
+		addMember(l,"maxParticles",get_maxParticles,set_maxParticles,true);
+		addMember(l,"simulationSpace",get_simulationSpace,set_simulationSpace,true);
+		addMember(l,"randomSeed",get_randomSeed,set_randomSeed,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ParticleSystem),typeof(UnityEngine.Component));
 	}
 }

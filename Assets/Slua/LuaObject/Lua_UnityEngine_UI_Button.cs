@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Button : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -54,7 +55,7 @@ public class Lua_UnityEngine_UI_Button : LuaObject {
 		getTypeTable(l,"UnityEngine.UI.Button");
 		addMember(l,OnPointerClick);
 		addMember(l,OnSubmit);
-		addMember(l,"onClick",get_onClick,set_onClick);
+		addMember(l,"onClick",get_onClick,set_onClick,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Button),typeof(UnityEngine.UI.Selectable));
 	}
 }

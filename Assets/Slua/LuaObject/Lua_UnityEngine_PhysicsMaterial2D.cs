@@ -6,20 +6,21 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_PhysicsMaterial2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.PhysicsMaterial2D o;
-		if(matchType(l,1)){
+		if(argc==1){
 			o=new UnityEngine.PhysicsMaterial2D();
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1,typeof(System.String))){
+		else if(argc==2){
 			System.String a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			o=new UnityEngine.PhysicsMaterial2D(a1);
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -52,8 +53,8 @@ public class Lua_UnityEngine_PhysicsMaterial2D : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.PhysicsMaterial2D");
-		addMember(l,"bounciness",get_bounciness,set_bounciness);
-		addMember(l,"friction",get_friction,set_friction);
+		addMember(l,"bounciness",get_bounciness,set_bounciness,true);
+		addMember(l,"friction",get_friction,set_friction,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.PhysicsMaterial2D),typeof(UnityEngine.Object));
 	}
 }

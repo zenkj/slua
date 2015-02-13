@@ -6,26 +6,23 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AudioSource o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AudioSource();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AudioSource();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Play(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.UInt64))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
 				System.UInt64 a1;
 				checkType(l,2,out a1);
 				self.Play(a1);
 				return 0;
 			}
-			else if(matchType(l,2)){
+			else if(argc==1){
 				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
 				self.Play();
 				return 0;
@@ -121,7 +118,8 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int PlayOneShot(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.AudioClip),typeof(System.Single))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
 				UnityEngine.AudioClip a1;
 				checkType(l,2,out a1);
@@ -130,7 +128,7 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 				self.PlayOneShot(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.AudioClip))){
+			else if(argc==2){
 				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
 				UnityEngine.AudioClip a1;
 				checkType(l,2,out a1);
@@ -148,26 +146,12 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetOutputData(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Int32),typeof(System.Int32))){
-				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
-				System.Int32 a1;
-				checkType(l,2,out a1);
-				System.Int32 a2;
-				checkType(l,3,out a2);
-				System.Single[] ret=self.GetOutputData(a1,a2);
-				pushValue(l,ret);
-				return 1;
-			}
-			else if(matchType(l,2,typeof(System.Single),typeof(System.Int32))){
-				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
-				System.Single[] a1;
-				checkType(l,2,out a1);
-				System.Int32 a2;
-				checkType(l,3,out a2);
-				self.GetOutputData(a1,a2);
-				return 0;
-			}
-			LuaDLL.luaL_error(l,"No matched override function to call");
+			UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
+			System.Single[] a1;
+			checkType(l,2,out a1);
+			System.Int32 a2;
+			checkType(l,3,out a2);
+			self.GetOutputData(a1,a2);
 			return 0;
 		}
 		catch(Exception e) {
@@ -178,30 +162,14 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetSpectrumData(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Int32),typeof(System.Int32),typeof(UnityEngine.FFTWindow))){
-				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
-				System.Int32 a1;
-				checkType(l,2,out a1);
-				System.Int32 a2;
-				checkType(l,3,out a2);
-				UnityEngine.FFTWindow a3;
-				checkEnum(l,4,out a3);
-				System.Single[] ret=self.GetSpectrumData(a1,a2,a3);
-				pushValue(l,ret);
-				return 1;
-			}
-			else if(matchType(l,2,typeof(System.Single),typeof(System.Int32),typeof(UnityEngine.FFTWindow))){
-				UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
-				System.Single[] a1;
-				checkType(l,2,out a1);
-				System.Int32 a2;
-				checkType(l,3,out a2);
-				UnityEngine.FFTWindow a3;
-				checkEnum(l,4,out a3);
-				self.GetSpectrumData(a1,a2,a3);
-				return 0;
-			}
-			LuaDLL.luaL_error(l,"No matched override function to call");
+			UnityEngine.AudioSource self=(UnityEngine.AudioSource)checkSelf(l);
+			System.Single[] a1;
+			checkType(l,2,out a1);
+			System.Int32 a2;
+			checkType(l,3,out a2);
+			UnityEngine.FFTWindow a3;
+			checkEnum(l,4,out a3);
+			self.GetSpectrumData(a1,a2,a3);
 			return 0;
 		}
 		catch(Exception e) {
@@ -212,7 +180,8 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int PlayClipAtPoint_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.AudioClip),typeof(UnityEngine.Vector3))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				UnityEngine.AudioClip a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -220,7 +189,7 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 				UnityEngine.AudioSource.PlayClipAtPoint(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.AudioClip),typeof(UnityEngine.Vector3),typeof(System.Single))){
+			else if(argc==3){
 				UnityEngine.AudioClip a1;
 				checkType(l,1,out a1);
 				UnityEngine.Vector3 a2;
@@ -373,7 +342,7 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_velocityUpdateMode(IntPtr l) {
 		UnityEngine.AudioSource o = (UnityEngine.AudioSource)checkSelf(l);
-		pushValue(l,o.velocityUpdateMode);
+		pushEnum(l,(int)o.velocityUpdateMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -541,7 +510,7 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_rolloffMode(IntPtr l) {
 		UnityEngine.AudioSource o = (UnityEngine.AudioSource)checkSelf(l);
-		pushValue(l,o.rolloffMode);
+		pushEnum(l,(int)o.rolloffMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -565,29 +534,29 @@ public class Lua_UnityEngine_AudioSource : LuaObject {
 		addMember(l,GetOutputData);
 		addMember(l,GetSpectrumData);
 		addMember(l,PlayClipAtPoint_s);
-		addMember(l,"volume",get_volume,set_volume);
-		addMember(l,"pitch",get_pitch,set_pitch);
-		addMember(l,"time",get_time,set_time);
-		addMember(l,"timeSamples",get_timeSamples,set_timeSamples);
-		addMember(l,"clip",get_clip,set_clip);
-		addMember(l,"isPlaying",get_isPlaying,null);
-		addMember(l,"loop",get_loop,set_loop);
-		addMember(l,"ignoreListenerVolume",get_ignoreListenerVolume,set_ignoreListenerVolume);
-		addMember(l,"playOnAwake",get_playOnAwake,set_playOnAwake);
-		addMember(l,"ignoreListenerPause",get_ignoreListenerPause,set_ignoreListenerPause);
-		addMember(l,"velocityUpdateMode",get_velocityUpdateMode,set_velocityUpdateMode);
-		addMember(l,"panLevel",get_panLevel,set_panLevel);
-		addMember(l,"bypassEffects",get_bypassEffects,set_bypassEffects);
-		addMember(l,"bypassListenerEffects",get_bypassListenerEffects,set_bypassListenerEffects);
-		addMember(l,"bypassReverbZones",get_bypassReverbZones,set_bypassReverbZones);
-		addMember(l,"dopplerLevel",get_dopplerLevel,set_dopplerLevel);
-		addMember(l,"spread",get_spread,set_spread);
-		addMember(l,"priority",get_priority,set_priority);
-		addMember(l,"mute",get_mute,set_mute);
-		addMember(l,"minDistance",get_minDistance,set_minDistance);
-		addMember(l,"maxDistance",get_maxDistance,set_maxDistance);
-		addMember(l,"pan",get_pan,set_pan);
-		addMember(l,"rolloffMode",get_rolloffMode,set_rolloffMode);
+		addMember(l,"volume",get_volume,set_volume,true);
+		addMember(l,"pitch",get_pitch,set_pitch,true);
+		addMember(l,"time",get_time,set_time,true);
+		addMember(l,"timeSamples",get_timeSamples,set_timeSamples,true);
+		addMember(l,"clip",get_clip,set_clip,true);
+		addMember(l,"isPlaying",get_isPlaying,null,true);
+		addMember(l,"loop",get_loop,set_loop,true);
+		addMember(l,"ignoreListenerVolume",get_ignoreListenerVolume,set_ignoreListenerVolume,true);
+		addMember(l,"playOnAwake",get_playOnAwake,set_playOnAwake,true);
+		addMember(l,"ignoreListenerPause",get_ignoreListenerPause,set_ignoreListenerPause,true);
+		addMember(l,"velocityUpdateMode",get_velocityUpdateMode,set_velocityUpdateMode,true);
+		addMember(l,"panLevel",get_panLevel,set_panLevel,true);
+		addMember(l,"bypassEffects",get_bypassEffects,set_bypassEffects,true);
+		addMember(l,"bypassListenerEffects",get_bypassListenerEffects,set_bypassListenerEffects,true);
+		addMember(l,"bypassReverbZones",get_bypassReverbZones,set_bypassReverbZones,true);
+		addMember(l,"dopplerLevel",get_dopplerLevel,set_dopplerLevel,true);
+		addMember(l,"spread",get_spread,set_spread,true);
+		addMember(l,"priority",get_priority,set_priority,true);
+		addMember(l,"mute",get_mute,set_mute,true);
+		addMember(l,"minDistance",get_minDistance,set_minDistance,true);
+		addMember(l,"maxDistance",get_maxDistance,set_maxDistance,true);
+		addMember(l,"pan",get_pan,set_pan,true);
+		addMember(l,"rolloffMode",get_rolloffMode,set_rolloffMode,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AudioSource),typeof(UnityEngine.Behaviour));
 	}
 }

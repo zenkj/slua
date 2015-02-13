@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LightProbeGroup : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.LightProbeGroup o;
-		if(matchType(l,1)){
-			o=new UnityEngine.LightProbeGroup();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.LightProbeGroup();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_probePositions(IntPtr l) {
@@ -31,7 +27,7 @@ public class Lua_UnityEngine_LightProbeGroup : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.LightProbeGroup");
-		addMember(l,"probePositions",get_probePositions,set_probePositions);
+		addMember(l,"probePositions",get_probePositions,set_probePositions,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LightProbeGroup),typeof(UnityEngine.Component));
 	}
 }

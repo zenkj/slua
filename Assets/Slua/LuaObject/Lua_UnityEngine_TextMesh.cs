@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_TextMesh : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.TextMesh o;
-		if(matchType(l,1)){
-			o=new UnityEngine.TextMesh();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.TextMesh();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_text(IntPtr l) {
@@ -60,7 +56,7 @@ public class Lua_UnityEngine_TextMesh : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_fontStyle(IntPtr l) {
 		UnityEngine.TextMesh o = (UnityEngine.TextMesh)checkSelf(l);
-		pushValue(l,o.fontStyle);
+		pushEnum(l,(int)o.fontStyle);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -88,7 +84,7 @@ public class Lua_UnityEngine_TextMesh : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_alignment(IntPtr l) {
 		UnityEngine.TextMesh o = (UnityEngine.TextMesh)checkSelf(l);
-		pushValue(l,o.alignment);
+		pushEnum(l,(int)o.alignment);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -102,7 +98,7 @@ public class Lua_UnityEngine_TextMesh : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_anchor(IntPtr l) {
 		UnityEngine.TextMesh o = (UnityEngine.TextMesh)checkSelf(l);
-		pushValue(l,o.anchor);
+		pushEnum(l,(int)o.anchor);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -185,18 +181,18 @@ public class Lua_UnityEngine_TextMesh : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.TextMesh");
-		addMember(l,"text",get_text,set_text);
-		addMember(l,"font",get_font,set_font);
-		addMember(l,"fontSize",get_fontSize,set_fontSize);
-		addMember(l,"fontStyle",get_fontStyle,set_fontStyle);
-		addMember(l,"offsetZ",get_offsetZ,set_offsetZ);
-		addMember(l,"alignment",get_alignment,set_alignment);
-		addMember(l,"anchor",get_anchor,set_anchor);
-		addMember(l,"characterSize",get_characterSize,set_characterSize);
-		addMember(l,"lineSpacing",get_lineSpacing,set_lineSpacing);
-		addMember(l,"tabSize",get_tabSize,set_tabSize);
-		addMember(l,"richText",get_richText,set_richText);
-		addMember(l,"color",get_color,set_color);
+		addMember(l,"text",get_text,set_text,true);
+		addMember(l,"font",get_font,set_font,true);
+		addMember(l,"fontSize",get_fontSize,set_fontSize,true);
+		addMember(l,"fontStyle",get_fontStyle,set_fontStyle,true);
+		addMember(l,"offsetZ",get_offsetZ,set_offsetZ,true);
+		addMember(l,"alignment",get_alignment,set_alignment,true);
+		addMember(l,"anchor",get_anchor,set_anchor,true);
+		addMember(l,"characterSize",get_characterSize,set_characterSize,true);
+		addMember(l,"lineSpacing",get_lineSpacing,set_lineSpacing,true);
+		addMember(l,"tabSize",get_tabSize,set_tabSize,true);
+		addMember(l,"richText",get_richText,set_richText,true);
+		addMember(l,"color",get_color,set_color,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.TextMesh),typeof(UnityEngine.Component));
 	}
 }

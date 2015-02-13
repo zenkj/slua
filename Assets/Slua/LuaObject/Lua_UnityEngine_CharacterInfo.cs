@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_CharacterInfo : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -86,7 +87,7 @@ public class Lua_UnityEngine_CharacterInfo : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_style(IntPtr l) {
 		UnityEngine.CharacterInfo o = (UnityEngine.CharacterInfo)checkSelf(l);
-		pushValue(l,o.style);
+		pushEnum(l,(int)o.style);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -115,13 +116,13 @@ public class Lua_UnityEngine_CharacterInfo : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.CharacterInfo");
-		addMember(l,"index",get_index,set_index);
-		addMember(l,"uv",get_uv,set_uv);
-		addMember(l,"vert",get_vert,set_vert);
-		addMember(l,"width",get_width,set_width);
-		addMember(l,"size",get_size,set_size);
-		addMember(l,"style",get_style,set_style);
-		addMember(l,"flipped",get_flipped,set_flipped);
+		addMember(l,"index",get_index,set_index,true);
+		addMember(l,"uv",get_uv,set_uv,true);
+		addMember(l,"vert",get_vert,set_vert,true);
+		addMember(l,"width",get_width,set_width,true);
+		addMember(l,"size",get_size,set_size,true);
+		addMember(l,"style",get_style,set_style,true);
+		addMember(l,"flipped",get_flipped,set_flipped,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.CharacterInfo));
 	}
 }

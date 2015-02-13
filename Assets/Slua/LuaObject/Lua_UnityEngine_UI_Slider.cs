@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Slider : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -177,7 +178,7 @@ public class Lua_UnityEngine_UI_Slider : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_direction(IntPtr l) {
 		UnityEngine.UI.Slider o = (UnityEngine.UI.Slider)checkSelf(l);
-		pushValue(l,o.direction);
+		pushEnum(l,(int)o.direction);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -284,15 +285,15 @@ public class Lua_UnityEngine_UI_Slider : LuaObject {
 		addMember(l,FindSelectableOnDown);
 		addMember(l,OnInitializePotentialDrag);
 		addMember(l,SetDirection);
-		addMember(l,"fillRect",get_fillRect,set_fillRect);
-		addMember(l,"handleRect",get_handleRect,set_handleRect);
-		addMember(l,"direction",get_direction,set_direction);
-		addMember(l,"minValue",get_minValue,set_minValue);
-		addMember(l,"maxValue",get_maxValue,set_maxValue);
-		addMember(l,"wholeNumbers",get_wholeNumbers,set_wholeNumbers);
-		addMember(l,"value",get_value,set_value);
-		addMember(l,"normalizedValue",get_normalizedValue,set_normalizedValue);
-		addMember(l,"onValueChanged",get_onValueChanged,set_onValueChanged);
+		addMember(l,"fillRect",get_fillRect,set_fillRect,true);
+		addMember(l,"handleRect",get_handleRect,set_handleRect,true);
+		addMember(l,"direction",get_direction,set_direction,true);
+		addMember(l,"minValue",get_minValue,set_minValue,true);
+		addMember(l,"maxValue",get_maxValue,set_maxValue,true);
+		addMember(l,"wholeNumbers",get_wholeNumbers,set_wholeNumbers,true);
+		addMember(l,"value",get_value,set_value,true);
+		addMember(l,"normalizedValue",get_normalizedValue,set_normalizedValue,true);
+		addMember(l,"onValueChanged",get_onValueChanged,set_onValueChanged,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Slider),typeof(UnityEngine.UI.Selectable));
 	}
 }

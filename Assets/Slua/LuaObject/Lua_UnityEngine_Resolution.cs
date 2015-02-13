@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Resolution : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -55,9 +56,9 @@ public class Lua_UnityEngine_Resolution : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Resolution");
-		addMember(l,"width",get_width,set_width);
-		addMember(l,"height",get_height,set_height);
-		addMember(l,"refreshRate",get_refreshRate,set_refreshRate);
+		addMember(l,"width",get_width,set_width,true);
+		addMember(l,"height",get_height,set_height,true);
+		addMember(l,"refreshRate",get_refreshRate,set_refreshRate,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Resolution));
 	}
 }

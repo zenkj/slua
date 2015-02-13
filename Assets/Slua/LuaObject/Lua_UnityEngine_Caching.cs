@@ -6,19 +6,16 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Caching : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Caching o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Caching();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Caching();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Authorize_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.String),typeof(System.String),typeof(System.Int64),typeof(System.String))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.String a2;
@@ -31,7 +28,7 @@ public class Lua_UnityEngine_Caching : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String),typeof(System.String),typeof(System.Int64),typeof(System.Int32),typeof(System.String))){
+			else if(argc==5){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.String a2;
@@ -43,34 +40,6 @@ public class Lua_UnityEngine_Caching : LuaObject {
 				System.String a5;
 				checkType(l,5,out a5);
 				System.Boolean ret=UnityEngine.Caching.Authorize(a1,a2,a3,a4,a5);
-				pushValue(l,ret);
-				return 1;
-			}
-			else if(matchType(l,1,typeof(System.String),typeof(System.String),typeof(System.Int32),typeof(System.Int32),typeof(System.String))){
-				System.String a1;
-				checkType(l,1,out a1);
-				System.String a2;
-				checkType(l,2,out a2);
-				System.Int32 a3;
-				checkType(l,3,out a3);
-				System.Int32 a4;
-				checkType(l,4,out a4);
-				System.String a5;
-				checkType(l,5,out a5);
-				System.Boolean ret=UnityEngine.Caching.Authorize(a1,a2,a3,a4,a5);
-				pushValue(l,ret);
-				return 1;
-			}
-			else if(matchType(l,1,typeof(System.String),typeof(System.String),typeof(System.Int32),typeof(System.String))){
-				System.String a1;
-				checkType(l,1,out a1);
-				System.String a2;
-				checkType(l,2,out a2);
-				System.Int32 a3;
-				checkType(l,3,out a3);
-				System.String a4;
-				checkType(l,4,out a4);
-				System.Boolean ret=UnityEngine.Caching.Authorize(a1,a2,a3,a4);
 				pushValue(l,ret);
 				return 1;
 			}
@@ -138,7 +107,7 @@ public class Lua_UnityEngine_Caching : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int set_maximumAvailableDiskSpace(IntPtr l) {
-		Int64 v;
+		System.Int64 v;
 		checkType(l,2,out v);
 		UnityEngine.Caching.maximumAvailableDiskSpace=v;
 		return 0;
@@ -183,12 +152,12 @@ public class Lua_UnityEngine_Caching : LuaObject {
 		addMember(l,CleanCache_s);
 		addMember(l,IsVersionCached_s);
 		addMember(l,MarkAsUsed_s);
-		addMember(l,"spaceFree",get_spaceFree,null);
-		addMember(l,"maximumAvailableDiskSpace",get_maximumAvailableDiskSpace,set_maximumAvailableDiskSpace);
-		addMember(l,"spaceOccupied",get_spaceOccupied,null);
-		addMember(l,"expirationDelay",get_expirationDelay,set_expirationDelay);
-		addMember(l,"enabled",get_enabled,set_enabled);
-		addMember(l,"ready",get_ready,null);
+		addMember(l,"spaceFree",get_spaceFree,null,false);
+		addMember(l,"maximumAvailableDiskSpace",get_maximumAvailableDiskSpace,set_maximumAvailableDiskSpace,false);
+		addMember(l,"spaceOccupied",get_spaceOccupied,null,false);
+		addMember(l,"expirationDelay",get_expirationDelay,set_expirationDelay,false);
+		addMember(l,"enabled",get_enabled,set_enabled,false);
+		addMember(l,"ready",get_ready,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Caching));
 	}
 }

@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AudioClip : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AudioClip o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AudioClip();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AudioClip();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetData(IntPtr l) {
@@ -50,7 +46,8 @@ public class Lua_UnityEngine_AudioClip : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Create_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.String),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Boolean),typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==6){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.Int32 a2;
@@ -67,7 +64,7 @@ public class Lua_UnityEngine_AudioClip : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Boolean),typeof(System.Boolean),typeof(UnityEngine.AudioClip.PCMReaderCallback))){
+			else if(argc==7){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.Int32 a2;
@@ -86,7 +83,7 @@ public class Lua_UnityEngine_AudioClip : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String),typeof(System.Int32),typeof(System.Int32),typeof(System.Int32),typeof(System.Boolean),typeof(System.Boolean),typeof(UnityEngine.AudioClip.PCMReaderCallback),typeof(UnityEngine.AudioClip.PCMSetPositionCallback))){
+			else if(argc==8){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.Int32 a2;
@@ -150,11 +147,11 @@ public class Lua_UnityEngine_AudioClip : LuaObject {
 		addMember(l,GetData);
 		addMember(l,SetData);
 		addMember(l,Create_s);
-		addMember(l,"length",get_length,null);
-		addMember(l,"samples",get_samples,null);
-		addMember(l,"channels",get_channels,null);
-		addMember(l,"frequency",get_frequency,null);
-		addMember(l,"isReadyToPlay",get_isReadyToPlay,null);
+		addMember(l,"length",get_length,null,true);
+		addMember(l,"samples",get_samples,null,true);
+		addMember(l,"channels",get_channels,null,true);
+		addMember(l,"frequency",get_frequency,null,true);
+		addMember(l,"isReadyToPlay",get_isReadyToPlay,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AudioClip),typeof(UnityEngine.Object));
 	}
 }

@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LODGroup : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.LODGroup o;
-		if(matchType(l,1)){
-			o=new UnityEngine.LODGroup();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.LODGroup();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int RecalculateBounds(IntPtr l) {
@@ -108,10 +104,10 @@ public class Lua_UnityEngine_LODGroup : LuaObject {
 		addMember(l,RecalculateBounds);
 		addMember(l,SetLODS);
 		addMember(l,ForceLOD);
-		addMember(l,"localReferencePoint",get_localReferencePoint,set_localReferencePoint);
-		addMember(l,"size",get_size,set_size);
-		addMember(l,"lodCount",get_lodCount,null);
-		addMember(l,"enabled",get_enabled,set_enabled);
+		addMember(l,"localReferencePoint",get_localReferencePoint,set_localReferencePoint,true);
+		addMember(l,"size",get_size,set_size,true);
+		addMember(l,"lodCount",get_lodCount,null,true);
+		addMember(l,"enabled",get_enabled,set_enabled,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LODGroup),typeof(UnityEngine.Component));
 	}
 }

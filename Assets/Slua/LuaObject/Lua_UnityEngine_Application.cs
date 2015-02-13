@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Application o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Application();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Application();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Quit_s(IntPtr l) {
@@ -40,13 +36,14 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LoadLevel_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Application.LoadLevel(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(matchType(l,argc,1,typeof(string))){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.Application.LoadLevel(a1);
@@ -63,14 +60,15 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LoadLevelAsync_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.AsyncOperation ret=UnityEngine.Application.LoadLevelAsync(a1);
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(matchType(l,argc,1,typeof(string))){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.AsyncOperation ret=UnityEngine.Application.LoadLevelAsync(a1);
@@ -88,14 +86,15 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LoadLevelAdditiveAsync_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.AsyncOperation ret=UnityEngine.Application.LoadLevelAdditiveAsync(a1);
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(matchType(l,argc,1,typeof(string))){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.AsyncOperation ret=UnityEngine.Application.LoadLevelAdditiveAsync(a1);
@@ -113,13 +112,14 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int LoadLevelAdditive_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.Application.LoadLevelAdditive(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(matchType(l,argc,1,typeof(string))){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.Application.LoadLevelAdditive(a1);
@@ -136,14 +136,15 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetStreamProgressForLevel_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				System.Single ret=UnityEngine.Application.GetStreamProgressForLevel(a1);
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(matchType(l,argc,1,typeof(string))){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.Single ret=UnityEngine.Application.GetStreamProgressForLevel(a1);
@@ -161,14 +162,15 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int CanStreamedLevelBeLoaded_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(int))){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				System.Boolean ret=UnityEngine.Application.CanStreamedLevelBeLoaded(a1);
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(matchType(l,argc,1,typeof(string))){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.Boolean ret=UnityEngine.Application.CanStreamedLevelBeLoaded(a1);
@@ -186,7 +188,8 @@ public class Lua_UnityEngine_Application : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int CaptureScreenshot_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.String),typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				System.String a1;
 				checkType(l,1,out a1);
 				System.Int32 a2;
@@ -194,7 +197,7 @@ public class Lua_UnityEngine_Application : LuaObject {
 				UnityEngine.Application.CaptureScreenshot(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.String))){
+			else if(argc==1){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.Application.CaptureScreenshot(a1);
@@ -226,7 +229,7 @@ public class Lua_UnityEngine_Application : LuaObject {
 			System.String a1;
 			checkType(l,1,out a1);
 			System.Object[] a2;
-			checkType(l,2,out a2);
+			checkParams(l,2,out a2);
 			UnityEngine.Application.ExternalCall(a1,a2);
 			return 0;
 		}
@@ -357,7 +360,7 @@ public class Lua_UnityEngine_Application : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_platform(IntPtr l) {
-		pushValue(l,UnityEngine.Application.platform);
+		pushEnum(l,(int)UnityEngine.Application.platform);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -441,12 +444,12 @@ public class Lua_UnityEngine_Application : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_systemLanguage(IntPtr l) {
-		pushValue(l,UnityEngine.Application.systemLanguage);
+		pushEnum(l,(int)UnityEngine.Application.systemLanguage);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_backgroundLoadingPriority(IntPtr l) {
-		pushValue(l,UnityEngine.Application.backgroundLoadingPriority);
+		pushEnum(l,(int)UnityEngine.Application.backgroundLoadingPriority);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -458,7 +461,7 @@ public class Lua_UnityEngine_Application : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_internetReachability(IntPtr l) {
-		pushValue(l,UnityEngine.Application.internetReachability);
+		pushEnum(l,(int)UnityEngine.Application.internetReachability);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -490,33 +493,33 @@ public class Lua_UnityEngine_Application : LuaObject {
 		addMember(l,RegisterLogCallbackThreaded_s);
 		addMember(l,RequestUserAuthorization_s);
 		addMember(l,HasUserAuthorization_s);
-		addMember(l,"loadedLevel",get_loadedLevel,null);
-		addMember(l,"loadedLevelName",get_loadedLevelName,null);
-		addMember(l,"isLoadingLevel",get_isLoadingLevel,null);
-		addMember(l,"levelCount",get_levelCount,null);
-		addMember(l,"streamedBytes",get_streamedBytes,null);
-		addMember(l,"isPlaying",get_isPlaying,null);
-		addMember(l,"isEditor",get_isEditor,null);
-		addMember(l,"isWebPlayer",get_isWebPlayer,null);
-		addMember(l,"platform",get_platform,null);
-		addMember(l,"isMobilePlatform",get_isMobilePlatform,null);
-		addMember(l,"isConsolePlatform",get_isConsolePlatform,null);
-		addMember(l,"runInBackground",get_runInBackground,set_runInBackground);
-		addMember(l,"dataPath",get_dataPath,null);
-		addMember(l,"streamingAssetsPath",get_streamingAssetsPath,null);
-		addMember(l,"persistentDataPath",get_persistentDataPath,null);
-		addMember(l,"temporaryCachePath",get_temporaryCachePath,null);
-		addMember(l,"srcValue",get_srcValue,null);
-		addMember(l,"absoluteURL",get_absoluteURL,null);
-		addMember(l,"unityVersion",get_unityVersion,null);
-		addMember(l,"webSecurityEnabled",get_webSecurityEnabled,null);
-		addMember(l,"webSecurityHostUrl",get_webSecurityHostUrl,null);
-		addMember(l,"targetFrameRate",get_targetFrameRate,set_targetFrameRate);
-		addMember(l,"systemLanguage",get_systemLanguage,null);
-		addMember(l,"backgroundLoadingPriority",get_backgroundLoadingPriority,set_backgroundLoadingPriority);
-		addMember(l,"internetReachability",get_internetReachability,null);
-		addMember(l,"genuine",get_genuine,null);
-		addMember(l,"genuineCheckAvailable",get_genuineCheckAvailable,null);
+		addMember(l,"loadedLevel",get_loadedLevel,null,false);
+		addMember(l,"loadedLevelName",get_loadedLevelName,null,false);
+		addMember(l,"isLoadingLevel",get_isLoadingLevel,null,false);
+		addMember(l,"levelCount",get_levelCount,null,false);
+		addMember(l,"streamedBytes",get_streamedBytes,null,false);
+		addMember(l,"isPlaying",get_isPlaying,null,false);
+		addMember(l,"isEditor",get_isEditor,null,false);
+		addMember(l,"isWebPlayer",get_isWebPlayer,null,false);
+		addMember(l,"platform",get_platform,null,false);
+		addMember(l,"isMobilePlatform",get_isMobilePlatform,null,false);
+		addMember(l,"isConsolePlatform",get_isConsolePlatform,null,false);
+		addMember(l,"runInBackground",get_runInBackground,set_runInBackground,false);
+		addMember(l,"dataPath",get_dataPath,null,false);
+		addMember(l,"streamingAssetsPath",get_streamingAssetsPath,null,false);
+		addMember(l,"persistentDataPath",get_persistentDataPath,null,false);
+		addMember(l,"temporaryCachePath",get_temporaryCachePath,null,false);
+		addMember(l,"srcValue",get_srcValue,null,false);
+		addMember(l,"absoluteURL",get_absoluteURL,null,false);
+		addMember(l,"unityVersion",get_unityVersion,null,false);
+		addMember(l,"webSecurityEnabled",get_webSecurityEnabled,null,false);
+		addMember(l,"webSecurityHostUrl",get_webSecurityHostUrl,null,false);
+		addMember(l,"targetFrameRate",get_targetFrameRate,set_targetFrameRate,false);
+		addMember(l,"systemLanguage",get_systemLanguage,null,false);
+		addMember(l,"backgroundLoadingPriority",get_backgroundLoadingPriority,set_backgroundLoadingPriority,false);
+		addMember(l,"internetReachability",get_internetReachability,null,false);
+		addMember(l,"genuine",get_genuine,null,false);
+		addMember(l,"genuineCheckAvailable",get_genuineCheckAvailable,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Application));
 	}
 }

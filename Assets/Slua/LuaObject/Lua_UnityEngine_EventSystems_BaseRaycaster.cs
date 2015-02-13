@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_EventSystems_BaseRaycaster : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -14,7 +15,7 @@ public class Lua_UnityEngine_EventSystems_BaseRaycaster : LuaObject {
 			UnityEngine.EventSystems.BaseRaycaster self=(UnityEngine.EventSystems.BaseRaycaster)checkSelf(l);
 			UnityEngine.EventSystems.PointerEventData a1;
 			checkType(l,2,out a1);
-			List<UnityEngine.EventSystems.RaycastResult> a2;
+			System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult> a2;
 			checkType(l,3,out a2);
 			self.Raycast(a1,a2);
 			return 0;
@@ -45,9 +46,9 @@ public class Lua_UnityEngine_EventSystems_BaseRaycaster : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.EventSystems.BaseRaycaster");
 		addMember(l,Raycast);
-		addMember(l,"eventCamera",get_eventCamera,null);
-		addMember(l,"sortOrderPriority",get_sortOrderPriority,null);
-		addMember(l,"renderOrderPriority",get_renderOrderPriority,null);
+		addMember(l,"eventCamera",get_eventCamera,null,true);
+		addMember(l,"sortOrderPriority",get_sortOrderPriority,null,true);
+		addMember(l,"renderOrderPriority",get_renderOrderPriority,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.EventSystems.BaseRaycaster),typeof(UnityEngine.EventSystems.UIBehaviour));
 	}
 }

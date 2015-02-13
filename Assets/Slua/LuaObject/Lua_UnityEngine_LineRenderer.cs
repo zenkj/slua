@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LineRenderer : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.LineRenderer o;
-		if(matchType(l,1)){
-			o=new UnityEngine.LineRenderer();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.LineRenderer();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetWidth(IntPtr l) {
@@ -97,7 +93,7 @@ public class Lua_UnityEngine_LineRenderer : LuaObject {
 		addMember(l,SetColors);
 		addMember(l,SetVertexCount);
 		addMember(l,SetPosition);
-		addMember(l,"useWorldSpace",get_useWorldSpace,set_useWorldSpace);
+		addMember(l,"useWorldSpace",get_useWorldSpace,set_useWorldSpace,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LineRenderer),typeof(UnityEngine.Renderer));
 	}
 }

@@ -6,19 +6,16 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AnimationState : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AnimationState o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AnimationState();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AnimationState();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddMixingTransform(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.Transform),typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.AnimationState self=(UnityEngine.AnimationState)checkSelf(l);
 				UnityEngine.Transform a1;
 				checkType(l,2,out a1);
@@ -27,7 +24,7 @@ public class Lua_UnityEngine_AnimationState : LuaObject {
 				self.AddMixingTransform(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.Transform))){
+			else if(argc==2){
 				UnityEngine.AnimationState self=(UnityEngine.AnimationState)checkSelf(l);
 				UnityEngine.Transform a1;
 				checkType(l,2,out a1);
@@ -87,7 +84,7 @@ public class Lua_UnityEngine_AnimationState : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_wrapMode(IntPtr l) {
 		UnityEngine.AnimationState o = (UnityEngine.AnimationState)checkSelf(l);
-		pushValue(l,o.wrapMode);
+		pushEnum(l,(int)o.wrapMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -197,7 +194,7 @@ public class Lua_UnityEngine_AnimationState : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_blendMode(IntPtr l) {
 		UnityEngine.AnimationState o = (UnityEngine.AnimationState)checkSelf(l);
-		pushValue(l,o.blendMode);
+		pushEnum(l,(int)o.blendMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -212,18 +209,18 @@ public class Lua_UnityEngine_AnimationState : LuaObject {
 		getTypeTable(l,"UnityEngine.AnimationState");
 		addMember(l,AddMixingTransform);
 		addMember(l,RemoveMixingTransform);
-		addMember(l,"enabled",get_enabled,set_enabled);
-		addMember(l,"weight",get_weight,set_weight);
-		addMember(l,"wrapMode",get_wrapMode,set_wrapMode);
-		addMember(l,"time",get_time,set_time);
-		addMember(l,"normalizedTime",get_normalizedTime,set_normalizedTime);
-		addMember(l,"speed",get_speed,set_speed);
-		addMember(l,"normalizedSpeed",get_normalizedSpeed,set_normalizedSpeed);
-		addMember(l,"length",get_length,null);
-		addMember(l,"layer",get_layer,set_layer);
-		addMember(l,"clip",get_clip,null);
-		addMember(l,"name",get_name,set_name);
-		addMember(l,"blendMode",get_blendMode,set_blendMode);
+		addMember(l,"enabled",get_enabled,set_enabled,true);
+		addMember(l,"weight",get_weight,set_weight,true);
+		addMember(l,"wrapMode",get_wrapMode,set_wrapMode,true);
+		addMember(l,"time",get_time,set_time,true);
+		addMember(l,"normalizedTime",get_normalizedTime,set_normalizedTime,true);
+		addMember(l,"speed",get_speed,set_speed,true);
+		addMember(l,"normalizedSpeed",get_normalizedSpeed,set_normalizedSpeed,true);
+		addMember(l,"length",get_length,null,true);
+		addMember(l,"layer",get_layer,set_layer,true);
+		addMember(l,"clip",get_clip,null,true);
+		addMember(l,"name",get_name,set_name,true);
+		addMember(l,"blendMode",get_blendMode,set_blendMode,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AnimationState),typeof(UnityEngine.TrackedReference));
 	}
 }

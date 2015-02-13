@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Graphic : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -63,18 +64,6 @@ public class Lua_UnityEngine_UI_Graphic : LuaObject {
 			UnityEngine.UI.CanvasUpdate a1;
 			checkEnum(l,2,out a1);
 			self.Rebuild(a1);
-			return 0;
-		}
-		catch(Exception e) {
-			LuaDLL.luaL_error(l, e.ToString());
-			return 0;
-		}
-	}
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static public int OnRebuildRequested(IntPtr l) {
-		try{
-			UnityEngine.UI.Graphic self=(UnityEngine.UI.Graphic)checkSelf(l);
-			self.OnRebuildRequested();
 			return 0;
 		}
 		catch(Exception e) {
@@ -343,7 +332,6 @@ public class Lua_UnityEngine_UI_Graphic : LuaObject {
 		addMember(l,SetVerticesDirty);
 		addMember(l,SetMaterialDirty);
 		addMember(l,Rebuild);
-		addMember(l,OnRebuildRequested);
 		addMember(l,SetNativeSize);
 		addMember(l,Raycast);
 		addMember(l,PixelAdjustPoint);
@@ -356,16 +344,16 @@ public class Lua_UnityEngine_UI_Graphic : LuaObject {
 		addMember(l,UnregisterDirtyVerticesCallback);
 		addMember(l,RegisterDirtyMaterialCallback);
 		addMember(l,UnregisterDirtyMaterialCallback);
-		addMember(l,"defaultGraphicMaterial",get_defaultGraphicMaterial,null);
-		addMember(l,"color",get_color,set_color);
-		addMember(l,"depth",get_depth,null);
-		addMember(l,"rectTransform",get_rectTransform,null);
-		addMember(l,"canvas",get_canvas,null);
-		addMember(l,"canvasRenderer",get_canvasRenderer,null);
-		addMember(l,"defaultMaterial",get_defaultMaterial,null);
-		addMember(l,"material",get_material,set_material);
-		addMember(l,"materialForRendering",get_materialForRendering,null);
-		addMember(l,"mainTexture",get_mainTexture,null);
+		addMember(l,"defaultGraphicMaterial",get_defaultGraphicMaterial,null,false);
+		addMember(l,"color",get_color,set_color,true);
+		addMember(l,"depth",get_depth,null,true);
+		addMember(l,"rectTransform",get_rectTransform,null,true);
+		addMember(l,"canvas",get_canvas,null,true);
+		addMember(l,"canvasRenderer",get_canvasRenderer,null,true);
+		addMember(l,"defaultMaterial",get_defaultMaterial,null,true);
+		addMember(l,"material",get_material,set_material,true);
+		addMember(l,"materialForRendering",get_materialForRendering,null,true);
+		addMember(l,"mainTexture",get_mainTexture,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Graphic),typeof(UnityEngine.EventSystems.UIBehaviour));
 	}
 }

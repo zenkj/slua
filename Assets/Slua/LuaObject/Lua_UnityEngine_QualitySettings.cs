@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_QualitySettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.QualitySettings o;
-		if(matchType(l,1)){
-			o=new UnityEngine.QualitySettings();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.QualitySettings();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetQualityLevel_s(IntPtr l) {
@@ -30,7 +26,8 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetQualityLevel_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Int32),typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				System.Boolean a2;
@@ -38,7 +35,7 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 				UnityEngine.QualitySettings.SetQualityLevel(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.Int32))){
+			else if(argc==1){
 				System.Int32 a1;
 				checkType(l,1,out a1);
 				UnityEngine.QualitySettings.SetQualityLevel(a1);
@@ -55,13 +52,14 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int IncreaseLevel_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.Boolean a1;
 				checkType(l,1,out a1);
 				UnityEngine.QualitySettings.IncreaseLevel(a1);
 				return 0;
 			}
-			else if(matchType(l,1)){
+			else if(argc==0){
 				UnityEngine.QualitySettings.IncreaseLevel();
 				return 0;
 			}
@@ -76,13 +74,14 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DecreaseLevel_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.Boolean))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.Boolean a1;
 				checkType(l,1,out a1);
 				UnityEngine.QualitySettings.DecreaseLevel(a1);
 				return 0;
 			}
-			else if(matchType(l,1)){
+			else if(argc==0){
 				UnityEngine.QualitySettings.DecreaseLevel();
 				return 0;
 			}
@@ -113,7 +112,7 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_shadowProjection(IntPtr l) {
-		pushValue(l,UnityEngine.QualitySettings.shadowProjection);
+		pushEnum(l,(int)UnityEngine.QualitySettings.shadowProjection);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -161,7 +160,7 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_anisotropicFiltering(IntPtr l) {
-		pushValue(l,UnityEngine.QualitySettings.anisotropicFiltering);
+		pushEnum(l,(int)UnityEngine.QualitySettings.anisotropicFiltering);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -257,17 +256,17 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_desiredColorSpace(IntPtr l) {
-		pushValue(l,UnityEngine.QualitySettings.desiredColorSpace);
+		pushEnum(l,(int)UnityEngine.QualitySettings.desiredColorSpace);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_activeColorSpace(IntPtr l) {
-		pushValue(l,UnityEngine.QualitySettings.activeColorSpace);
+		pushEnum(l,(int)UnityEngine.QualitySettings.activeColorSpace);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_blendWeights(IntPtr l) {
-		pushValue(l,UnityEngine.QualitySettings.blendWeights);
+		pushEnum(l,(int)UnityEngine.QualitySettings.blendWeights);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -283,23 +282,23 @@ public class Lua_UnityEngine_QualitySettings : LuaObject {
 		addMember(l,SetQualityLevel_s);
 		addMember(l,IncreaseLevel_s);
 		addMember(l,DecreaseLevel_s);
-		addMember(l,"names",get_names,null);
-		addMember(l,"pixelLightCount",get_pixelLightCount,set_pixelLightCount);
-		addMember(l,"shadowProjection",get_shadowProjection,set_shadowProjection);
-		addMember(l,"shadowCascades",get_shadowCascades,set_shadowCascades);
-		addMember(l,"shadowDistance",get_shadowDistance,set_shadowDistance);
-		addMember(l,"masterTextureLimit",get_masterTextureLimit,set_masterTextureLimit);
-		addMember(l,"anisotropicFiltering",get_anisotropicFiltering,set_anisotropicFiltering);
-		addMember(l,"lodBias",get_lodBias,set_lodBias);
-		addMember(l,"maximumLODLevel",get_maximumLODLevel,set_maximumLODLevel);
-		addMember(l,"particleRaycastBudget",get_particleRaycastBudget,set_particleRaycastBudget);
-		addMember(l,"softVegetation",get_softVegetation,set_softVegetation);
-		addMember(l,"maxQueuedFrames",get_maxQueuedFrames,set_maxQueuedFrames);
-		addMember(l,"vSyncCount",get_vSyncCount,set_vSyncCount);
-		addMember(l,"antiAliasing",get_antiAliasing,set_antiAliasing);
-		addMember(l,"desiredColorSpace",get_desiredColorSpace,null);
-		addMember(l,"activeColorSpace",get_activeColorSpace,null);
-		addMember(l,"blendWeights",get_blendWeights,set_blendWeights);
+		addMember(l,"names",get_names,null,false);
+		addMember(l,"pixelLightCount",get_pixelLightCount,set_pixelLightCount,false);
+		addMember(l,"shadowProjection",get_shadowProjection,set_shadowProjection,false);
+		addMember(l,"shadowCascades",get_shadowCascades,set_shadowCascades,false);
+		addMember(l,"shadowDistance",get_shadowDistance,set_shadowDistance,false);
+		addMember(l,"masterTextureLimit",get_masterTextureLimit,set_masterTextureLimit,false);
+		addMember(l,"anisotropicFiltering",get_anisotropicFiltering,set_anisotropicFiltering,false);
+		addMember(l,"lodBias",get_lodBias,set_lodBias,false);
+		addMember(l,"maximumLODLevel",get_maximumLODLevel,set_maximumLODLevel,false);
+		addMember(l,"particleRaycastBudget",get_particleRaycastBudget,set_particleRaycastBudget,false);
+		addMember(l,"softVegetation",get_softVegetation,set_softVegetation,false);
+		addMember(l,"maxQueuedFrames",get_maxQueuedFrames,set_maxQueuedFrames,false);
+		addMember(l,"vSyncCount",get_vSyncCount,set_vSyncCount,false);
+		addMember(l,"antiAliasing",get_antiAliasing,set_antiAliasing,false);
+		addMember(l,"desiredColorSpace",get_desiredColorSpace,null,false);
+		addMember(l,"activeColorSpace",get_activeColorSpace,null,false);
+		addMember(l,"blendWeights",get_blendWeights,set_blendWeights,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.QualitySettings),typeof(UnityEngine.Object));
 	}
 }

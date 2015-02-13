@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SystemInfo : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SystemInfo o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SystemInfo();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SystemInfo();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SupportsRenderTextureFormat_s(IntPtr l) {
@@ -146,7 +142,7 @@ public class Lua_UnityEngine_SystemInfo : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_npotSupport(IntPtr l) {
-		pushValue(l,UnityEngine.SystemInfo.npotSupport);
+		pushEnum(l,(int)UnityEngine.SystemInfo.npotSupport);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -186,7 +182,7 @@ public class Lua_UnityEngine_SystemInfo : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_deviceType(IntPtr l) {
-		pushValue(l,UnityEngine.SystemInfo.deviceType);
+		pushEnum(l,(int)UnityEngine.SystemInfo.deviceType);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -197,39 +193,39 @@ public class Lua_UnityEngine_SystemInfo : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.SystemInfo");
 		addMember(l,SupportsRenderTextureFormat_s);
-		addMember(l,"operatingSystem",get_operatingSystem,null);
-		addMember(l,"processorType",get_processorType,null);
-		addMember(l,"processorCount",get_processorCount,null);
-		addMember(l,"systemMemorySize",get_systemMemorySize,null);
-		addMember(l,"graphicsMemorySize",get_graphicsMemorySize,null);
-		addMember(l,"graphicsDeviceName",get_graphicsDeviceName,null);
-		addMember(l,"graphicsDeviceVendor",get_graphicsDeviceVendor,null);
-		addMember(l,"graphicsDeviceID",get_graphicsDeviceID,null);
-		addMember(l,"graphicsDeviceVendorID",get_graphicsDeviceVendorID,null);
-		addMember(l,"graphicsDeviceVersion",get_graphicsDeviceVersion,null);
-		addMember(l,"graphicsShaderLevel",get_graphicsShaderLevel,null);
-		addMember(l,"graphicsPixelFillrate",get_graphicsPixelFillrate,null);
-		addMember(l,"supportsShadows",get_supportsShadows,null);
-		addMember(l,"supportsRenderTextures",get_supportsRenderTextures,null);
-		addMember(l,"supportsRenderToCubemap",get_supportsRenderToCubemap,null);
-		addMember(l,"supportsImageEffects",get_supportsImageEffects,null);
-		addMember(l,"supports3DTextures",get_supports3DTextures,null);
-		addMember(l,"supportsComputeShaders",get_supportsComputeShaders,null);
-		addMember(l,"supportsInstancing",get_supportsInstancing,null);
-		addMember(l,"supportsSparseTextures",get_supportsSparseTextures,null);
-		addMember(l,"supportedRenderTargetCount",get_supportedRenderTargetCount,null);
-		addMember(l,"supportsStencil",get_supportsStencil,null);
-		addMember(l,"supportsVertexPrograms",get_supportsVertexPrograms,null);
-		addMember(l,"npotSupport",get_npotSupport,null);
-		addMember(l,"deviceUniqueIdentifier",get_deviceUniqueIdentifier,null);
-		addMember(l,"deviceName",get_deviceName,null);
-		addMember(l,"deviceModel",get_deviceModel,null);
-		addMember(l,"supportsAccelerometer",get_supportsAccelerometer,null);
-		addMember(l,"supportsGyroscope",get_supportsGyroscope,null);
-		addMember(l,"supportsLocationService",get_supportsLocationService,null);
-		addMember(l,"supportsVibration",get_supportsVibration,null);
-		addMember(l,"deviceType",get_deviceType,null);
-		addMember(l,"maxTextureSize",get_maxTextureSize,null);
+		addMember(l,"operatingSystem",get_operatingSystem,null,false);
+		addMember(l,"processorType",get_processorType,null,false);
+		addMember(l,"processorCount",get_processorCount,null,false);
+		addMember(l,"systemMemorySize",get_systemMemorySize,null,false);
+		addMember(l,"graphicsMemorySize",get_graphicsMemorySize,null,false);
+		addMember(l,"graphicsDeviceName",get_graphicsDeviceName,null,false);
+		addMember(l,"graphicsDeviceVendor",get_graphicsDeviceVendor,null,false);
+		addMember(l,"graphicsDeviceID",get_graphicsDeviceID,null,false);
+		addMember(l,"graphicsDeviceVendorID",get_graphicsDeviceVendorID,null,false);
+		addMember(l,"graphicsDeviceVersion",get_graphicsDeviceVersion,null,false);
+		addMember(l,"graphicsShaderLevel",get_graphicsShaderLevel,null,false);
+		addMember(l,"graphicsPixelFillrate",get_graphicsPixelFillrate,null,false);
+		addMember(l,"supportsShadows",get_supportsShadows,null,false);
+		addMember(l,"supportsRenderTextures",get_supportsRenderTextures,null,false);
+		addMember(l,"supportsRenderToCubemap",get_supportsRenderToCubemap,null,false);
+		addMember(l,"supportsImageEffects",get_supportsImageEffects,null,false);
+		addMember(l,"supports3DTextures",get_supports3DTextures,null,false);
+		addMember(l,"supportsComputeShaders",get_supportsComputeShaders,null,false);
+		addMember(l,"supportsInstancing",get_supportsInstancing,null,false);
+		addMember(l,"supportsSparseTextures",get_supportsSparseTextures,null,false);
+		addMember(l,"supportedRenderTargetCount",get_supportedRenderTargetCount,null,false);
+		addMember(l,"supportsStencil",get_supportsStencil,null,false);
+		addMember(l,"supportsVertexPrograms",get_supportsVertexPrograms,null,false);
+		addMember(l,"npotSupport",get_npotSupport,null,false);
+		addMember(l,"deviceUniqueIdentifier",get_deviceUniqueIdentifier,null,false);
+		addMember(l,"deviceName",get_deviceName,null,false);
+		addMember(l,"deviceModel",get_deviceModel,null,false);
+		addMember(l,"supportsAccelerometer",get_supportsAccelerometer,null,false);
+		addMember(l,"supportsGyroscope",get_supportsGyroscope,null,false);
+		addMember(l,"supportsLocationService",get_supportsLocationService,null,false);
+		addMember(l,"supportsVibration",get_supportsVibration,null,false);
+		addMember(l,"deviceType",get_deviceType,null,false);
+		addMember(l,"maxTextureSize",get_maxTextureSize,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SystemInfo));
 	}
 }

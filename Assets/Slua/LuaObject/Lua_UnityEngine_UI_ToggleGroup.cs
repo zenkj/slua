@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_ToggleGroup : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -67,7 +68,7 @@ public class Lua_UnityEngine_UI_ToggleGroup : LuaObject {
 	static public int ActiveToggles(IntPtr l) {
 		try{
 			UnityEngine.UI.ToggleGroup self=(UnityEngine.UI.ToggleGroup)checkSelf(l);
-			IEnumerable<UnityEngine.UI.Toggle> ret=self.ActiveToggles();
+			System.Collections.Generic.IEnumerable<UnityEngine.UI.Toggle> ret=self.ActiveToggles();
 			pushValue(l,ret);
 			return 1;
 		}
@@ -110,7 +111,7 @@ public class Lua_UnityEngine_UI_ToggleGroup : LuaObject {
 		addMember(l,AnyTogglesOn);
 		addMember(l,ActiveToggles);
 		addMember(l,SetAllTogglesOff);
-		addMember(l,"allowSwitchOff",get_allowSwitchOff,set_allowSwitchOff);
+		addMember(l,"allowSwitchOff",get_allowSwitchOff,set_allowSwitchOff,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.ToggleGroup),typeof(UnityEngine.EventSystems.UIBehaviour));
 	}
 }

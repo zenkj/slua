@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Profiler : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Profiler o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Profiler();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Profiler();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddFramesFromFile_s(IntPtr l) {
@@ -31,13 +27,14 @@ public class Lua_UnityEngine_Profiler : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int BeginSample_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(System.String))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.Profiler.BeginSample(a1);
 				return 0;
 			}
-			else if(matchType(l,1,typeof(System.String),typeof(UnityEngine.Object))){
+			else if(argc==2){
 				System.String a1;
 				checkType(l,1,out a1);
 				UnityEngine.Object a2;
@@ -195,11 +192,11 @@ public class Lua_UnityEngine_Profiler : LuaObject {
 		addMember(l,GetTotalAllocatedMemory_s);
 		addMember(l,GetTotalUnusedReservedMemory_s);
 		addMember(l,GetTotalReservedMemory_s);
-		addMember(l,"supported",get_supported,null);
-		addMember(l,"logFile",get_logFile,set_logFile);
-		addMember(l,"enableBinaryLog",get_enableBinaryLog,set_enableBinaryLog);
-		addMember(l,"enabled",get_enabled,set_enabled);
-		addMember(l,"usedHeapSize",get_usedHeapSize,null);
+		addMember(l,"supported",get_supported,null,false);
+		addMember(l,"logFile",get_logFile,set_logFile,false);
+		addMember(l,"enableBinaryLog",get_enableBinaryLog,set_enableBinaryLog,false);
+		addMember(l,"enabled",get_enabled,set_enabled,false);
+		addMember(l,"usedHeapSize",get_usedHeapSize,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Profiler));
 	}
 }

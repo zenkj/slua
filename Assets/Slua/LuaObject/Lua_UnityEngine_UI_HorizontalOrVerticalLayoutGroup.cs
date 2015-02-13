@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_HorizontalOrVerticalLayoutGroup : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -52,9 +53,9 @@ public class Lua_UnityEngine_UI_HorizontalOrVerticalLayoutGroup : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.UI.HorizontalOrVerticalLayoutGroup");
-		addMember(l,"spacing",get_spacing,set_spacing);
-		addMember(l,"childForceExpandWidth",get_childForceExpandWidth,set_childForceExpandWidth);
-		addMember(l,"childForceExpandHeight",get_childForceExpandHeight,set_childForceExpandHeight);
+		addMember(l,"spacing",get_spacing,set_spacing,true);
+		addMember(l,"childForceExpandWidth",get_childForceExpandWidth,set_childForceExpandWidth,true);
+		addMember(l,"childForceExpandHeight",get_childForceExpandHeight,set_childForceExpandHeight,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.HorizontalOrVerticalLayoutGroup),typeof(UnityEngine.UI.LayoutGroup));
 	}
 }

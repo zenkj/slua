@@ -6,32 +6,33 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Color : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.Color o;
-		if(matchType(l,1,typeof(System.Single),typeof(System.Single),typeof(System.Single),typeof(System.Single))){
+		if(argc==5){
 			System.Single a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			System.Single a2;
-			checkType(l,2,out a2);
+			checkType(l,3,out a2);
 			System.Single a3;
-			checkType(l,3,out a3);
+			checkType(l,4,out a3);
 			System.Single a4;
-			checkType(l,4,out a4);
+			checkType(l,5,out a4);
 			o=new UnityEngine.Color(a1,a2,a3,a4);
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1,typeof(System.Single),typeof(System.Single),typeof(System.Single))){
+		else if(argc==4){
 			System.Single a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			System.Single a2;
-			checkType(l,2,out a2);
+			checkType(l,3,out a2);
 			System.Single a3;
-			checkType(l,3,out a3);
+			checkType(l,4,out a3);
 			o=new UnityEngine.Color(a1,a2,a3);
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -87,7 +88,8 @@ public class Lua_UnityEngine_Color : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int op_Multiply(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Color),typeof(UnityEngine.Color))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,1,typeof(UnityEngine.Color),typeof(UnityEngine.Color))){
 				UnityEngine.Color a1;
 				checkType(l,1,out a1);
 				UnityEngine.Color a2;
@@ -96,7 +98,7 @@ public class Lua_UnityEngine_Color : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Color),typeof(System.Single))){
+			else if(matchType(l,argc,1,typeof(UnityEngine.Color),typeof(float))){
 				UnityEngine.Color a1;
 				checkType(l,1,out a1);
 				System.Single a2;
@@ -105,7 +107,7 @@ public class Lua_UnityEngine_Color : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(System.Single),typeof(UnityEngine.Color))){
+			else if(matchType(l,argc,1,typeof(float),typeof(UnityEngine.Color))){
 				System.Single a1;
 				checkType(l,1,out a1);
 				UnityEngine.Color a2;
@@ -312,24 +314,24 @@ public class Lua_UnityEngine_Color : LuaObject {
 		addMember(l,op_Division);
 		addMember(l,op_Equality);
 		addMember(l,op_Inequality);
-		addMember(l,"r",get_r,set_r);
-		addMember(l,"g",get_g,set_g);
-		addMember(l,"b",get_b,set_b);
-		addMember(l,"a",get_a,set_a);
-		addMember(l,"red",get_red,null);
-		addMember(l,"green",get_green,null);
-		addMember(l,"blue",get_blue,null);
-		addMember(l,"white",get_white,null);
-		addMember(l,"black",get_black,null);
-		addMember(l,"yellow",get_yellow,null);
-		addMember(l,"cyan",get_cyan,null);
-		addMember(l,"magenta",get_magenta,null);
-		addMember(l,"gray",get_gray,null);
-		addMember(l,"grey",get_grey,null);
-		addMember(l,"clear",get_clear,null);
-		addMember(l,"grayscale",get_grayscale,null);
-		addMember(l,"linear",get_linear,null);
-		addMember(l,"gamma",get_gamma,null);
+		addMember(l,"r",get_r,set_r,true);
+		addMember(l,"g",get_g,set_g,true);
+		addMember(l,"b",get_b,set_b,true);
+		addMember(l,"a",get_a,set_a,true);
+		addMember(l,"red",get_red,null,false);
+		addMember(l,"green",get_green,null,false);
+		addMember(l,"blue",get_blue,null,false);
+		addMember(l,"white",get_white,null,false);
+		addMember(l,"black",get_black,null,false);
+		addMember(l,"yellow",get_yellow,null,false);
+		addMember(l,"cyan",get_cyan,null,false);
+		addMember(l,"magenta",get_magenta,null,false);
+		addMember(l,"gray",get_gray,null,false);
+		addMember(l,"grey",get_grey,null,false);
+		addMember(l,"clear",get_clear,null,false);
+		addMember(l,"grayscale",get_grayscale,null,true);
+		addMember(l,"linear",get_linear,null,true);
+		addMember(l,"gamma",get_gamma,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Color));
 	}
 }

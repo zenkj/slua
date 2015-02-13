@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AnimationEvent : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AnimationEvent o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AnimationEvent();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AnimationEvent();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_stringParameter(IntPtr l) {
@@ -102,7 +98,7 @@ public class Lua_UnityEngine_AnimationEvent : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_messageOptions(IntPtr l) {
 		UnityEngine.AnimationEvent o = (UnityEngine.AnimationEvent)checkSelf(l);
-		pushValue(l,o.messageOptions);
+		pushEnum(l,(int)o.messageOptions);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -121,14 +117,14 @@ public class Lua_UnityEngine_AnimationEvent : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.AnimationEvent");
-		addMember(l,"stringParameter",get_stringParameter,set_stringParameter);
-		addMember(l,"floatParameter",get_floatParameter,set_floatParameter);
-		addMember(l,"intParameter",get_intParameter,set_intParameter);
-		addMember(l,"objectReferenceParameter",get_objectReferenceParameter,set_objectReferenceParameter);
-		addMember(l,"functionName",get_functionName,set_functionName);
-		addMember(l,"time",get_time,set_time);
-		addMember(l,"messageOptions",get_messageOptions,set_messageOptions);
-		addMember(l,"animationState",get_animationState,null);
+		addMember(l,"stringParameter",get_stringParameter,set_stringParameter,true);
+		addMember(l,"floatParameter",get_floatParameter,set_floatParameter,true);
+		addMember(l,"intParameter",get_intParameter,set_intParameter,true);
+		addMember(l,"objectReferenceParameter",get_objectReferenceParameter,set_objectReferenceParameter,true);
+		addMember(l,"functionName",get_functionName,set_functionName,true);
+		addMember(l,"time",get_time,set_time,true);
+		addMember(l,"messageOptions",get_messageOptions,set_messageOptions,true);
+		addMember(l,"animationState",get_animationState,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AnimationEvent));
 	}
 }

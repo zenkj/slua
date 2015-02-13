@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LightmapSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.LightmapSettings o;
-		if(matchType(l,1)){
-			o=new UnityEngine.LightmapSettings();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.LightmapSettings();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_lightmaps(IntPtr l) {
@@ -29,7 +25,7 @@ public class Lua_UnityEngine_LightmapSettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_lightmapsMode(IntPtr l) {
-		pushValue(l,UnityEngine.LightmapSettings.lightmapsMode);
+		pushEnum(l,(int)UnityEngine.LightmapSettings.lightmapsMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -41,7 +37,7 @@ public class Lua_UnityEngine_LightmapSettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_bakedColorSpace(IntPtr l) {
-		pushValue(l,UnityEngine.LightmapSettings.bakedColorSpace);
+		pushEnum(l,(int)UnityEngine.LightmapSettings.bakedColorSpace);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -65,10 +61,10 @@ public class Lua_UnityEngine_LightmapSettings : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.LightmapSettings");
-		addMember(l,"lightmaps",get_lightmaps,set_lightmaps);
-		addMember(l,"lightmapsMode",get_lightmapsMode,set_lightmapsMode);
-		addMember(l,"bakedColorSpace",get_bakedColorSpace,set_bakedColorSpace);
-		addMember(l,"lightProbes",get_lightProbes,set_lightProbes);
+		addMember(l,"lightmaps",get_lightmaps,set_lightmaps,false);
+		addMember(l,"lightmapsMode",get_lightmapsMode,set_lightmapsMode,false);
+		addMember(l,"bakedColorSpace",get_bakedColorSpace,set_bakedColorSpace,false);
+		addMember(l,"lightProbes",get_lightProbes,set_lightProbes,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LightmapSettings),typeof(UnityEngine.Object));
 	}
 }

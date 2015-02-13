@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Collider2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Collider2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Collider2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Collider2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int OverlapPoint(IntPtr l) {
@@ -79,11 +75,11 @@ public class Lua_UnityEngine_Collider2D : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Collider2D");
 		addMember(l,OverlapPoint);
-		addMember(l,"isTrigger",get_isTrigger,set_isTrigger);
-		addMember(l,"attachedRigidbody",get_attachedRigidbody,null);
-		addMember(l,"shapeCount",get_shapeCount,null);
-		addMember(l,"bounds",get_bounds,null);
-		addMember(l,"sharedMaterial",get_sharedMaterial,set_sharedMaterial);
+		addMember(l,"isTrigger",get_isTrigger,set_isTrigger,true);
+		addMember(l,"attachedRigidbody",get_attachedRigidbody,null,true);
+		addMember(l,"shapeCount",get_shapeCount,null,true);
+		addMember(l,"bounds",get_bounds,null,true);
+		addMember(l,"sharedMaterial",get_sharedMaterial,set_sharedMaterial,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Collider2D),typeof(UnityEngine.Behaviour));
 	}
 }

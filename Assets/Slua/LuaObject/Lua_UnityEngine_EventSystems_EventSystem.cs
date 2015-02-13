@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_EventSystems_EventSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -23,7 +24,8 @@ public class Lua_UnityEngine_EventSystems_EventSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetSelectedGameObject(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.GameObject),typeof(UnityEngine.EventSystems.BaseEventData))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.EventSystems.EventSystem self=(UnityEngine.EventSystems.EventSystem)checkSelf(l);
 				UnityEngine.GameObject a1;
 				checkType(l,2,out a1);
@@ -32,7 +34,7 @@ public class Lua_UnityEngine_EventSystems_EventSystem : LuaObject {
 				self.SetSelectedGameObject(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.GameObject))){
+			else if(argc==2){
 				UnityEngine.EventSystems.EventSystem self=(UnityEngine.EventSystems.EventSystem)checkSelf(l);
 				UnityEngine.GameObject a1;
 				checkType(l,2,out a1);
@@ -53,7 +55,7 @@ public class Lua_UnityEngine_EventSystems_EventSystem : LuaObject {
 			UnityEngine.EventSystems.EventSystem self=(UnityEngine.EventSystems.EventSystem)checkSelf(l);
 			UnityEngine.EventSystems.PointerEventData a1;
 			checkType(l,2,out a1);
-			List<UnityEngine.EventSystems.RaycastResult> a2;
+			System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult> a2;
 			checkType(l,3,out a2);
 			self.RaycastAll(a1,a2);
 			return 0;
@@ -66,13 +68,14 @@ public class Lua_UnityEngine_EventSystems_EventSystem : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int IsPointerOverGameObject(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.EventSystems.EventSystem self=(UnityEngine.EventSystems.EventSystem)checkSelf(l);
 				System.Boolean ret=self.IsPointerOverGameObject();
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.Int32))){
+			else if(argc==2){
 				UnityEngine.EventSystems.EventSystem self=(UnityEngine.EventSystems.EventSystem)checkSelf(l);
 				System.Int32 a1;
 				checkType(l,2,out a1);
@@ -164,14 +167,14 @@ public class Lua_UnityEngine_EventSystems_EventSystem : LuaObject {
 		addMember(l,SetSelectedGameObject);
 		addMember(l,RaycastAll);
 		addMember(l,IsPointerOverGameObject);
-		addMember(l,"current",get_current,set_current);
-		addMember(l,"sendNavigationEvents",get_sendNavigationEvents,set_sendNavigationEvents);
-		addMember(l,"pixelDragThreshold",get_pixelDragThreshold,set_pixelDragThreshold);
-		addMember(l,"currentInputModule",get_currentInputModule,null);
-		addMember(l,"firstSelectedGameObject",get_firstSelectedGameObject,null);
-		addMember(l,"currentSelectedGameObject",get_currentSelectedGameObject,null);
-		addMember(l,"lastSelectedGameObject",get_lastSelectedGameObject,null);
-		addMember(l,"alreadySelecting",get_alreadySelecting,null);
+		addMember(l,"current",get_current,set_current,false);
+		addMember(l,"sendNavigationEvents",get_sendNavigationEvents,set_sendNavigationEvents,true);
+		addMember(l,"pixelDragThreshold",get_pixelDragThreshold,set_pixelDragThreshold,true);
+		addMember(l,"currentInputModule",get_currentInputModule,null,true);
+		addMember(l,"firstSelectedGameObject",get_firstSelectedGameObject,null,true);
+		addMember(l,"currentSelectedGameObject",get_currentSelectedGameObject,null,true);
+		addMember(l,"lastSelectedGameObject",get_lastSelectedGameObject,null,true);
+		addMember(l,"alreadySelecting",get_alreadySelecting,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.EventSystems.EventSystem),typeof(UnityEngine.EventSystems.UIBehaviour));
 	}
 }

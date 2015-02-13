@@ -6,24 +6,21 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Animation o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Animation();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Animation();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Stop(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				self.Stop();
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(argc==2){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -41,14 +38,15 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Rewind(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.String))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
 				self.Rewind(a1);
 				return 0;
 			}
-			else if(matchType(l,2)){
+			else if(argc==1){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				self.Rewind();
 				return 0;
@@ -91,13 +89,14 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Play(IntPtr l) {
 		try{
-			if(matchType(l,2)){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==1){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.Boolean ret=self.Play();
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.PlayMode))){
+			else if(matchType(l,argc,2,typeof(UnityEngine.PlayMode))){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				UnityEngine.PlayMode a1;
 				checkEnum(l,2,out a1);
@@ -105,7 +104,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(UnityEngine.PlayMode))){
+			else if(argc==3){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -115,29 +114,11 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(matchType(l,argc,2,typeof(string))){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
 				System.Boolean ret=self.Play(a1);
-				pushValue(l,ret);
-				return 1;
-			}
-			else if(matchType(l,2,typeof(UnityEngine.AnimationPlayMode))){
-				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
-				UnityEngine.AnimationPlayMode a1;
-				checkEnum(l,2,out a1);
-				System.Boolean ret=self.Play(a1);
-				pushValue(l,ret);
-				return 1;
-			}
-			else if(matchType(l,2,typeof(System.String),typeof(UnityEngine.AnimationPlayMode))){
-				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
-				System.String a1;
-				checkType(l,2,out a1);
-				UnityEngine.AnimationPlayMode a2;
-				checkEnum(l,3,out a2);
-				System.Boolean ret=self.Play(a1,a2);
 				pushValue(l,ret);
 				return 1;
 			}
@@ -152,7 +133,8 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int CrossFade(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.String),typeof(System.Single),typeof(UnityEngine.PlayMode))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -163,7 +145,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				self.CrossFade(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(System.Single))){
+			else if(argc==3){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -172,7 +154,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				self.CrossFade(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(argc==2){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -190,7 +172,8 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Blend(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.String),typeof(System.Single),typeof(System.Single))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -201,7 +184,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				self.Blend(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(System.Single))){
+			else if(argc==3){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -210,7 +193,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				self.Blend(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(argc==2){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -228,7 +211,8 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int CrossFadeQueued(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.String),typeof(System.Single),typeof(UnityEngine.QueueMode),typeof(UnityEngine.PlayMode))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==5){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -242,7 +226,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(System.Single),typeof(UnityEngine.QueueMode))){
+			else if(argc==4){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -254,7 +238,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(System.Single))){
+			else if(argc==3){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -264,7 +248,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(argc==2){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -283,7 +267,8 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int PlayQueued(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.String),typeof(UnityEngine.QueueMode),typeof(UnityEngine.PlayMode))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -295,7 +280,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(UnityEngine.QueueMode))){
+			else if(argc==3){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -305,7 +290,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(argc==2){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -324,7 +309,8 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddClip(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.AnimationClip),typeof(System.String))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				UnityEngine.AnimationClip a1;
 				checkType(l,2,out a1);
@@ -333,7 +319,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				self.AddClip(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.AnimationClip),typeof(System.String),typeof(System.Int32),typeof(System.Int32),typeof(System.Boolean))){
+			else if(argc==6){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				UnityEngine.AnimationClip a1;
 				checkType(l,2,out a1);
@@ -348,7 +334,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 				self.AddClip(a1,a2,a3,a4,a5);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.AnimationClip),typeof(System.String),typeof(System.Int32),typeof(System.Int32))){
+			else if(argc==5){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				UnityEngine.AnimationClip a1;
 				checkType(l,2,out a1);
@@ -372,14 +358,15 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int RemoveClip(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.AnimationClip))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(matchType(l,argc,2,typeof(UnityEngine.AnimationClip))){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				UnityEngine.AnimationClip a1;
 				checkType(l,2,out a1);
 				self.RemoveClip(a1);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(matchType(l,argc,2,typeof(string))){
 				UnityEngine.Animation self=(UnityEngine.Animation)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -467,7 +454,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_wrapMode(IntPtr l) {
 		UnityEngine.Animation o = (UnityEngine.Animation)checkSelf(l);
-		pushValue(l,o.wrapMode);
+		pushEnum(l,(int)o.wrapMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -501,7 +488,7 @@ public class Lua_UnityEngine_Animation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_cullingType(IntPtr l) {
 		UnityEngine.Animation o = (UnityEngine.Animation)checkSelf(l);
-		pushValue(l,o.cullingType);
+		pushEnum(l,(int)o.cullingType);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -542,13 +529,13 @@ public class Lua_UnityEngine_Animation : LuaObject {
 		addMember(l,GetClipCount);
 		addMember(l,SyncLayer);
 		addMember(l,GetClip);
-		addMember(l,"clip",get_clip,set_clip);
-		addMember(l,"playAutomatically",get_playAutomatically,set_playAutomatically);
-		addMember(l,"wrapMode",get_wrapMode,set_wrapMode);
-		addMember(l,"isPlaying",get_isPlaying,null);
-		addMember(l,"animatePhysics",get_animatePhysics,set_animatePhysics);
-		addMember(l,"cullingType",get_cullingType,set_cullingType);
-		addMember(l,"localBounds",get_localBounds,set_localBounds);
+		addMember(l,"clip",get_clip,set_clip,true);
+		addMember(l,"playAutomatically",get_playAutomatically,set_playAutomatically,true);
+		addMember(l,"wrapMode",get_wrapMode,set_wrapMode,true);
+		addMember(l,"isPlaying",get_isPlaying,null,true);
+		addMember(l,"animatePhysics",get_animatePhysics,set_animatePhysics,true);
+		addMember(l,"cullingType",get_cullingType,set_cullingType,true);
+		addMember(l,"localBounds",get_localBounds,set_localBounds,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Animation),typeof(UnityEngine.Behaviour));
 	}
 }

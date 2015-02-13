@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_AspectRatioFitter : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -35,7 +36,7 @@ public class Lua_UnityEngine_UI_AspectRatioFitter : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_aspectMode(IntPtr l) {
 		UnityEngine.UI.AspectRatioFitter o = (UnityEngine.UI.AspectRatioFitter)checkSelf(l);
-		pushValue(l,o.aspectMode);
+		pushEnum(l,(int)o.aspectMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -64,8 +65,8 @@ public class Lua_UnityEngine_UI_AspectRatioFitter : LuaObject {
 		getTypeTable(l,"UnityEngine.UI.AspectRatioFitter");
 		addMember(l,SetLayoutHorizontal);
 		addMember(l,SetLayoutVertical);
-		addMember(l,"aspectMode",get_aspectMode,set_aspectMode);
-		addMember(l,"aspectRatio",get_aspectRatio,set_aspectRatio);
+		addMember(l,"aspectMode",get_aspectMode,set_aspectMode,true);
+		addMember(l,"aspectRatio",get_aspectRatio,set_aspectRatio,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.AspectRatioFitter),typeof(UnityEngine.EventSystems.UIBehaviour));
 	}
 }

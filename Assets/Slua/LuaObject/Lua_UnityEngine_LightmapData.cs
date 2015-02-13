@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LightmapData : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.LightmapData o;
-		if(matchType(l,1)){
-			o=new UnityEngine.LightmapData();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.LightmapData();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_lightmapFar(IntPtr l) {
@@ -45,8 +41,8 @@ public class Lua_UnityEngine_LightmapData : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.LightmapData");
-		addMember(l,"lightmapFar",get_lightmapFar,set_lightmapFar);
-		addMember(l,"lightmapNear",get_lightmapNear,set_lightmapNear);
+		addMember(l,"lightmapFar",get_lightmapFar,set_lightmapFar,true);
+		addMember(l,"lightmapNear",get_lightmapNear,set_lightmapNear,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LightmapData));
 	}
 }

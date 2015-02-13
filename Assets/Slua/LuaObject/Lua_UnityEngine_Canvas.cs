@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Canvas : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Canvas o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Canvas();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Canvas();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetDefaultCanvasMaterial_s(IntPtr l) {
@@ -53,7 +49,7 @@ public class Lua_UnityEngine_Canvas : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_renderMode(IntPtr l) {
 		UnityEngine.Canvas o = (UnityEngine.Canvas)checkSelf(l);
-		pushValue(l,o.renderMode);
+		pushEnum(l,(int)o.renderMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -227,20 +223,20 @@ public class Lua_UnityEngine_Canvas : LuaObject {
 		addMember(l,GetDefaultCanvasMaterial_s);
 		addMember(l,GetDefaultCanvasTextMaterial_s);
 		addMember(l,ForceUpdateCanvases_s);
-		addMember(l,"renderMode",get_renderMode,set_renderMode);
-		addMember(l,"isRootCanvas",get_isRootCanvas,null);
-		addMember(l,"worldCamera",get_worldCamera,set_worldCamera);
-		addMember(l,"pixelRect",get_pixelRect,null);
-		addMember(l,"scaleFactor",get_scaleFactor,set_scaleFactor);
-		addMember(l,"referencePixelsPerUnit",get_referencePixelsPerUnit,set_referencePixelsPerUnit);
-		addMember(l,"overridePixelPerfect",get_overridePixelPerfect,set_overridePixelPerfect);
-		addMember(l,"pixelPerfect",get_pixelPerfect,set_pixelPerfect);
-		addMember(l,"planeDistance",get_planeDistance,set_planeDistance);
-		addMember(l,"renderOrder",get_renderOrder,null);
-		addMember(l,"overrideSorting",get_overrideSorting,set_overrideSorting);
-		addMember(l,"sortingOrder",get_sortingOrder,set_sortingOrder);
-		addMember(l,"sortingLayerID",get_sortingLayerID,set_sortingLayerID);
-		addMember(l,"sortingLayerName",get_sortingLayerName,set_sortingLayerName);
+		addMember(l,"renderMode",get_renderMode,set_renderMode,true);
+		addMember(l,"isRootCanvas",get_isRootCanvas,null,true);
+		addMember(l,"worldCamera",get_worldCamera,set_worldCamera,true);
+		addMember(l,"pixelRect",get_pixelRect,null,true);
+		addMember(l,"scaleFactor",get_scaleFactor,set_scaleFactor,true);
+		addMember(l,"referencePixelsPerUnit",get_referencePixelsPerUnit,set_referencePixelsPerUnit,true);
+		addMember(l,"overridePixelPerfect",get_overridePixelPerfect,set_overridePixelPerfect,true);
+		addMember(l,"pixelPerfect",get_pixelPerfect,set_pixelPerfect,true);
+		addMember(l,"planeDistance",get_planeDistance,set_planeDistance,true);
+		addMember(l,"renderOrder",get_renderOrder,null,true);
+		addMember(l,"overrideSorting",get_overrideSorting,set_overrideSorting,true);
+		addMember(l,"sortingOrder",get_sortingOrder,set_sortingOrder,true);
+		addMember(l,"sortingLayerID",get_sortingLayerID,set_sortingLayerID,true);
+		addMember(l,"sortingLayerName",get_sortingLayerName,set_sortingLayerName,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Canvas),typeof(UnityEngine.Behaviour));
 	}
 }

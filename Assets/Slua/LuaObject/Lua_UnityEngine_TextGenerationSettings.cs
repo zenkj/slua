@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_TextGenerationSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -86,7 +87,7 @@ public class Lua_UnityEngine_TextGenerationSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_fontStyle(IntPtr l) {
 		UnityEngine.TextGenerationSettings o = (UnityEngine.TextGenerationSettings)checkSelf(l);
-		pushValue(l,o.fontStyle);
+		pushEnum(l,(int)o.fontStyle);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -101,7 +102,7 @@ public class Lua_UnityEngine_TextGenerationSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_textAnchor(IntPtr l) {
 		UnityEngine.TextGenerationSettings o = (UnityEngine.TextGenerationSettings)checkSelf(l);
-		pushValue(l,o.textAnchor);
+		pushEnum(l,(int)o.textAnchor);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -176,7 +177,7 @@ public class Lua_UnityEngine_TextGenerationSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_verticalOverflow(IntPtr l) {
 		UnityEngine.TextGenerationSettings o = (UnityEngine.TextGenerationSettings)checkSelf(l);
-		pushValue(l,o.verticalOverflow);
+		pushEnum(l,(int)o.verticalOverflow);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -191,7 +192,7 @@ public class Lua_UnityEngine_TextGenerationSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_horizontalOverflow(IntPtr l) {
 		UnityEngine.TextGenerationSettings o = (UnityEngine.TextGenerationSettings)checkSelf(l);
-		pushValue(l,o.horizontalOverflow);
+		pushEnum(l,(int)o.horizontalOverflow);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -250,22 +251,22 @@ public class Lua_UnityEngine_TextGenerationSettings : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.TextGenerationSettings");
-		addMember(l,"font",get_font,set_font);
-		addMember(l,"color",get_color,set_color);
-		addMember(l,"fontSize",get_fontSize,set_fontSize);
-		addMember(l,"lineSpacing",get_lineSpacing,set_lineSpacing);
-		addMember(l,"richText",get_richText,set_richText);
-		addMember(l,"fontStyle",get_fontStyle,set_fontStyle);
-		addMember(l,"textAnchor",get_textAnchor,set_textAnchor);
-		addMember(l,"resizeTextForBestFit",get_resizeTextForBestFit,set_resizeTextForBestFit);
-		addMember(l,"resizeTextMinSize",get_resizeTextMinSize,set_resizeTextMinSize);
-		addMember(l,"resizeTextMaxSize",get_resizeTextMaxSize,set_resizeTextMaxSize);
-		addMember(l,"updateBounds",get_updateBounds,set_updateBounds);
-		addMember(l,"verticalOverflow",get_verticalOverflow,set_verticalOverflow);
-		addMember(l,"horizontalOverflow",get_horizontalOverflow,set_horizontalOverflow);
-		addMember(l,"generationExtents",get_generationExtents,set_generationExtents);
-		addMember(l,"pivot",get_pivot,set_pivot);
-		addMember(l,"generateOutOfBounds",get_generateOutOfBounds,set_generateOutOfBounds);
+		addMember(l,"font",get_font,set_font,true);
+		addMember(l,"color",get_color,set_color,true);
+		addMember(l,"fontSize",get_fontSize,set_fontSize,true);
+		addMember(l,"lineSpacing",get_lineSpacing,set_lineSpacing,true);
+		addMember(l,"richText",get_richText,set_richText,true);
+		addMember(l,"fontStyle",get_fontStyle,set_fontStyle,true);
+		addMember(l,"textAnchor",get_textAnchor,set_textAnchor,true);
+		addMember(l,"resizeTextForBestFit",get_resizeTextForBestFit,set_resizeTextForBestFit,true);
+		addMember(l,"resizeTextMinSize",get_resizeTextMinSize,set_resizeTextMinSize,true);
+		addMember(l,"resizeTextMaxSize",get_resizeTextMaxSize,set_resizeTextMaxSize,true);
+		addMember(l,"updateBounds",get_updateBounds,set_updateBounds,true);
+		addMember(l,"verticalOverflow",get_verticalOverflow,set_verticalOverflow,true);
+		addMember(l,"horizontalOverflow",get_horizontalOverflow,set_horizontalOverflow,true);
+		addMember(l,"generationExtents",get_generationExtents,set_generationExtents,true);
+		addMember(l,"pivot",get_pivot,set_pivot,true);
+		addMember(l,"generateOutOfBounds",get_generateOutOfBounds,set_generateOutOfBounds,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.TextGenerationSettings));
 	}
 }

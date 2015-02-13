@@ -6,20 +6,21 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Event : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.Event o;
-		if(matchType(l,1)){
+		if(argc==1){
 			o=new UnityEngine.Event();
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1,typeof(UnityEngine.Event))){
+		else if(argc==2){
 			UnityEngine.Event a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			o=new UnityEngine.Event(a1);
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -29,7 +30,7 @@ public class Lua_UnityEngine_Event : LuaObject {
 			System.Int32 a1;
 			checkType(l,2,out a1);
 			UnityEngine.EventType ret=self.GetTypeForControl(a1);
-			pushValue(l,ret);
+			pushEnum(l,(int)ret);
 			return 1;
 		}
 		catch(Exception e) {
@@ -92,13 +93,13 @@ public class Lua_UnityEngine_Event : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_rawType(IntPtr l) {
 		UnityEngine.Event o = (UnityEngine.Event)checkSelf(l);
-		pushValue(l,o.rawType);
+		pushEnum(l,(int)o.rawType);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_type(IntPtr l) {
 		UnityEngine.Event o = (UnityEngine.Event)checkSelf(l);
-		pushValue(l,o.type);
+		pushEnum(l,(int)o.type);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -154,7 +155,7 @@ public class Lua_UnityEngine_Event : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_modifiers(IntPtr l) {
 		UnityEngine.Event o = (UnityEngine.Event)checkSelf(l);
-		pushValue(l,o.modifiers);
+		pushEnum(l,(int)o.modifiers);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -202,7 +203,7 @@ public class Lua_UnityEngine_Event : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int set_character(IntPtr l) {
 		UnityEngine.Event o = (UnityEngine.Event)checkSelf(l);
-		Char v;
+		System.Char v;
 		checkType(l,2,out v);
 		o.character=v;
 		return 0;
@@ -224,7 +225,7 @@ public class Lua_UnityEngine_Event : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_keyCode(IntPtr l) {
 		UnityEngine.Event o = (UnityEngine.Event)checkSelf(l);
-		pushValue(l,o.keyCode);
+		pushEnum(l,(int)o.keyCode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -356,27 +357,27 @@ public class Lua_UnityEngine_Event : LuaObject {
 		addMember(l,PopEvent_s);
 		addMember(l,GetEventCount_s);
 		addMember(l,KeyboardEvent_s);
-		addMember(l,"rawType",get_rawType,null);
-		addMember(l,"type",get_type,set_type);
-		addMember(l,"mousePosition",get_mousePosition,set_mousePosition);
-		addMember(l,"delta",get_delta,set_delta);
-		addMember(l,"button",get_button,set_button);
-		addMember(l,"modifiers",get_modifiers,set_modifiers);
-		addMember(l,"pressure",get_pressure,set_pressure);
-		addMember(l,"clickCount",get_clickCount,set_clickCount);
-		addMember(l,"character",get_character,set_character);
-		addMember(l,"commandName",get_commandName,set_commandName);
-		addMember(l,"keyCode",get_keyCode,set_keyCode);
-		addMember(l,"shift",get_shift,set_shift);
-		addMember(l,"control",get_control,set_control);
-		addMember(l,"alt",get_alt,set_alt);
-		addMember(l,"command",get_command,set_command);
-		addMember(l,"capsLock",get_capsLock,set_capsLock);
-		addMember(l,"numeric",get_numeric,set_numeric);
-		addMember(l,"functionKey",get_functionKey,null);
-		addMember(l,"current",get_current,set_current);
-		addMember(l,"isKey",get_isKey,null);
-		addMember(l,"isMouse",get_isMouse,null);
+		addMember(l,"rawType",get_rawType,null,true);
+		addMember(l,"type",get_type,set_type,true);
+		addMember(l,"mousePosition",get_mousePosition,set_mousePosition,true);
+		addMember(l,"delta",get_delta,set_delta,true);
+		addMember(l,"button",get_button,set_button,true);
+		addMember(l,"modifiers",get_modifiers,set_modifiers,true);
+		addMember(l,"pressure",get_pressure,set_pressure,true);
+		addMember(l,"clickCount",get_clickCount,set_clickCount,true);
+		addMember(l,"character",get_character,set_character,true);
+		addMember(l,"commandName",get_commandName,set_commandName,true);
+		addMember(l,"keyCode",get_keyCode,set_keyCode,true);
+		addMember(l,"shift",get_shift,set_shift,true);
+		addMember(l,"control",get_control,set_control,true);
+		addMember(l,"alt",get_alt,set_alt,true);
+		addMember(l,"command",get_command,set_command,true);
+		addMember(l,"capsLock",get_capsLock,set_capsLock,true);
+		addMember(l,"numeric",get_numeric,set_numeric,true);
+		addMember(l,"functionKey",get_functionKey,null,true);
+		addMember(l,"current",get_current,set_current,false);
+		addMember(l,"isKey",get_isKey,null,true);
+		addMember(l,"isMouse",get_isMouse,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Event));
 	}
 }

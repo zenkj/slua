@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_MeshCollider : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.MeshCollider o;
-		if(matchType(l,1)){
-			o=new UnityEngine.MeshCollider();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.MeshCollider();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_sharedMesh(IntPtr l) {
@@ -59,9 +55,9 @@ public class Lua_UnityEngine_MeshCollider : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.MeshCollider");
-		addMember(l,"sharedMesh",get_sharedMesh,set_sharedMesh);
-		addMember(l,"convex",get_convex,set_convex);
-		addMember(l,"smoothSphereCollisions",get_smoothSphereCollisions,set_smoothSphereCollisions);
+		addMember(l,"sharedMesh",get_sharedMesh,set_sharedMesh,true);
+		addMember(l,"convex",get_convex,set_convex,true);
+		addMember(l,"smoothSphereCollisions",get_smoothSphereCollisions,set_smoothSphereCollisions,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.MeshCollider),typeof(UnityEngine.Collider));
 	}
 }

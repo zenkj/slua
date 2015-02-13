@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_PolygonCollider2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.PolygonCollider2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.PolygonCollider2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.PolygonCollider2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetPath(IntPtr l) {
@@ -62,7 +58,8 @@ public class Lua_UnityEngine_PolygonCollider2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int CreatePrimitive(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Int32),typeof(UnityEngine.Vector2),typeof(UnityEngine.Vector2))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.PolygonCollider2D self=(UnityEngine.PolygonCollider2D)checkSelf(l);
 				System.Int32 a1;
 				checkType(l,2,out a1);
@@ -73,7 +70,7 @@ public class Lua_UnityEngine_PolygonCollider2D : LuaObject {
 				self.CreatePrimitive(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Int32),typeof(UnityEngine.Vector2))){
+			else if(argc==3){
 				UnityEngine.PolygonCollider2D self=(UnityEngine.PolygonCollider2D)checkSelf(l);
 				System.Int32 a1;
 				checkType(l,2,out a1);
@@ -82,7 +79,7 @@ public class Lua_UnityEngine_PolygonCollider2D : LuaObject {
 				self.CreatePrimitive(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Int32))){
+			else if(argc==2){
 				UnityEngine.PolygonCollider2D self=(UnityEngine.PolygonCollider2D)checkSelf(l);
 				System.Int32 a1;
 				checkType(l,2,out a1);
@@ -131,8 +128,8 @@ public class Lua_UnityEngine_PolygonCollider2D : LuaObject {
 		addMember(l,SetPath);
 		addMember(l,GetTotalPointCount);
 		addMember(l,CreatePrimitive);
-		addMember(l,"points",get_points,set_points);
-		addMember(l,"pathCount",get_pathCount,set_pathCount);
+		addMember(l,"points",get_points,set_points,true);
+		addMember(l,"pathCount",get_pathCount,set_pathCount,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.PolygonCollider2D),typeof(UnityEngine.Collider2D));
 	}
 }

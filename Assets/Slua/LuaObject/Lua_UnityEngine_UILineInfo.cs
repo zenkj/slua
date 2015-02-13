@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UILineInfo : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -40,8 +41,8 @@ public class Lua_UnityEngine_UILineInfo : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.UILineInfo");
-		addMember(l,"startCharIdx",get_startCharIdx,set_startCharIdx);
-		addMember(l,"height",get_height,set_height);
+		addMember(l,"startCharIdx",get_startCharIdx,set_startCharIdx,true);
+		addMember(l,"height",get_height,set_height,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UILineInfo));
 	}
 }

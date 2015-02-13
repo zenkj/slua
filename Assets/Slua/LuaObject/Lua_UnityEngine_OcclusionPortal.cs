@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_OcclusionPortal : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.OcclusionPortal o;
-		if(matchType(l,1)){
-			o=new UnityEngine.OcclusionPortal();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.OcclusionPortal();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_open(IntPtr l) {
@@ -31,7 +27,7 @@ public class Lua_UnityEngine_OcclusionPortal : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.OcclusionPortal");
-		addMember(l,"open",get_open,set_open);
+		addMember(l,"open",get_open,set_open,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.OcclusionPortal),typeof(UnityEngine.Component));
 	}
 }

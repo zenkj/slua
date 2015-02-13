@@ -6,21 +6,17 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ProceduralTexture : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ProceduralTexture o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ProceduralTexture();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ProceduralTexture();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetProceduralOutputType(IntPtr l) {
 		try{
 			UnityEngine.ProceduralTexture self=(UnityEngine.ProceduralTexture)checkSelf(l);
 			UnityEngine.ProceduralOutputType ret=self.GetProceduralOutputType();
-			pushValue(l,ret);
+			pushEnum(l,(int)ret);
 			return 1;
 		}
 		catch(Exception e) {
@@ -58,15 +54,15 @@ public class Lua_UnityEngine_ProceduralTexture : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_format(IntPtr l) {
 		UnityEngine.ProceduralTexture o = (UnityEngine.ProceduralTexture)checkSelf(l);
-		pushValue(l,o.format);
+		pushEnum(l,(int)o.format);
 		return 1;
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.ProceduralTexture");
 		addMember(l,GetProceduralOutputType);
 		addMember(l,GetPixels32);
-		addMember(l,"hasAlpha",get_hasAlpha,null);
-		addMember(l,"format",get_format,null);
+		addMember(l,"hasAlpha",get_hasAlpha,null,true);
+		addMember(l,"format",get_format,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ProceduralTexture),typeof(UnityEngine.Texture));
 	}
 }

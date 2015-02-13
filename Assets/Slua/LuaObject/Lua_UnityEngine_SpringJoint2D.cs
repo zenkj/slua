@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SpringJoint2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SpringJoint2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SpringJoint2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SpringJoint2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetReactionForce(IntPtr l) {
@@ -91,9 +87,9 @@ public class Lua_UnityEngine_SpringJoint2D : LuaObject {
 		getTypeTable(l,"UnityEngine.SpringJoint2D");
 		addMember(l,GetReactionForce);
 		addMember(l,GetReactionTorque);
-		addMember(l,"distance",get_distance,set_distance);
-		addMember(l,"dampingRatio",get_dampingRatio,set_dampingRatio);
-		addMember(l,"frequency",get_frequency,set_frequency);
+		addMember(l,"distance",get_distance,set_distance,true);
+		addMember(l,"dampingRatio",get_dampingRatio,set_dampingRatio,true);
+		addMember(l,"frequency",get_frequency,set_frequency,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SpringJoint2D),typeof(UnityEngine.AnchoredJoint2D));
 	}
 }

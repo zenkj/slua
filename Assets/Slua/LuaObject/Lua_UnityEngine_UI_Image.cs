@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Image : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -116,7 +117,7 @@ public class Lua_UnityEngine_UI_Image : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_type(IntPtr l) {
 		UnityEngine.UI.Image o = (UnityEngine.UI.Image)checkSelf(l);
-		pushValue(l,o.type);
+		pushEnum(l,(int)o.type);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -158,7 +159,7 @@ public class Lua_UnityEngine_UI_Image : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_fillMethod(IntPtr l) {
 		UnityEngine.UI.Image o = (UnityEngine.UI.Image)checkSelf(l);
-		pushValue(l,o.fillMethod);
+		pushEnum(l,(int)o.fillMethod);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -293,26 +294,26 @@ public class Lua_UnityEngine_UI_Image : LuaObject {
 		addMember(l,CalculateLayoutInputHorizontal);
 		addMember(l,CalculateLayoutInputVertical);
 		addMember(l,IsRaycastLocationValid);
-		addMember(l,"sprite",get_sprite,set_sprite);
-		addMember(l,"overrideSprite",get_overrideSprite,set_overrideSprite);
-		addMember(l,"type",get_type,set_type);
-		addMember(l,"preserveAspect",get_preserveAspect,set_preserveAspect);
-		addMember(l,"fillCenter",get_fillCenter,set_fillCenter);
-		addMember(l,"fillMethod",get_fillMethod,set_fillMethod);
-		addMember(l,"fillAmount",get_fillAmount,set_fillAmount);
-		addMember(l,"fillClockwise",get_fillClockwise,set_fillClockwise);
-		addMember(l,"fillOrigin",get_fillOrigin,set_fillOrigin);
-		addMember(l,"eventAlphaThreshold",get_eventAlphaThreshold,set_eventAlphaThreshold);
-		addMember(l,"mainTexture",get_mainTexture,null);
-		addMember(l,"hasBorder",get_hasBorder,null);
-		addMember(l,"pixelsPerUnit",get_pixelsPerUnit,null);
-		addMember(l,"minWidth",get_minWidth,null);
-		addMember(l,"preferredWidth",get_preferredWidth,null);
-		addMember(l,"flexibleWidth",get_flexibleWidth,null);
-		addMember(l,"minHeight",get_minHeight,null);
-		addMember(l,"preferredHeight",get_preferredHeight,null);
-		addMember(l,"flexibleHeight",get_flexibleHeight,null);
-		addMember(l,"layoutPriority",get_layoutPriority,null);
+		addMember(l,"sprite",get_sprite,set_sprite,true);
+		addMember(l,"overrideSprite",get_overrideSprite,set_overrideSprite,true);
+		addMember(l,"type",get_type,set_type,true);
+		addMember(l,"preserveAspect",get_preserveAspect,set_preserveAspect,true);
+		addMember(l,"fillCenter",get_fillCenter,set_fillCenter,true);
+		addMember(l,"fillMethod",get_fillMethod,set_fillMethod,true);
+		addMember(l,"fillAmount",get_fillAmount,set_fillAmount,true);
+		addMember(l,"fillClockwise",get_fillClockwise,set_fillClockwise,true);
+		addMember(l,"fillOrigin",get_fillOrigin,set_fillOrigin,true);
+		addMember(l,"eventAlphaThreshold",get_eventAlphaThreshold,set_eventAlphaThreshold,true);
+		addMember(l,"mainTexture",get_mainTexture,null,true);
+		addMember(l,"hasBorder",get_hasBorder,null,true);
+		addMember(l,"pixelsPerUnit",get_pixelsPerUnit,null,true);
+		addMember(l,"minWidth",get_minWidth,null,true);
+		addMember(l,"preferredWidth",get_preferredWidth,null,true);
+		addMember(l,"flexibleWidth",get_flexibleWidth,null,true);
+		addMember(l,"minHeight",get_minHeight,null,true);
+		addMember(l,"preferredHeight",get_preferredHeight,null,true);
+		addMember(l,"flexibleHeight",get_flexibleHeight,null,true);
+		addMember(l,"layoutPriority",get_layoutPriority,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Image),typeof(UnityEngine.UI.MaskableGraphic));
 	}
 }

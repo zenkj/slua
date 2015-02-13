@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Particle : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -130,14 +131,14 @@ public class Lua_UnityEngine_Particle : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Particle");
-		addMember(l,"position",get_position,set_position);
-		addMember(l,"velocity",get_velocity,set_velocity);
-		addMember(l,"energy",get_energy,set_energy);
-		addMember(l,"startEnergy",get_startEnergy,set_startEnergy);
-		addMember(l,"size",get_size,set_size);
-		addMember(l,"rotation",get_rotation,set_rotation);
-		addMember(l,"angularVelocity",get_angularVelocity,set_angularVelocity);
-		addMember(l,"color",get_color,set_color);
+		addMember(l,"position",get_position,set_position,true);
+		addMember(l,"velocity",get_velocity,set_velocity,true);
+		addMember(l,"energy",get_energy,set_energy,true);
+		addMember(l,"startEnergy",get_startEnergy,set_startEnergy,true);
+		addMember(l,"size",get_size,set_size,true);
+		addMember(l,"rotation",get_rotation,set_rotation,true);
+		addMember(l,"angularVelocity",get_angularVelocity,set_angularVelocity,true);
+		addMember(l,"color",get_color,set_color,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Particle));
 	}
 }

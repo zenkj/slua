@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Gradient : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Gradient o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Gradient();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Gradient();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Evaluate(IntPtr l) {
@@ -78,8 +74,8 @@ public class Lua_UnityEngine_Gradient : LuaObject {
 		getTypeTable(l,"UnityEngine.Gradient");
 		addMember(l,Evaluate);
 		addMember(l,SetKeys);
-		addMember(l,"colorKeys",get_colorKeys,set_colorKeys);
-		addMember(l,"alphaKeys",get_alphaKeys,set_alphaKeys);
+		addMember(l,"colorKeys",get_colorKeys,set_colorKeys,true);
+		addMember(l,"alphaKeys",get_alphaKeys,set_alphaKeys,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Gradient));
 	}
 }

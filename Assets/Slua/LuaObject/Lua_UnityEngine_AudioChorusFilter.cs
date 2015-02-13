@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AudioChorusFilter : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AudioChorusFilter o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AudioChorusFilter();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AudioChorusFilter();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_dryMix(IntPtr l) {
@@ -115,13 +111,13 @@ public class Lua_UnityEngine_AudioChorusFilter : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.AudioChorusFilter");
-		addMember(l,"dryMix",get_dryMix,set_dryMix);
-		addMember(l,"wetMix1",get_wetMix1,set_wetMix1);
-		addMember(l,"wetMix2",get_wetMix2,set_wetMix2);
-		addMember(l,"wetMix3",get_wetMix3,set_wetMix3);
-		addMember(l,"delay",get_delay,set_delay);
-		addMember(l,"rate",get_rate,set_rate);
-		addMember(l,"depth",get_depth,set_depth);
+		addMember(l,"dryMix",get_dryMix,set_dryMix,true);
+		addMember(l,"wetMix1",get_wetMix1,set_wetMix1,true);
+		addMember(l,"wetMix2",get_wetMix2,set_wetMix2,true);
+		addMember(l,"wetMix3",get_wetMix3,set_wetMix3,true);
+		addMember(l,"delay",get_delay,set_delay,true);
+		addMember(l,"rate",get_rate,set_rate,true);
+		addMember(l,"depth",get_depth,set_depth,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AudioChorusFilter),typeof(UnityEngine.Behaviour));
 	}
 }

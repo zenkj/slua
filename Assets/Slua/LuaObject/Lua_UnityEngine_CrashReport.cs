@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_CrashReport : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -57,10 +58,10 @@ public class Lua_UnityEngine_CrashReport : LuaObject {
 		getTypeTable(l,"UnityEngine.CrashReport");
 		addMember(l,Remove);
 		addMember(l,RemoveAll_s);
-		addMember(l,"time",get_time,null);
-		addMember(l,"text",get_text,null);
-		addMember(l,"reports",get_reports,null);
-		addMember(l,"lastReport",get_lastReport,null);
+		addMember(l,"time",get_time,null,true);
+		addMember(l,"text",get_text,null,true);
+		addMember(l,"reports",get_reports,null,false);
+		addMember(l,"lastReport",get_lastReport,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.CrashReport));
 	}
 }

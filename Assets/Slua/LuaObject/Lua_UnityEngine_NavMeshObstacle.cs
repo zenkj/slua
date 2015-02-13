@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_NavMeshObstacle : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.NavMeshObstacle o;
-		if(matchType(l,1)){
-			o=new UnityEngine.NavMeshObstacle();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.NavMeshObstacle();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_height(IntPtr l) {
@@ -87,11 +83,11 @@ public class Lua_UnityEngine_NavMeshObstacle : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.NavMeshObstacle");
-		addMember(l,"height",get_height,set_height);
-		addMember(l,"radius",get_radius,set_radius);
-		addMember(l,"velocity",get_velocity,set_velocity);
-		addMember(l,"carving",get_carving,set_carving);
-		addMember(l,"carvingMoveThreshold",get_carvingMoveThreshold,set_carvingMoveThreshold);
+		addMember(l,"height",get_height,set_height,true);
+		addMember(l,"radius",get_radius,set_radius,true);
+		addMember(l,"velocity",get_velocity,set_velocity,true);
+		addMember(l,"carving",get_carving,set_carving,true);
+		addMember(l,"carvingMoveThreshold",get_carvingMoveThreshold,set_carvingMoveThreshold,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.NavMeshObstacle),typeof(UnityEngine.Behaviour));
 	}
 }

@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AudioEchoFilter : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AudioEchoFilter o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AudioEchoFilter();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AudioEchoFilter();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_delay(IntPtr l) {
@@ -73,10 +69,10 @@ public class Lua_UnityEngine_AudioEchoFilter : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.AudioEchoFilter");
-		addMember(l,"delay",get_delay,set_delay);
-		addMember(l,"decayRatio",get_decayRatio,set_decayRatio);
-		addMember(l,"dryMix",get_dryMix,set_dryMix);
-		addMember(l,"wetMix",get_wetMix,set_wetMix);
+		addMember(l,"delay",get_delay,set_delay,true);
+		addMember(l,"decayRatio",get_decayRatio,set_decayRatio,true);
+		addMember(l,"dryMix",get_dryMix,set_dryMix,true);
+		addMember(l,"wetMix",get_wetMix,set_wetMix,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AudioEchoFilter),typeof(UnityEngine.Behaviour));
 	}
 }

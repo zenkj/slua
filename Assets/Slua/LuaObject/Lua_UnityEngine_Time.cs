@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Time : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Time o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Time();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Time();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_time(IntPtr l) {
@@ -115,20 +111,20 @@ public class Lua_UnityEngine_Time : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Time");
-		addMember(l,"time",get_time,null);
-		addMember(l,"timeSinceLevelLoad",get_timeSinceLevelLoad,null);
-		addMember(l,"deltaTime",get_deltaTime,null);
-		addMember(l,"fixedTime",get_fixedTime,null);
-		addMember(l,"unscaledTime",get_unscaledTime,null);
-		addMember(l,"unscaledDeltaTime",get_unscaledDeltaTime,null);
-		addMember(l,"fixedDeltaTime",get_fixedDeltaTime,set_fixedDeltaTime);
-		addMember(l,"maximumDeltaTime",get_maximumDeltaTime,set_maximumDeltaTime);
-		addMember(l,"smoothDeltaTime",get_smoothDeltaTime,null);
-		addMember(l,"timeScale",get_timeScale,set_timeScale);
-		addMember(l,"frameCount",get_frameCount,null);
-		addMember(l,"renderedFrameCount",get_renderedFrameCount,null);
-		addMember(l,"realtimeSinceStartup",get_realtimeSinceStartup,null);
-		addMember(l,"captureFramerate",get_captureFramerate,set_captureFramerate);
+		addMember(l,"time",get_time,null,false);
+		addMember(l,"timeSinceLevelLoad",get_timeSinceLevelLoad,null,false);
+		addMember(l,"deltaTime",get_deltaTime,null,false);
+		addMember(l,"fixedTime",get_fixedTime,null,false);
+		addMember(l,"unscaledTime",get_unscaledTime,null,false);
+		addMember(l,"unscaledDeltaTime",get_unscaledDeltaTime,null,false);
+		addMember(l,"fixedDeltaTime",get_fixedDeltaTime,set_fixedDeltaTime,false);
+		addMember(l,"maximumDeltaTime",get_maximumDeltaTime,set_maximumDeltaTime,false);
+		addMember(l,"smoothDeltaTime",get_smoothDeltaTime,null,false);
+		addMember(l,"timeScale",get_timeScale,set_timeScale,false);
+		addMember(l,"frameCount",get_frameCount,null,false);
+		addMember(l,"renderedFrameCount",get_renderedFrameCount,null,false);
+		addMember(l,"realtimeSinceStartup",get_realtimeSinceStartup,null,false);
+		addMember(l,"captureFramerate",get_captureFramerate,set_captureFramerate,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Time));
 	}
 }

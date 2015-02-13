@@ -6,13 +6,14 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Outline : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int ModifyVertices(IntPtr l) {
 		try{
 			UnityEngine.UI.Outline self=(UnityEngine.UI.Outline)checkSelf(l);
-			List<UnityEngine.UIVertex> a1;
+			System.Collections.Generic.List<UnityEngine.UIVertex> a1;
 			checkType(l,2,out a1);
 			self.ModifyVertices(a1);
 			return 0;

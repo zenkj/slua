@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SpriteRenderer : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SpriteRenderer o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SpriteRenderer();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SpriteRenderer();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_sprite(IntPtr l) {
@@ -45,8 +41,8 @@ public class Lua_UnityEngine_SpriteRenderer : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.SpriteRenderer");
-		addMember(l,"sprite",get_sprite,set_sprite);
-		addMember(l,"color",get_color,set_color);
+		addMember(l,"sprite",get_sprite,set_sprite,true);
+		addMember(l,"color",get_color,set_color,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SpriteRenderer),typeof(UnityEngine.Renderer));
 	}
 }

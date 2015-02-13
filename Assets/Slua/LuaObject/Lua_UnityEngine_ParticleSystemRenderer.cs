@@ -6,19 +6,15 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ParticleSystemRenderer : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ParticleSystemRenderer o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ParticleSystemRenderer();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ParticleSystemRenderer();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_renderMode(IntPtr l) {
 		UnityEngine.ParticleSystemRenderer o = (UnityEngine.ParticleSystemRenderer)checkSelf(l);
-		pushValue(l,o.renderMode);
+		pushEnum(l,(int)o.renderMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -101,12 +97,12 @@ public class Lua_UnityEngine_ParticleSystemRenderer : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.ParticleSystemRenderer");
-		addMember(l,"renderMode",get_renderMode,set_renderMode);
-		addMember(l,"lengthScale",get_lengthScale,set_lengthScale);
-		addMember(l,"velocityScale",get_velocityScale,set_velocityScale);
-		addMember(l,"cameraVelocityScale",get_cameraVelocityScale,set_cameraVelocityScale);
-		addMember(l,"maxParticleSize",get_maxParticleSize,set_maxParticleSize);
-		addMember(l,"mesh",get_mesh,set_mesh);
+		addMember(l,"renderMode",get_renderMode,set_renderMode,true);
+		addMember(l,"lengthScale",get_lengthScale,set_lengthScale,true);
+		addMember(l,"velocityScale",get_velocityScale,set_velocityScale,true);
+		addMember(l,"cameraVelocityScale",get_cameraVelocityScale,set_cameraVelocityScale,true);
+		addMember(l,"maxParticleSize",get_maxParticleSize,set_maxParticleSize,true);
+		addMember(l,"mesh",get_mesh,set_mesh,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ParticleSystemRenderer),typeof(UnityEngine.Renderer));
 	}
 }

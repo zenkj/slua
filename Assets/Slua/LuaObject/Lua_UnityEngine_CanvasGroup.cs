@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_CanvasGroup : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.CanvasGroup o;
-		if(matchType(l,1)){
-			o=new UnityEngine.CanvasGroup();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.CanvasGroup();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int IsRaycastLocationValid(IntPtr l) {
@@ -91,10 +87,10 @@ public class Lua_UnityEngine_CanvasGroup : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.CanvasGroup");
 		addMember(l,IsRaycastLocationValid);
-		addMember(l,"alpha",get_alpha,set_alpha);
-		addMember(l,"interactable",get_interactable,set_interactable);
-		addMember(l,"blocksRaycasts",get_blocksRaycasts,set_blocksRaycasts);
-		addMember(l,"ignoreParentGroups",get_ignoreParentGroups,set_ignoreParentGroups);
+		addMember(l,"alpha",get_alpha,set_alpha,true);
+		addMember(l,"interactable",get_interactable,set_interactable,true);
+		addMember(l,"blocksRaycasts",get_blocksRaycasts,set_blocksRaycasts,true);
+		addMember(l,"ignoreParentGroups",get_ignoreParentGroups,set_ignoreParentGroups,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.CanvasGroup),typeof(UnityEngine.Component));
 	}
 }

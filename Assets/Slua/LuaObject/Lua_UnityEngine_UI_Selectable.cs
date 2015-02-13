@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Selectable : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -220,7 +221,7 @@ public class Lua_UnityEngine_UI_Selectable : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_transition(IntPtr l) {
 		UnityEngine.UI.Selectable o = (UnityEngine.UI.Selectable)checkSelf(l);
-		pushValue(l,o.transition);
+		pushEnum(l,(int)o.transition);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -337,16 +338,16 @@ public class Lua_UnityEngine_UI_Selectable : LuaObject {
 		addMember(l,OnSelect);
 		addMember(l,OnDeselect);
 		addMember(l,Select);
-		addMember(l,"allSelectables",get_allSelectables,null);
-		addMember(l,"navigation",get_navigation,set_navigation);
-		addMember(l,"transition",get_transition,set_transition);
-		addMember(l,"colors",get_colors,set_colors);
-		addMember(l,"spriteState",get_spriteState,set_spriteState);
-		addMember(l,"animationTriggers",get_animationTriggers,set_animationTriggers);
-		addMember(l,"targetGraphic",get_targetGraphic,set_targetGraphic);
-		addMember(l,"interactable",get_interactable,set_interactable);
-		addMember(l,"image",get_image,set_image);
-		addMember(l,"animator",get_animator,null);
+		addMember(l,"allSelectables",get_allSelectables,null,false);
+		addMember(l,"navigation",get_navigation,set_navigation,true);
+		addMember(l,"transition",get_transition,set_transition,true);
+		addMember(l,"colors",get_colors,set_colors,true);
+		addMember(l,"spriteState",get_spriteState,set_spriteState,true);
+		addMember(l,"animationTriggers",get_animationTriggers,set_animationTriggers,true);
+		addMember(l,"targetGraphic",get_targetGraphic,set_targetGraphic,true);
+		addMember(l,"interactable",get_interactable,set_interactable,true);
+		addMember(l,"image",get_image,set_image,true);
+		addMember(l,"animator",get_animator,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Selectable),typeof(UnityEngine.EventSystems.UIBehaviour));
 	}
 }

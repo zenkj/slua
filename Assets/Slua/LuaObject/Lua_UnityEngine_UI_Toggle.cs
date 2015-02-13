@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Toggle : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -53,7 +54,7 @@ public class Lua_UnityEngine_UI_Toggle : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_toggleTransition(IntPtr l) {
 		UnityEngine.UI.Toggle o = (UnityEngine.UI.Toggle)checkSelf(l);
-		pushValue(l,o.toggleTransition);
+		pushEnum(l,(int)o.toggleTransition);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -125,11 +126,11 @@ public class Lua_UnityEngine_UI_Toggle : LuaObject {
 		addMember(l,Rebuild);
 		addMember(l,OnPointerClick);
 		addMember(l,OnSubmit);
-		addMember(l,"toggleTransition",get_toggleTransition,set_toggleTransition);
-		addMember(l,"graphic",get_graphic,set_graphic);
-		addMember(l,"onValueChanged",get_onValueChanged,set_onValueChanged);
-		addMember(l,"group",get_group,set_group);
-		addMember(l,"isOn",get_isOn,set_isOn);
+		addMember(l,"toggleTransition",get_toggleTransition,set_toggleTransition,true);
+		addMember(l,"graphic",get_graphic,set_graphic,true);
+		addMember(l,"onValueChanged",get_onValueChanged,set_onValueChanged,true);
+		addMember(l,"group",get_group,set_group,true);
+		addMember(l,"isOn",get_isOn,set_isOn,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Toggle),typeof(UnityEngine.UI.Selectable));
 	}
 }

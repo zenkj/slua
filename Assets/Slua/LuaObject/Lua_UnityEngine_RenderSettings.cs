@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_RenderSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.RenderSettings o;
-		if(matchType(l,1)){
-			o=new UnityEngine.RenderSettings();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.RenderSettings();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_fog(IntPtr l) {
@@ -29,7 +25,7 @@ public class Lua_UnityEngine_RenderSettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_fogMode(IntPtr l) {
-		pushValue(l,UnityEngine.RenderSettings.fogMode);
+		pushEnum(l,(int)UnityEngine.RenderSettings.fogMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -149,17 +145,17 @@ public class Lua_UnityEngine_RenderSettings : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.RenderSettings");
-		addMember(l,"fog",get_fog,set_fog);
-		addMember(l,"fogMode",get_fogMode,set_fogMode);
-		addMember(l,"fogColor",get_fogColor,set_fogColor);
-		addMember(l,"fogDensity",get_fogDensity,set_fogDensity);
-		addMember(l,"fogStartDistance",get_fogStartDistance,set_fogStartDistance);
-		addMember(l,"fogEndDistance",get_fogEndDistance,set_fogEndDistance);
-		addMember(l,"ambientLight",get_ambientLight,set_ambientLight);
-		addMember(l,"haloStrength",get_haloStrength,set_haloStrength);
-		addMember(l,"flareStrength",get_flareStrength,set_flareStrength);
-		addMember(l,"flareFadeSpeed",get_flareFadeSpeed,set_flareFadeSpeed);
-		addMember(l,"skybox",get_skybox,set_skybox);
+		addMember(l,"fog",get_fog,set_fog,false);
+		addMember(l,"fogMode",get_fogMode,set_fogMode,false);
+		addMember(l,"fogColor",get_fogColor,set_fogColor,false);
+		addMember(l,"fogDensity",get_fogDensity,set_fogDensity,false);
+		addMember(l,"fogStartDistance",get_fogStartDistance,set_fogStartDistance,false);
+		addMember(l,"fogEndDistance",get_fogEndDistance,set_fogEndDistance,false);
+		addMember(l,"ambientLight",get_ambientLight,set_ambientLight,false);
+		addMember(l,"haloStrength",get_haloStrength,set_haloStrength,false);
+		addMember(l,"flareStrength",get_flareStrength,set_flareStrength,false);
+		addMember(l,"flareFadeSpeed",get_flareFadeSpeed,set_flareFadeSpeed,false);
+		addMember(l,"skybox",get_skybox,set_skybox,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.RenderSettings),typeof(UnityEngine.Object));
 	}
 }

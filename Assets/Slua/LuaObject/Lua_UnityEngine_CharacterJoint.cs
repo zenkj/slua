@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_CharacterJoint : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.CharacterJoint o;
-		if(matchType(l,1)){
-			o=new UnityEngine.CharacterJoint();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.CharacterJoint();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_swingAxis(IntPtr l) {
@@ -129,14 +125,14 @@ public class Lua_UnityEngine_CharacterJoint : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.CharacterJoint");
-		addMember(l,"swingAxis",get_swingAxis,set_swingAxis);
-		addMember(l,"lowTwistLimit",get_lowTwistLimit,set_lowTwistLimit);
-		addMember(l,"highTwistLimit",get_highTwistLimit,set_highTwistLimit);
-		addMember(l,"swing1Limit",get_swing1Limit,set_swing1Limit);
-		addMember(l,"swing2Limit",get_swing2Limit,set_swing2Limit);
-		addMember(l,"targetRotation",get_targetRotation,set_targetRotation);
-		addMember(l,"targetAngularVelocity",get_targetAngularVelocity,set_targetAngularVelocity);
-		addMember(l,"rotationDrive",get_rotationDrive,set_rotationDrive);
+		addMember(l,"swingAxis",get_swingAxis,set_swingAxis,true);
+		addMember(l,"lowTwistLimit",get_lowTwistLimit,set_lowTwistLimit,true);
+		addMember(l,"highTwistLimit",get_highTwistLimit,set_highTwistLimit,true);
+		addMember(l,"swing1Limit",get_swing1Limit,set_swing1Limit,true);
+		addMember(l,"swing2Limit",get_swing2Limit,set_swing2Limit,true);
+		addMember(l,"targetRotation",get_targetRotation,set_targetRotation,true);
+		addMember(l,"targetAngularVelocity",get_targetAngularVelocity,set_targetAngularVelocity,true);
+		addMember(l,"rotationDrive",get_rotationDrive,set_rotationDrive,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.CharacterJoint),typeof(UnityEngine.Joint));
 	}
 }

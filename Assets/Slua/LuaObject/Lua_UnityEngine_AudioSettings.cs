@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_AudioSettings : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.AudioSettings o;
-		if(matchType(l,1)){
-			o=new UnityEngine.AudioSettings();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.AudioSettings();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetDSPBufferSize_s(IntPtr l) {
@@ -47,12 +43,12 @@ public class Lua_UnityEngine_AudioSettings : LuaObject {
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_driverCaps(IntPtr l) {
-		pushValue(l,UnityEngine.AudioSettings.driverCaps);
+		pushEnum(l,(int)UnityEngine.AudioSettings.driverCaps);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_speakerMode(IntPtr l) {
-		pushValue(l,UnityEngine.AudioSettings.speakerMode);
+		pushEnum(l,(int)UnityEngine.AudioSettings.speakerMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -83,10 +79,10 @@ public class Lua_UnityEngine_AudioSettings : LuaObject {
 		getTypeTable(l,"UnityEngine.AudioSettings");
 		addMember(l,SetDSPBufferSize_s);
 		addMember(l,GetDSPBufferSize_s);
-		addMember(l,"driverCaps",get_driverCaps,null);
-		addMember(l,"speakerMode",get_speakerMode,set_speakerMode);
-		addMember(l,"dspTime",get_dspTime,null);
-		addMember(l,"outputSampleRate",get_outputSampleRate,set_outputSampleRate);
+		addMember(l,"driverCaps",get_driverCaps,null,false);
+		addMember(l,"speakerMode",get_speakerMode,set_speakerMode,false);
+		addMember(l,"dspTime",get_dspTime,null,false);
+		addMember(l,"outputSampleRate",get_outputSampleRate,set_outputSampleRate,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.AudioSettings));
 	}
 }

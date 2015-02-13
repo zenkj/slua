@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_JointSuspension2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -55,9 +56,9 @@ public class Lua_UnityEngine_JointSuspension2D : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.JointSuspension2D");
-		addMember(l,"dampingRatio",get_dampingRatio,set_dampingRatio);
-		addMember(l,"frequency",get_frequency,set_frequency);
-		addMember(l,"angle",get_angle,set_angle);
+		addMember(l,"dampingRatio",get_dampingRatio,set_dampingRatio,true);
+		addMember(l,"frequency",get_frequency,set_frequency,true);
+		addMember(l,"angle",get_angle,set_angle,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.JointSuspension2D));
 	}
 }

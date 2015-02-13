@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Compass : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Compass o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Compass();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Compass();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_magneticHeading(IntPtr l) {
@@ -61,12 +57,12 @@ public class Lua_UnityEngine_Compass : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Compass");
-		addMember(l,"magneticHeading",get_magneticHeading,null);
-		addMember(l,"trueHeading",get_trueHeading,null);
-		addMember(l,"headingAccuracy",get_headingAccuracy,null);
-		addMember(l,"rawVector",get_rawVector,null);
-		addMember(l,"timestamp",get_timestamp,null);
-		addMember(l,"enabled",get_enabled,set_enabled);
+		addMember(l,"magneticHeading",get_magneticHeading,null,true);
+		addMember(l,"trueHeading",get_trueHeading,null,true);
+		addMember(l,"headingAccuracy",get_headingAccuracy,null,true);
+		addMember(l,"rawVector",get_rawVector,null,true);
+		addMember(l,"timestamp",get_timestamp,null,true);
+		addMember(l,"enabled",get_enabled,set_enabled,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Compass));
 	}
 }

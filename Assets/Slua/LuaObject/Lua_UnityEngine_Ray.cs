@@ -6,18 +6,14 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Ray : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Ray o;
-		if(matchType(l,1,typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector3))){
-			UnityEngine.Vector3 a1;
-			checkType(l,1,out a1);
-			UnityEngine.Vector3 a2;
-			checkType(l,2,out a2);
-			o=new UnityEngine.Ray(a1,a2);
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		UnityEngine.Vector3 a1;
+		checkType(l,2,out a1);
+		UnityEngine.Vector3 a2;
+		checkType(l,3,out a2);
+		o=new UnityEngine.Ray(a1,a2);
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetPoint(IntPtr l) {
@@ -67,8 +63,8 @@ public class Lua_UnityEngine_Ray : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Ray");
 		addMember(l,GetPoint);
-		addMember(l,"origin",get_origin,set_origin);
-		addMember(l,"direction",get_direction,set_direction);
+		addMember(l,"origin",get_origin,set_origin,true);
+		addMember(l,"direction",get_direction,set_direction,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Ray));
 	}
 }

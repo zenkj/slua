@@ -1,14 +1,17 @@
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
+
 namespace LuaInterface
 {
-    using System;
-    using System.Runtime.InteropServices;
-    using System.Text;
 
 #pragma warning disable 414
     public class MonoPInvokeCallbackAttribute : System.Attribute
     {
         private Type type;
-        public MonoPInvokeCallbackAttribute(Type t) { type = t; }
+        public MonoPInvokeCallbackAttribute(Type t) { 
+            type = t;
+        }
     }
 #pragma warning restore 414
 
@@ -49,7 +52,7 @@ namespace LuaInterface
 
     sealed class LuaIndexes
     {
-#if !LUA_5_1
+#if LUA_5_3
         // for lua5.3
         public static int LUA_REGISTRYINDEX = -1000000 - 1000;
 #else
@@ -211,7 +214,7 @@ namespace LuaInterface
         }
 
 
-#if !LUA_5_1
+#if LUA_5_3
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_getglobal(IntPtr luaState, string name);
 

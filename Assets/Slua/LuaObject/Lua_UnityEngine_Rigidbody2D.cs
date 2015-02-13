@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Rigidbody2D o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Rigidbody2D();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Rigidbody2D();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int MovePosition(IntPtr l) {
@@ -96,7 +92,8 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddForce(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.Vector2),typeof(UnityEngine.ForceMode2D))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				UnityEngine.Vector2 a1;
 				checkType(l,2,out a1);
@@ -105,7 +102,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 				self.AddForce(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.Vector2))){
+			else if(argc==2){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				UnityEngine.Vector2 a1;
 				checkType(l,2,out a1);
@@ -123,7 +120,8 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddRelativeForce(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.Vector2),typeof(UnityEngine.ForceMode2D))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				UnityEngine.Vector2 a1;
 				checkType(l,2,out a1);
@@ -132,7 +130,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 				self.AddRelativeForce(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.Vector2))){
+			else if(argc==2){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				UnityEngine.Vector2 a1;
 				checkType(l,2,out a1);
@@ -150,7 +148,8 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddForceAtPosition(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.Vector2),typeof(UnityEngine.Vector2),typeof(UnityEngine.ForceMode2D))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				UnityEngine.Vector2 a1;
 				checkType(l,2,out a1);
@@ -161,7 +160,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 				self.AddForceAtPosition(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(UnityEngine.Vector2),typeof(UnityEngine.Vector2))){
+			else if(argc==3){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				UnityEngine.Vector2 a1;
 				checkType(l,2,out a1);
@@ -181,7 +180,8 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int AddTorque(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Single),typeof(UnityEngine.ForceMode2D))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				System.Single a1;
 				checkType(l,2,out a1);
@@ -190,7 +190,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 				self.AddTorque(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Single))){
+			else if(argc==2){
 				UnityEngine.Rigidbody2D self=(UnityEngine.Rigidbody2D)checkSelf(l);
 				System.Single a1;
 				checkType(l,2,out a1);
@@ -486,7 +486,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_interpolation(IntPtr l) {
 		UnityEngine.Rigidbody2D o = (UnityEngine.Rigidbody2D)checkSelf(l);
-		pushValue(l,o.interpolation);
+		pushEnum(l,(int)o.interpolation);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -500,7 +500,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_sleepMode(IntPtr l) {
 		UnityEngine.Rigidbody2D o = (UnityEngine.Rigidbody2D)checkSelf(l);
-		pushValue(l,o.sleepMode);
+		pushEnum(l,(int)o.sleepMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -514,7 +514,7 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_collisionDetectionMode(IntPtr l) {
 		UnityEngine.Rigidbody2D o = (UnityEngine.Rigidbody2D)checkSelf(l);
-		pushValue(l,o.collisionDetectionMode);
+		pushEnum(l,(int)o.collisionDetectionMode);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -543,23 +543,23 @@ public class Lua_UnityEngine_Rigidbody2D : LuaObject {
 		addMember(l,GetRelativeVector);
 		addMember(l,GetPointVelocity);
 		addMember(l,GetRelativePointVelocity);
-		addMember(l,"position",get_position,set_position);
-		addMember(l,"rotation",get_rotation,set_rotation);
-		addMember(l,"velocity",get_velocity,set_velocity);
-		addMember(l,"angularVelocity",get_angularVelocity,set_angularVelocity);
-		addMember(l,"mass",get_mass,set_mass);
-		addMember(l,"centerOfMass",get_centerOfMass,set_centerOfMass);
-		addMember(l,"worldCenterOfMass",get_worldCenterOfMass,null);
-		addMember(l,"inertia",get_inertia,set_inertia);
-		addMember(l,"drag",get_drag,set_drag);
-		addMember(l,"angularDrag",get_angularDrag,set_angularDrag);
-		addMember(l,"gravityScale",get_gravityScale,set_gravityScale);
-		addMember(l,"isKinematic",get_isKinematic,set_isKinematic);
-		addMember(l,"fixedAngle",get_fixedAngle,set_fixedAngle);
-		addMember(l,"simulated",get_simulated,set_simulated);
-		addMember(l,"interpolation",get_interpolation,set_interpolation);
-		addMember(l,"sleepMode",get_sleepMode,set_sleepMode);
-		addMember(l,"collisionDetectionMode",get_collisionDetectionMode,set_collisionDetectionMode);
+		addMember(l,"position",get_position,set_position,true);
+		addMember(l,"rotation",get_rotation,set_rotation,true);
+		addMember(l,"velocity",get_velocity,set_velocity,true);
+		addMember(l,"angularVelocity",get_angularVelocity,set_angularVelocity,true);
+		addMember(l,"mass",get_mass,set_mass,true);
+		addMember(l,"centerOfMass",get_centerOfMass,set_centerOfMass,true);
+		addMember(l,"worldCenterOfMass",get_worldCenterOfMass,null,true);
+		addMember(l,"inertia",get_inertia,set_inertia,true);
+		addMember(l,"drag",get_drag,set_drag,true);
+		addMember(l,"angularDrag",get_angularDrag,set_angularDrag,true);
+		addMember(l,"gravityScale",get_gravityScale,set_gravityScale,true);
+		addMember(l,"isKinematic",get_isKinematic,set_isKinematic,true);
+		addMember(l,"fixedAngle",get_fixedAngle,set_fixedAngle,true);
+		addMember(l,"simulated",get_simulated,set_simulated,true);
+		addMember(l,"interpolation",get_interpolation,set_interpolation,true);
+		addMember(l,"sleepMode",get_sleepMode,set_sleepMode,true);
+		addMember(l,"collisionDetectionMode",get_collisionDetectionMode,set_collisionDetectionMode,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Rigidbody2D),typeof(UnityEngine.Component));
 	}
 }

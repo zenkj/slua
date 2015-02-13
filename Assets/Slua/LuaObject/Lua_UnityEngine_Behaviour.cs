@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Behaviour : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Behaviour o;
-		if(matchType(l,1)){
-			o=new UnityEngine.Behaviour();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.Behaviour();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_enabled(IntPtr l) {
@@ -31,7 +27,7 @@ public class Lua_UnityEngine_Behaviour : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Behaviour");
-		addMember(l,"enabled",get_enabled,set_enabled);
+		addMember(l,"enabled",get_enabled,set_enabled,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Behaviour),typeof(UnityEngine.Component));
 	}
 }

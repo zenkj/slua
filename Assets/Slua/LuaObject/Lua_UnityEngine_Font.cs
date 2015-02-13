@@ -6,20 +6,21 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Font : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.Font o;
-		if(matchType(l,1)){
+		if(argc==1){
 			o=new UnityEngine.Font();
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1,typeof(System.String))){
+		else if(argc==2){
 			System.String a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			o=new UnityEngine.Font(a1);
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -40,7 +41,8 @@ public class Lua_UnityEngine_Font : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int RequestCharactersInTexture(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.String),typeof(System.Int32),typeof(UnityEngine.FontStyle))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==4){
 				UnityEngine.Font self=(UnityEngine.Font)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -51,7 +53,7 @@ public class Lua_UnityEngine_Font : LuaObject {
 				self.RequestCharactersInTexture(a1,a2,a3);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String),typeof(System.Int32))){
+			else if(argc==3){
 				UnityEngine.Font self=(UnityEngine.Font)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -60,7 +62,7 @@ public class Lua_UnityEngine_Font : LuaObject {
 				self.RequestCharactersInTexture(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.String))){
+			else if(argc==2){
 				UnityEngine.Font self=(UnityEngine.Font)checkSelf(l);
 				System.String a1;
 				checkType(l,2,out a1);
@@ -78,7 +80,8 @@ public class Lua_UnityEngine_Font : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int GetCharacterInfo(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Char),typeof(UnityEngine.CharacterInfo),typeof(System.Int32),typeof(UnityEngine.FontStyle))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==5){
 				UnityEngine.Font self=(UnityEngine.Font)checkSelf(l);
 				System.Char a1;
 				checkType(l,2,out a1);
@@ -92,7 +95,7 @@ public class Lua_UnityEngine_Font : LuaObject {
 				pushValue(l,a2);
 				return 2;
 			}
-			else if(matchType(l,2,typeof(System.Char),typeof(UnityEngine.CharacterInfo),typeof(System.Int32))){
+			else if(argc==4){
 				UnityEngine.Font self=(UnityEngine.Font)checkSelf(l);
 				System.Char a1;
 				checkType(l,2,out a1);
@@ -104,7 +107,7 @@ public class Lua_UnityEngine_Font : LuaObject {
 				pushValue(l,a2);
 				return 2;
 			}
-			else if(matchType(l,2,typeof(System.Char),typeof(UnityEngine.CharacterInfo))){
+			else if(argc==3){
 				UnityEngine.Font self=(UnityEngine.Font)checkSelf(l);
 				System.Char a1;
 				checkType(l,2,out a1);
@@ -159,7 +162,7 @@ public class Lua_UnityEngine_Font : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int set_fontNames(IntPtr l) {
 		UnityEngine.Font o = (UnityEngine.Font)checkSelf(l);
-		string[] v;
+		System.String[] v;
 		checkType(l,2,out v);
 		o.fontNames=v;
 		return 0;
@@ -206,12 +209,12 @@ public class Lua_UnityEngine_Font : LuaObject {
 		addMember(l,RequestCharactersInTexture);
 		addMember(l,GetCharacterInfo);
 		addMember(l,GetMaxVertsForString_s);
-		addMember(l,"material",get_material,set_material);
-		addMember(l,"fontNames",get_fontNames,set_fontNames);
-		addMember(l,"characterInfo",get_characterInfo,set_characterInfo);
-		addMember(l,"textureRebuildCallback",get_textureRebuildCallback,set_textureRebuildCallback);
-		addMember(l,"dynamic",get_dynamic,null);
-		addMember(l,"fontSize",get_fontSize,null);
+		addMember(l,"material",get_material,set_material,true);
+		addMember(l,"fontNames",get_fontNames,set_fontNames,true);
+		addMember(l,"characterInfo",get_characterInfo,set_characterInfo,true);
+		addMember(l,"textureRebuildCallback",get_textureRebuildCallback,set_textureRebuildCallback,true);
+		addMember(l,"dynamic",get_dynamic,null,true);
+		addMember(l,"fontSize",get_fontSize,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Font),typeof(UnityEngine.Object));
 	}
 }

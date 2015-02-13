@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_LensFlare : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.LensFlare o;
-		if(matchType(l,1)){
-			o=new UnityEngine.LensFlare();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.LensFlare();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_flare(IntPtr l) {
@@ -73,10 +69,10 @@ public class Lua_UnityEngine_LensFlare : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.LensFlare");
-		addMember(l,"flare",get_flare,set_flare);
-		addMember(l,"brightness",get_brightness,set_brightness);
-		addMember(l,"fadeSpeed",get_fadeSpeed,set_fadeSpeed);
-		addMember(l,"color",get_color,set_color);
+		addMember(l,"flare",get_flare,set_flare,true);
+		addMember(l,"brightness",get_brightness,set_brightness,true);
+		addMember(l,"fadeSpeed",get_fadeSpeed,set_fadeSpeed,true);
+		addMember(l,"color",get_color,set_color,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.LensFlare),typeof(UnityEngine.Behaviour));
 	}
 }

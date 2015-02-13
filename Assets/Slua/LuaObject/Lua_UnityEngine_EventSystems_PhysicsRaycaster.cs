@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_EventSystems_PhysicsRaycaster : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -14,7 +15,7 @@ public class Lua_UnityEngine_EventSystems_PhysicsRaycaster : LuaObject {
 			UnityEngine.EventSystems.PhysicsRaycaster self=(UnityEngine.EventSystems.PhysicsRaycaster)checkSelf(l);
 			UnityEngine.EventSystems.PointerEventData a1;
 			checkType(l,2,out a1);
-			List<UnityEngine.EventSystems.RaycastResult> a2;
+			System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult> a2;
 			checkType(l,3,out a2);
 			self.Raycast(a1,a2);
 			return 0;
@@ -59,10 +60,10 @@ public class Lua_UnityEngine_EventSystems_PhysicsRaycaster : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.EventSystems.PhysicsRaycaster");
 		addMember(l,Raycast);
-		addMember(l,"eventCamera",get_eventCamera,null);
-		addMember(l,"depth",get_depth,null);
-		addMember(l,"finalEventMask",get_finalEventMask,null);
-		addMember(l,"eventMask",get_eventMask,set_eventMask);
+		addMember(l,"eventCamera",get_eventCamera,null,true);
+		addMember(l,"depth",get_depth,null,true);
+		addMember(l,"finalEventMask",get_finalEventMask,null,true);
+		addMember(l,"eventMask",get_eventMask,set_eventMask,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.EventSystems.PhysicsRaycaster),typeof(UnityEngine.EventSystems.BaseRaycaster));
 	}
 }

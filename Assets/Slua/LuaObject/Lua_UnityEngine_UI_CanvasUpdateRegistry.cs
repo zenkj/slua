@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_CanvasUpdateRegistry : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -83,7 +84,7 @@ public class Lua_UnityEngine_UI_CanvasUpdateRegistry : LuaObject {
 		addMember(l,UnRegisterCanvasElementForRebuild_s);
 		addMember(l,IsRebuildingLayout_s);
 		addMember(l,IsRebuildingGraphics_s);
-		addMember(l,"instance",get_instance,null);
+		addMember(l,"instance",get_instance,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.CanvasUpdateRegistry));
 	}
 }

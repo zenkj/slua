@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_RectTransformUtility : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -135,7 +136,8 @@ public class Lua_UnityEngine_RectTransformUtility : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int CalculateRelativeRectTransformBounds_s(IntPtr l) {
 		try{
-			if(matchType(l,1,typeof(UnityEngine.Transform),typeof(UnityEngine.Transform))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
 				UnityEngine.Transform a1;
 				checkType(l,1,out a1);
 				UnityEngine.Transform a2;
@@ -144,7 +146,7 @@ public class Lua_UnityEngine_RectTransformUtility : LuaObject {
 				pushValue(l,ret);
 				return 1;
 			}
-			else if(matchType(l,1,typeof(UnityEngine.Transform))){
+			else if(argc==1){
 				UnityEngine.Transform a1;
 				checkType(l,1,out a1);
 				UnityEngine.Bounds ret=UnityEngine.RectTransformUtility.CalculateRelativeRectTransformBounds(a1);

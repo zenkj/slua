@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_EventSystems_Physics2DRaycaster : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -14,7 +15,7 @@ public class Lua_UnityEngine_EventSystems_Physics2DRaycaster : LuaObject {
 			UnityEngine.EventSystems.Physics2DRaycaster self=(UnityEngine.EventSystems.Physics2DRaycaster)checkSelf(l);
 			UnityEngine.EventSystems.PointerEventData a1;
 			checkType(l,2,out a1);
-			List<UnityEngine.EventSystems.RaycastResult> a2;
+			System.Collections.Generic.List<UnityEngine.EventSystems.RaycastResult> a2;
 			checkType(l,3,out a2);
 			self.Raycast(a1,a2);
 			return 0;

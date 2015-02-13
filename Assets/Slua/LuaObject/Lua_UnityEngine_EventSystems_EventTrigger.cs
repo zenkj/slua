@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_EventSystems_EventTrigger : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -255,7 +256,7 @@ public class Lua_UnityEngine_EventSystems_EventTrigger : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int set_delegates(IntPtr l) {
 		UnityEngine.EventSystems.EventTrigger o = (UnityEngine.EventSystems.EventTrigger)checkSelf(l);
-		List<UnityEngine.EventSystems.EventTrigger.Entry> v;
+		System.Collections.Generic.List<UnityEngine.EventSystems.EventTrigger.Entry> v;
 		checkType(l,2,out v);
 		o.delegates=v;
 		return 0;
@@ -279,7 +280,7 @@ public class Lua_UnityEngine_EventSystems_EventTrigger : LuaObject {
 		addMember(l,OnEndDrag);
 		addMember(l,OnSubmit);
 		addMember(l,OnCancel);
-		addMember(l,"delegates",get_delegates,set_delegates);
+		addMember(l,"delegates",get_delegates,set_delegates,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.EventSystems.EventTrigger),typeof(UnityEngine.MonoBehaviour));
 	}
 }

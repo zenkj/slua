@@ -6,16 +6,12 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Ping : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Ping o;
-		if(matchType(l,1,typeof(System.String))){
-			System.String a1;
-			checkType(l,1,out a1);
-			o=new UnityEngine.Ping(a1);
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		System.String a1;
+		checkType(l,2,out a1);
+		o=new UnityEngine.Ping(a1);
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int DestroyPing(IntPtr l) {
@@ -50,9 +46,9 @@ public class Lua_UnityEngine_Ping : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Ping");
 		addMember(l,DestroyPing);
-		addMember(l,"isDone",get_isDone,null);
-		addMember(l,"time",get_time,null);
-		addMember(l,"ip",get_ip,null);
+		addMember(l,"isDone",get_isDone,null,true);
+		addMember(l,"time",get_time,null,true);
+		addMember(l,"ip",get_ip,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Ping));
 	}
 }

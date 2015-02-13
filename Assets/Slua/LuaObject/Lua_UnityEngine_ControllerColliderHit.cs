@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ControllerColliderHit : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ControllerColliderHit o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ControllerColliderHit();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ControllerColliderHit();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_controller(IntPtr l) {
@@ -71,15 +67,15 @@ public class Lua_UnityEngine_ControllerColliderHit : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.ControllerColliderHit");
-		addMember(l,"controller",get_controller,null);
-		addMember(l,"collider",get_collider,null);
-		addMember(l,"rigidbody",get_rigidbody,null);
-		addMember(l,"gameObject",get_gameObject,null);
-		addMember(l,"transform",get_transform,null);
-		addMember(l,"point",get_point,null);
-		addMember(l,"normal",get_normal,null);
-		addMember(l,"moveDirection",get_moveDirection,null);
-		addMember(l,"moveLength",get_moveLength,null);
+		addMember(l,"controller",get_controller,null,true);
+		addMember(l,"collider",get_collider,null,true);
+		addMember(l,"rigidbody",get_rigidbody,null,true);
+		addMember(l,"gameObject",get_gameObject,null,true);
+		addMember(l,"transform",get_transform,null,true);
+		addMember(l,"point",get_point,null,true);
+		addMember(l,"normal",get_normal,null,true);
+		addMember(l,"moveDirection",get_moveDirection,null,true);
+		addMember(l,"moveLength",get_moveLength,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ControllerColliderHit));
 	}
 }

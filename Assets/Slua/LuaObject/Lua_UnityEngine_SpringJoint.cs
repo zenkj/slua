@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SpringJoint : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SpringJoint o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SpringJoint();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SpringJoint();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_spring(IntPtr l) {
@@ -73,10 +69,10 @@ public class Lua_UnityEngine_SpringJoint : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.SpringJoint");
-		addMember(l,"spring",get_spring,set_spring);
-		addMember(l,"damper",get_damper,set_damper);
-		addMember(l,"minDistance",get_minDistance,set_minDistance);
-		addMember(l,"maxDistance",get_maxDistance,set_maxDistance);
+		addMember(l,"spring",get_spring,set_spring,true);
+		addMember(l,"damper",get_damper,set_damper,true);
+		addMember(l,"minDistance",get_minDistance,set_minDistance,true);
+		addMember(l,"maxDistance",get_maxDistance,set_maxDistance,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SpringJoint),typeof(UnityEngine.Joint));
 	}
 }

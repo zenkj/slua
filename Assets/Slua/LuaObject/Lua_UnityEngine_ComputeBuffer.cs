@@ -6,28 +6,29 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ComputeBuffer : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.ComputeBuffer o;
-		if(matchType(l,1,typeof(System.Int32),typeof(System.Int32))){
+		if(argc==3){
 			System.Int32 a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			System.Int32 a2;
-			checkType(l,2,out a2);
+			checkType(l,3,out a2);
 			o=new UnityEngine.ComputeBuffer(a1,a2);
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1,typeof(System.Int32),typeof(System.Int32),typeof(UnityEngine.ComputeBufferType))){
+		else if(argc==4){
 			System.Int32 a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			System.Int32 a2;
-			checkType(l,2,out a2);
+			checkType(l,3,out a2);
 			UnityEngine.ComputeBufferType a3;
-			checkEnum(l,3,out a3);
+			checkEnum(l,4,out a3);
 			o=new UnityEngine.ComputeBuffer(a1,a2,a3);
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -105,8 +106,8 @@ public class Lua_UnityEngine_ComputeBuffer : LuaObject {
 		addMember(l,SetData);
 		addMember(l,GetData);
 		addMember(l,CopyCount_s);
-		addMember(l,"count",get_count,null);
-		addMember(l,"stride",get_stride,null);
+		addMember(l,"count",get_count,null,true);
+		addMember(l,"stride",get_stride,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ComputeBuffer));
 	}
 }

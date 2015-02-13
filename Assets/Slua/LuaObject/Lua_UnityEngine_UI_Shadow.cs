@@ -6,13 +6,14 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_Shadow : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int ModifyVertices(IntPtr l) {
 		try{
 			UnityEngine.UI.Shadow self=(UnityEngine.UI.Shadow)checkSelf(l);
-			List<UnityEngine.UIVertex> a1;
+			System.Collections.Generic.List<UnityEngine.UIVertex> a1;
 			checkType(l,2,out a1);
 			self.ModifyVertices(a1);
 			return 0;
@@ -67,9 +68,9 @@ public class Lua_UnityEngine_UI_Shadow : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.UI.Shadow");
 		addMember(l,ModifyVertices);
-		addMember(l,"effectColor",get_effectColor,set_effectColor);
-		addMember(l,"effectDistance",get_effectDistance,set_effectDistance);
-		addMember(l,"useGraphicAlpha",get_useGraphicAlpha,set_useGraphicAlpha);
+		addMember(l,"effectColor",get_effectColor,set_effectColor,true);
+		addMember(l,"effectDistance",get_effectDistance,set_effectDistance,true);
+		addMember(l,"useGraphicAlpha",get_useGraphicAlpha,set_useGraphicAlpha,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.Shadow),typeof(UnityEngine.UI.BaseVertexEffect));
 	}
 }

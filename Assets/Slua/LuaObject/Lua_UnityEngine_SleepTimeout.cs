@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SleepTimeout : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SleepTimeout o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SleepTimeout();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SleepTimeout();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_NeverSleep(IntPtr l) {
@@ -27,8 +23,8 @@ public class Lua_UnityEngine_SleepTimeout : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.SleepTimeout");
-		addMember(l,"NeverSleep",get_NeverSleep,null);
-		addMember(l,"SystemSetting",get_SystemSetting,null);
+		addMember(l,"NeverSleep",get_NeverSleep,null,false);
+		addMember(l,"SystemSetting",get_SystemSetting,null,false);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SleepTimeout));
 	}
 }

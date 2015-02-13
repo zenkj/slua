@@ -6,22 +6,18 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Color32 : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.Color32 o;
-		if(matchType(l,1,typeof(System.Byte),typeof(System.Byte),typeof(System.Byte),typeof(System.Byte))){
-			System.Byte a1;
-			checkType(l,1,out a1);
-			System.Byte a2;
-			checkType(l,2,out a2);
-			System.Byte a3;
-			checkType(l,3,out a3);
-			System.Byte a4;
-			checkType(l,4,out a4);
-			o=new UnityEngine.Color32(a1,a2,a3,a4);
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		System.Byte a1;
+		checkType(l,2,out a1);
+		System.Byte a2;
+		checkType(l,3,out a2);
+		System.Byte a3;
+		checkType(l,4,out a3);
+		System.Byte a4;
+		checkType(l,5,out a4);
+		o=new UnityEngine.Color32(a1,a2,a3,a4);
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int Lerp_s(IntPtr l) {
@@ -104,10 +100,10 @@ public class Lua_UnityEngine_Color32 : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Color32");
 		addMember(l,Lerp_s);
-		addMember(l,"r",get_r,set_r);
-		addMember(l,"g",get_g,set_g);
-		addMember(l,"b",get_b,set_b);
-		addMember(l,"a",get_a,set_a);
+		addMember(l,"r",get_r,set_r,true);
+		addMember(l,"g",get_g,set_g,true);
+		addMember(l,"b",get_b,set_b,true);
+		addMember(l,"a",get_a,set_a,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Color32));
 	}
 }

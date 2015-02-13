@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_NavMeshTriangulation : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -55,9 +56,9 @@ public class Lua_UnityEngine_NavMeshTriangulation : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.NavMeshTriangulation");
-		addMember(l,"vertices",get_vertices,set_vertices);
-		addMember(l,"indices",get_indices,set_indices);
-		addMember(l,"layers",get_layers,set_layers);
+		addMember(l,"vertices",get_vertices,set_vertices,true);
+		addMember(l,"indices",get_indices,set_indices,true);
+		addMember(l,"layers",get_layers,set_layers,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.NavMeshTriangulation));
 	}
 }

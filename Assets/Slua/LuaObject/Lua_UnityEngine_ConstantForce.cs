@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ConstantForce : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ConstantForce o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ConstantForce();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ConstantForce();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_force(IntPtr l) {
@@ -73,10 +69,10 @@ public class Lua_UnityEngine_ConstantForce : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.ConstantForce");
-		addMember(l,"force",get_force,set_force);
-		addMember(l,"relativeForce",get_relativeForce,set_relativeForce);
-		addMember(l,"torque",get_torque,set_torque);
-		addMember(l,"relativeTorque",get_relativeTorque,set_relativeTorque);
+		addMember(l,"force",get_force,set_force,true);
+		addMember(l,"relativeForce",get_relativeForce,set_relativeForce,true);
+		addMember(l,"torque",get_torque,set_torque,true);
+		addMember(l,"relativeTorque",get_relativeTorque,set_relativeTorque,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ConstantForce),typeof(UnityEngine.Behaviour));
 	}
 }

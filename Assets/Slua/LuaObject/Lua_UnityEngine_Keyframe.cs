@@ -6,30 +6,31 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_Keyframe : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
+		int argc = LuaDLL.lua_gettop(l);
 		UnityEngine.Keyframe o;
-		if(matchType(l,1,typeof(System.Single),typeof(System.Single))){
+		if(argc==3){
 			System.Single a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			System.Single a2;
-			checkType(l,2,out a2);
+			checkType(l,3,out a2);
 			o=new UnityEngine.Keyframe(a1,a2);
 			pushObject(l,o);
 			return 1;
 		}
-		else if(matchType(l,1,typeof(System.Single),typeof(System.Single),typeof(System.Single),typeof(System.Single))){
+		else if(argc==5){
 			System.Single a1;
-			checkType(l,1,out a1);
+			checkType(l,2,out a1);
 			System.Single a2;
-			checkType(l,2,out a2);
+			checkType(l,3,out a2);
 			System.Single a3;
-			checkType(l,3,out a3);
+			checkType(l,4,out a3);
 			System.Single a4;
-			checkType(l,4,out a4);
+			checkType(l,5,out a4);
 			o=new UnityEngine.Keyframe(a1,a2,a3,a4);
 			pushObject(l,o);
 			return 1;
 		}
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -109,11 +110,11 @@ public class Lua_UnityEngine_Keyframe : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.Keyframe");
-		addMember(l,"time",get_time,set_time);
-		addMember(l,"value",get_value,set_value);
-		addMember(l,"inTangent",get_inTangent,set_inTangent);
-		addMember(l,"outTangent",get_outTangent,set_outTangent);
-		addMember(l,"tangentMode",get_tangentMode,set_tangentMode);
+		addMember(l,"time",get_time,set_time,true);
+		addMember(l,"value",get_value,set_value,true);
+		addMember(l,"inTangent",get_inTangent,set_inTangent,true);
+		addMember(l,"outTangent",get_outTangent,set_outTangent,true);
+		addMember(l,"tangentMode",get_tangentMode,set_tangentMode,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.Keyframe));
 	}
 }

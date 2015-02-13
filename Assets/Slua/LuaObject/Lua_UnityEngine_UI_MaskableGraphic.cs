@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_UI_MaskableGraphic : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
+		LuaDLL.luaL_error(l,"New object failed.");
 		return 0;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -64,8 +65,8 @@ public class Lua_UnityEngine_UI_MaskableGraphic : LuaObject {
 		getTypeTable(l,"UnityEngine.UI.MaskableGraphic");
 		addMember(l,ParentMaskStateChanged);
 		addMember(l,SetMaterialDirty);
-		addMember(l,"maskable",get_maskable,set_maskable);
-		addMember(l,"material",get_material,set_material);
+		addMember(l,"maskable",get_maskable,set_maskable,true);
+		addMember(l,"material",get_material,set_material,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.UI.MaskableGraphic),typeof(UnityEngine.UI.Graphic));
 	}
 }

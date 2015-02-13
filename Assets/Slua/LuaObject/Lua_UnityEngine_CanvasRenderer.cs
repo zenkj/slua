@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_CanvasRenderer : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.CanvasRenderer o;
-		if(matchType(l,1)){
-			o=new UnityEngine.CanvasRenderer();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.CanvasRenderer();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetColor(IntPtr l) {
@@ -101,7 +97,15 @@ public class Lua_UnityEngine_CanvasRenderer : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetVertices(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(UnityEngine.UIVertex),typeof(System.Int32))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==2){
+				UnityEngine.CanvasRenderer self=(UnityEngine.CanvasRenderer)checkSelf(l);
+				System.Collections.Generic.List<UnityEngine.UIVertex> a1;
+				checkType(l,2,out a1);
+				self.SetVertices(a1);
+				return 0;
+			}
+			else if(argc==3){
 				UnityEngine.CanvasRenderer self=(UnityEngine.CanvasRenderer)checkSelf(l);
 				UnityEngine.UIVertex[] a1;
 				checkType(l,2,out a1);
@@ -166,9 +170,9 @@ public class Lua_UnityEngine_CanvasRenderer : LuaObject {
 		addMember(l,GetMaterial);
 		addMember(l,SetVertices);
 		addMember(l,Clear);
-		addMember(l,"isMask",get_isMask,set_isMask);
-		addMember(l,"relativeDepth",get_relativeDepth,null);
-		addMember(l,"absoluteDepth",get_absoluteDepth,null);
+		addMember(l,"isMask",get_isMask,set_isMask,true);
+		addMember(l,"relativeDepth",get_relativeDepth,null,true);
+		addMember(l,"absoluteDepth",get_absoluteDepth,null,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.CanvasRenderer),typeof(UnityEngine.Component));
 	}
 }

@@ -6,19 +6,16 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_SkinnedCloth : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.SkinnedCloth o;
-		if(matchType(l,1)){
-			o=new UnityEngine.SkinnedCloth();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.SkinnedCloth();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int SetEnabledFading(IntPtr l) {
 		try{
-			if(matchType(l,2,typeof(System.Boolean),typeof(System.Single))){
+			int argc = LuaDLL.lua_gettop(l);
+			if(argc==3){
 				UnityEngine.SkinnedCloth self=(UnityEngine.SkinnedCloth)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -27,7 +24,7 @@ public class Lua_UnityEngine_SkinnedCloth : LuaObject {
 				self.SetEnabledFading(a1,a2);
 				return 0;
 			}
-			else if(matchType(l,2,typeof(System.Boolean))){
+			else if(argc==2){
 				UnityEngine.SkinnedCloth self=(UnityEngine.SkinnedCloth)checkSelf(l);
 				System.Boolean a1;
 				checkType(l,2,out a1);
@@ -87,9 +84,9 @@ public class Lua_UnityEngine_SkinnedCloth : LuaObject {
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.SkinnedCloth");
 		addMember(l,SetEnabledFading);
-		addMember(l,"coefficients",get_coefficients,set_coefficients);
-		addMember(l,"worldVelocityScale",get_worldVelocityScale,set_worldVelocityScale);
-		addMember(l,"worldAccelerationScale",get_worldAccelerationScale,set_worldAccelerationScale);
+		addMember(l,"coefficients",get_coefficients,set_coefficients,true);
+		addMember(l,"worldVelocityScale",get_worldVelocityScale,set_worldVelocityScale,true);
+		addMember(l,"worldAccelerationScale",get_worldAccelerationScale,set_worldAccelerationScale,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.SkinnedCloth),typeof(UnityEngine.Cloth));
 	}
 }

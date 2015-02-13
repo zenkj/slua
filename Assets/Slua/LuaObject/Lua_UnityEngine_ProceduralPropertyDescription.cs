@@ -6,14 +6,10 @@ using System.Collections.Generic;
 public class Lua_UnityEngine_ProceduralPropertyDescription : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int constructor(IntPtr l) {
-		LuaDLL.lua_remove(l,1);
 		UnityEngine.ProceduralPropertyDescription o;
-		if(matchType(l,1)){
-			o=new UnityEngine.ProceduralPropertyDescription();
-			pushObject(l,o);
-			return 1;
-		}
-		return 0;
+		o=new UnityEngine.ProceduralPropertyDescription();
+		pushObject(l,o);
+		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_name(IntPtr l) {
@@ -60,7 +56,7 @@ public class Lua_UnityEngine_ProceduralPropertyDescription : LuaObject {
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static public int get_type(IntPtr l) {
 		UnityEngine.ProceduralPropertyDescription o = (UnityEngine.ProceduralPropertyDescription)checkSelf(l);
-		pushValue(l,o.type);
+		pushEnum(l,(int)o.type);
 		return 1;
 	}
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -157,16 +153,16 @@ public class Lua_UnityEngine_ProceduralPropertyDescription : LuaObject {
 	}
 	static public void reg(IntPtr l) {
 		getTypeTable(l,"UnityEngine.ProceduralPropertyDescription");
-		addMember(l,"name",get_name,set_name);
-		addMember(l,"label",get_label,set_label);
-		addMember(l,"group",get_group,set_group);
-		addMember(l,"type",get_type,set_type);
-		addMember(l,"hasRange",get_hasRange,set_hasRange);
-		addMember(l,"minimum",get_minimum,set_minimum);
-		addMember(l,"maximum",get_maximum,set_maximum);
-		addMember(l,"step",get_step,set_step);
-		addMember(l,"enumOptions",get_enumOptions,set_enumOptions);
-		addMember(l,"componentLabels",get_componentLabels,set_componentLabels);
+		addMember(l,"name",get_name,set_name,true);
+		addMember(l,"label",get_label,set_label,true);
+		addMember(l,"group",get_group,set_group,true);
+		addMember(l,"type",get_type,set_type,true);
+		addMember(l,"hasRange",get_hasRange,set_hasRange,true);
+		addMember(l,"minimum",get_minimum,set_minimum,true);
+		addMember(l,"maximum",get_maximum,set_maximum,true);
+		addMember(l,"step",get_step,set_step,true);
+		addMember(l,"enumOptions",get_enumOptions,set_enumOptions,true);
+		addMember(l,"componentLabels",get_componentLabels,set_componentLabels,true);
 		createTypeMetatable(l,constructor, typeof(UnityEngine.ProceduralPropertyDescription));
 	}
 }
